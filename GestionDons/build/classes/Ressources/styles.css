@@ -40,9 +40,8 @@
 }
 
 .combobox{
-        -fx-background-color: transparent;
-    -fx-border-color: #DEDEE4;
-    -fx-border-width: 0px 0px 1px 0px;
-  -fx-prompt-text-fill: white;
+        
+  -fx-prompt-text-fill: red;
+  
     
 }
