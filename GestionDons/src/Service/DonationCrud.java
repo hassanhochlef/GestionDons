@@ -260,10 +260,11 @@ public void afficherrecu(Label fieldDate, Label fieldMontant, Label fieldCategor
    
 }
 /******************************************************************************/
-  public List<User> ModifierDonneur(User u,Don d){
+
+  public List<User> ModifierDonneur(UserSession u,Don d){
         List<User> user = new ArrayList<>() ;
     try {
-        int x = d.getDonorId();
+        int x = u.getActualUserId();
         float y = 0;
         String sql1 = "SELECT SUM(montant) from Don where donorId='"+x+"'"; 
        String sql = "UPDATE User SET montant_donne=? where userId='"+x+"'";
