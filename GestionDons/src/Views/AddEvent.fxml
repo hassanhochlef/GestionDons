@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="721.0" prefWidth="1075.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddEventController">
+   <children>
+      <HBox layoutX="29.0" layoutY="95.0" prefHeight="289.0" prefWidth="836.0" spacing="30.0">
+         <children>
+            <VBox prefHeight="289.0" prefWidth="272.0" spacing="40.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 15;">
+               <children>
+                  <JFXComboBox fx:id="categInput" focusColor="#7ca76f" labelFloat="true" prefHeight="25.0" prefWidth="218.0" promptText="Categorie de l'évenement" styleClass="text-field" stylesheets="@../css/style1.css" />
+                  <JFXTextField fx:id="causeInput" focusColor="#7ca76f" labelFloat="true" prefHeight="40.0" prefWidth="172.0" promptText="Cause" stylesheets="@../css/style1.css" unFocusColor="BLACK">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                     <opaqueInsets>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </opaqueInsets>
+                  </JFXTextField>
+                  <JFXComboBox fx:id="regionInput" focusColor="#7ca76f" labelFloat="true" prefHeight="25.0" prefWidth="218.0" promptText="Region" styleClass="text-field" stylesheets="@../css/style1.css" />
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="10.0" prefHeight="289.0" prefWidth="272.0" spacing="40.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 15;">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <children>
+                  <JFXComboBox fx:id="idAssocInput" focusColor="#7ca76f" labelFloat="true" prefHeight="25.0" prefWidth="218.0" promptText="Identifiant de l'association" styleClass="text-field" stylesheets="@../css/style1.css" />
+                  <DatePicker fx:id="dateInput" promptText="Date de l'évenement" />
+                  <JFXTextArea fx:id="descInput" focusColor="#7ca76f" labelFloat="true" prefHeight="144.0" prefWidth="232.0" promptText="Description de l'évenement" styleClass="text-field" stylesheets="@../css/style1.css" />
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="252.0" prefWidth="203.0" spacing="30.0">
+               <children>
+                  <JFXButton fx:id="addEventButton" onAction="#addEventActionHandler" prefHeight="47.0" prefWidth="162.0" style="-fx-background-color: #7ca76f; -fx-background-radius: 15;" text="Ajouter" textFill="WHITE">
+                     <font>
+                        <Font name="Ebrima" size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="deleteEventButton" layoutX="10.0" layoutY="10.0" onAction="#deleteEventActionHandler" prefHeight="47.0" prefWidth="162.0" style="-fx-background-color: #ae8c8c; -fx-background-radius: 15;" text="Supprimer" textFill="WHITE">
+                     <font>
+                        <Font name="Ebrima" size="16.0" />
+                     </font>
+                     <effect>
+                        <DropShadow radius="10.7425" width="23.97" />
+                     </effect>
+                  </JFXButton>
+                  <JFXButton fx:id="updateEventButton" layoutX="10.0" layoutY="57.0" onAction="#updateEventActionHandler" prefHeight="47.0" prefWidth="162.0" style="-fx-background-color: #504545; -fx-background-radius: 15;" text="Modifier" textFill="WHITE">
+                     <font>
+                        <Font name="Ebrima" size="16.0" />
+                     </font>
+                     <effect>
+                        <DropShadow radius="10.7425" width="23.97" />
+                     </effect>
+                  </JFXButton>
+                  <JFXButton fx:id="confirmUpdate" onAction="#confirmUpdateActionHandler" prefHeight="28.0" prefWidth="110.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 20;" text="Confirmer" />
+               </children>
+               <padding>
+                  <Insets bottom="30.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox layoutX="29.0" layoutY="427.0" prefHeight="254.0" prefWidth="972.0">
+         <children>
+            <TableView fx:id="eventTable" prefHeight="254.0" prefWidth="961.0" stylesheets="@../../../Main/src/css/style1.css">
+              <columns>
+                <TableColumn fx:id="colID" prefWidth="108.0" text="ID de l'évenement" />
+                <TableColumn fx:id="colIDAssociation" minWidth="0.0" prefWidth="108.0" text="ID de l'association" />
+                  <TableColumn fx:id="colCategorie" minWidth="0.0" prefWidth="111.0" text="Catégorie" />
+                  <TableColumn fx:id="colCause" minWidth="0.0" prefWidth="145.0" text="Objectif" />
+                  <TableColumn fx:id="colParticip" minWidth="0.0" prefWidth="114.0" text="Num Participants" />
+                  <TableColumn fx:id="colDate" minWidth="0.0" prefWidth="109.0" text="Date de création" />
+                  <TableColumn fx:id="colMontant" minWidth="0.0" prefWidth="108.0" text="Montant collecté" />
+                  <TableColumn fx:id="colDescription" minWidth="0.0" prefWidth="154.0" text="Description" />
+              </columns>
+            </TableView>
+         </children></HBox>
+      <HBox alignment="CENTER_LEFT" fillHeight="false" layoutX="683.0" layoutY="373.0" prefHeight="58.0" prefWidth="305.0">
+         <children>
+            <TextField fx:id="searchInput" onInputMethodTextChanged="#filterTable" prefHeight="39.0" prefWidth="309.0" promptText="Rechercher..." style="-fx-background-radius: 10;" stylesheets="@../../../Main/src/css/style1.css" />
+         </children>
+      </HBox>
+      <HBox layoutX="35.0" layoutY="7.0" prefHeight="62.0" prefWidth="960.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <ImageView fitHeight="52.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/editer.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="277.0">
+               <children>
+                  <JFXButton fx:id="btnEditProfil" onAction="#btnEditProfilAction" styleClass="btnEditProfil" stylesheets="@../css/style.css" text="Editer le profil" />
+               </children>
+            </VBox>
+            <Pane prefHeight="84.0" prefWidth="531.0" />
+            <VBox alignment="CENTER" prefHeight="84.0" prefWidth="97.0">
+               <children>
+                  <ImageView fx:id="imgPhotoSession" fitHeight="66.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/profile.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="231.0">
+               <children>
+                  <Label fx:id="labelNomSession" text="Label">
+                     <font>
+                        <Font name="Calibri Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+      <Line endX="311.0" layoutX="666.0" layoutY="78.0" startX="-622.0" />
+   </children>
+</AnchorPane>
