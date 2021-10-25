@@ -1,0 +1,5 @@
+.btnEditProfil:hover{
+    -fx-text-fill: #7ca76f;
+    -fx-scale-y: 1.1;
+    -fx-scale-x: 1.1;
+}

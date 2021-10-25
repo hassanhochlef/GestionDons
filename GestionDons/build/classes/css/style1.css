@@ -1,0 +1,39 @@
+.mainpane{
+    -fx-background-color: #7ca76f;
+}
+
+.leftpane{
+    -fx-table-cell-border-color: transparent;
+}
+
+.text-field {
+    -fx-prompt-text-fill: gray;
+}
+
+
+
+
+.table-view {
+    -fx-control-inner-background-alt: -fx-control-inner-background ;
+}
+
+
+
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(#ffffff 0%, #7ca76f 100%);
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell:selected {
+   -fx-background-color: #7ca76f; 
+   -fx-text-background-color: white;
+}
+

@@ -24,6 +24,12 @@ import javafx.scene.paint.Color;
 import Connection.MyConnection;
 import Service.UserService ;
 import Service.UserSession;
+import java.io.IOException;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
@@ -37,6 +43,10 @@ public class SignInController implements Initializable {
     private TextField inputpassword;
     @FXML
     private Button signin;
+    
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     /**
      * Initializes the controller class.
@@ -49,7 +59,7 @@ public class SignInController implements Initializable {
      
  
     @FXML
-    private void signinAction(ActionEvent event) {
+    private void signinAction(ActionEvent event) throws IOException {
      MyConnection cnx = MyConnection.getInstance();
         PreparedStatement ps;
         ResultSet rs;
@@ -60,11 +70,14 @@ public class SignInController implements Initializable {
         if (us.verifyUser(mail, password)){
             User u = us.getUserConnected(mail);
             us.addUserSession(u);
-        }
-               
-        
-        
-        }
+            Parent root = FXMLLoader.load(getClass().getResource("/Views/DonsScreen.fxml"));
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            }
+
+           }
         
         
         

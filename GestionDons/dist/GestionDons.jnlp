@@ -2,20 +2,21 @@
 <jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="GestionDons.jnlp">
   <information>
     <title>GestionDons</title>
-
     <vendor>LENOVO</vendor>
-
     <description>null</description>
     <offline-allowed/>
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-
-    <jar href="GestionDons.jar" size="16711" download="eager" />
+    <jar href="GestionDons.jar" size="1215567" download="eager" />
+    <jar href="lib\AnimateFX-1.2.1.jar" size="94267" download="eager" />
     <jar href="lib\TrayNotification.jar" size="41019" download="eager" />
+    <jar href="lib\commons-io-2.6.jar" size="247129" download="eager" />
+    <jar href="lib\controlsfx-8.40.11.jar" size="985420" download="eager" />
     <jar href="lib\fontawesomefx-8.9.jar" size="571068" download="eager" />
+    <jar href="lib\javax.mail.jar" size="659033" download="eager" />
+    <jar href="lib\jfoenix-8.0.2.jar" size="2442326" download="eager" />
     <jar href="lib\mysql-connector-java-5.1.15-bin.jar" size="785998" download="eager" />
-
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="GestionDons" >
     <param name="requiredFXVersion" value="8.0+"/>
