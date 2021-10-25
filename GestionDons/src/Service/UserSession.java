@@ -5,10 +5,6 @@
  */
 package Service;
 
-
-
-import Connection.MyConnection;
-
 import Entities.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,12 +12,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+import Connection.MyConnection;
 
 /**
  *
- * @author LENOVO
-
+ * @author SeifD
  */
 public class UserSession {
     
@@ -90,6 +85,7 @@ public class UserSession {
     }
     
     public void addUserSession(User u){
+        deleteUserSession();
         String req = "INSERT INTO user_connected(userId,name,photo,password,city,gouvernorat,phone,mail,role,montant_donne)"+" VALUES (?,?,?,?,?,?,?,?,?,?)";
             try {
             ste = cnx.prepareStatement(req);
@@ -315,5 +311,6 @@ public class UserSession {
         
     
     
-
+    
+    
 }
