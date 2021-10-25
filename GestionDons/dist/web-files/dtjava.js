@@ -190,6 +190,7 @@ var dtjava = function() {
         }
 
 
+
         // Check mime types. Works with netscape family browsers and checks latest installed plugin only
         var mm = navigator.mimeTypes;
         var jre = null;
@@ -219,6 +220,7 @@ var dtjava = function() {
                 jre:jre, deploy:deploy, fx:fx,
                 cputype: cputype, osVersion: osVersion};
     }
+
 
     //partially derived from swfobject.js
     var initDone = false;
@@ -300,6 +302,7 @@ var dtjava = function() {
             installNativePlugin();
         }
     }
+
 
     /**
      This class provides details on why current platform does not meet
@@ -1283,6 +1286,7 @@ var dtjava = function() {
         return doValidate(p);
     }
 
+
     function doValidate(platform) {
 
         //ensure some platform is set (we could get array too!)
@@ -1631,7 +1635,6 @@ var dtjava = function() {
        // auto-install is windows only
        if (!ua.win) return false;
 
-       
 
        // if no DT plugin, return false
        // if DT plugin is there but not operational (e.g. blocked)
@@ -1644,7 +1647,10 @@ var dtjava = function() {
            if (!enableWithoutCertMisMatchWorkaround(platform.jvm)) {
                return false;
            }
-}
+
+       }
+
+
        if (fx != "ok") {
             if (!canJavaFXCoBundleSatisfy(platform)) {
                 // no cobundle, check if there is standalone FX auto-install
