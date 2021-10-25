@@ -12,6 +12,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
@@ -235,53 +236,172 @@
                         <Line endX="125.0" layoutX="390.0" layoutY="337.0" startX="25.0" startY="40.333343505859375" />
                         <Pane layoutX="236.0" layoutY="112.0" prefHeight="145.0" prefWidth="227.0" styleClass="back1" stylesheets="@../Resources/Style.css">
                            <children>
-                              <ImageView fitHeight="73.0" fitWidth="64.0" layoutX="6.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="participantProfilepic1" fitHeight="73.0" fitWidth="64.0" layoutX="6.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../Resources/family.png" />
                                  </image>
                               </ImageView>
                               <Text layoutX="86.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :" />
                               <Text layoutX="85.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tel:" />
-                              <Text layoutX="85.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Statue :" />
-                              <Label layoutX="134.0" layoutY="18.0" text="Label" />
-                              <Label layoutX="134.0" layoutY="45.0" text="Label" />
-                              <Label layoutX="148.0" layoutY="74.0" text="Label" />
+                              <Label fx:id="NomParticipant1" layoutX="126.0" layoutY="18.0" text="Pas de participant" textFill="#180a36">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <effect>
+                                    <Lighting>
+                                       <bumpInput>
+                                          <Shadow />
+                                       </bumpInput>
+                                       <light>
+                                          <Light.Distant />
+                                       </light>
+                                    </Lighting>
+                                 </effect></Label>
                               <Text layoutX="22.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Montant :" />
-                              <Label layoutX="134.0" layoutY="110.0" text="Label" />
+                              <Label fx:id="telParticipant1" layoutX="118.0" layoutY="46.0" text="Pas de participant" textFill="#180a36">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <effect>
+                                    <Lighting>
+                                       <bumpInput>
+                                          <Shadow />
+                                       </bumpInput>
+                                       <light>
+                                          <Light.Distant />
+                                       </light>
+                                    </Lighting>
+                                 </effect>
+                              </Label>
+                              <Label fx:id="montantParticipant1" layoutX="82.0" layoutY="108.0" text="Pas de participant" textFill="#180a36">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <effect>
+                                    <Lighting>
+                                       <bumpInput>
+                                          <Shadow />
+                                       </bumpInput>
+                                       <light>
+                                          <Light.Distant />
+                                       </light>
+                                    </Lighting>
+                                 </effect>
+                              </Label>
                            </children>
                         </Pane>
                         <Pane layoutX="235.0" layoutY="295.0" prefHeight="145.0" prefWidth="227.0" styleClass="back1" stylesheets="@../Resources/Style.css">
                            <children>
-                              <ImageView fitHeight="73.0" fitWidth="64.0" layoutX="6.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="participantProfilepic2" fitHeight="73.0" fitWidth="64.0" layoutX="6.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../Resources/family.png" />
                                  </image>
                               </ImageView>
                               <Text layoutX="86.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :" />
                               <Text layoutX="85.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tel:" />
-                              <Text layoutX="85.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Statue :" />
-                              <Label layoutX="134.0" layoutY="18.0" text="Label" />
-                              <Label layoutX="134.0" layoutY="45.0" text="Label" />
-                              <Label layoutX="148.0" layoutY="74.0" text="Label" />
                               <Text layoutX="22.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Montant :" />
-                              <Label layoutX="134.0" layoutY="110.0" text="Label" />
+                              <Label fx:id="NomParticipant2" layoutX="122.0" layoutY="19.0" text="Pas de participant" textFill="#180a36">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <effect>
+                                    <Lighting>
+                                       <bumpInput>
+                                          <Shadow />
+                                       </bumpInput>
+                                       <light>
+                                          <Light.Distant />
+                                       </light>
+                                    </Lighting>
+                                 </effect>
+                              </Label>
+                              <Label fx:id="telParticipant2" layoutX="122.0" layoutY="46.0" text="Pas de participant" textFill="#180a36">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <effect>
+                                    <Lighting>
+                                       <bumpInput>
+                                          <Shadow />
+                                       </bumpInput>
+                                       <light>
+                                          <Light.Distant />
+                                       </light>
+                                    </Lighting>
+                                 </effect>
+                              </Label>
+                              <Label fx:id="montantParticipant2" layoutX="102.0" layoutY="110.0" text="Pas de participant" textFill="#180a36">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <effect>
+                                    <Lighting>
+                                       <bumpInput>
+                                          <Shadow />
+                                       </bumpInput>
+                                       <light>
+                                          <Light.Distant />
+                                       </light>
+                                    </Lighting>
+                                 </effect>
+                              </Label>
                            </children>
                         </Pane>
                         <Pane layoutX="693.0" layoutY="88.0" prefHeight="145.0" prefWidth="227.0" styleClass="back1" stylesheets="@../Resources/Style.css">
                            <children>
-                              <ImageView fitHeight="73.0" fitWidth="64.0" layoutX="6.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="participantProfilepic3" fitHeight="73.0" fitWidth="64.0" layoutX="6.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../Resources/family.png" />
                                  </image>
                               </ImageView>
                               <Text layoutX="86.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :" />
                               <Text layoutX="85.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tel:" />
-                              <Text layoutX="85.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Statue :" />
-                              <Label layoutX="134.0" layoutY="18.0" text="Label" />
-                              <Label layoutX="134.0" layoutY="45.0" text="Label" />
-                              <Label layoutX="148.0" layoutY="74.0" text="Label" />
                               <Text layoutX="22.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Montant :" />
-                              <Label layoutX="134.0" layoutY="110.0" text="Label" />
+                              <Label fx:id="NomParticipant3" layoutX="123.0" layoutY="20.0" text="Pas de participant" textFill="#180a36">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <effect>
+                                    <Lighting>
+                                       <bumpInput>
+                                          <Shadow />
+                                       </bumpInput>
+                                       <light>
+                                          <Light.Distant />
+                                       </light>
+                                    </Lighting>
+                                 </effect>
+                              </Label>
+                              <Label fx:id="telParticipant3" layoutX="122.0" layoutY="46.0" text="Pas de participant" textFill="#180a36">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <effect>
+                                    <Lighting>
+                                       <bumpInput>
+                                          <Shadow />
+                                       </bumpInput>
+                                       <light>
+                                          <Light.Distant />
+                                       </light>
+                                    </Lighting>
+                                 </effect>
+                              </Label>
+                              <Label fx:id="montantParticipant3" layoutX="92.0" layoutY="114.0" text="Pas de participant" textFill="#180a36">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <effect>
+                                    <Lighting>
+                                       <bumpInput>
+                                          <Shadow />
+                                       </bumpInput>
+                                       <light>
+                                          <Light.Distant />
+                                       </light>
+                                    </Lighting>
+                                 </effect>
+                              </Label>
                            </children>
                         </Pane>
                         <Separator layoutX="217.0" layoutY="8.0" orientation="VERTICAL" prefHeight="480.0" prefWidth="6.0" />
@@ -294,16 +414,17 @@
                         <Label layoutX="43.0" layoutY="299.0" text="Raquette : Rafael Nadal" />
                         <Text layoutX="57.0" layoutY="397.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Montant de depart:" />
                         <Label layoutX="95.0" layoutY="419.0" text="10000" />
-                        <Text layoutX="529.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temps restant " wrappingWidth="228.10028076171875" />
-                        <Pane fx:id="panerejoindre" layoutX="664.0" layoutY="284.0" prefHeight="192.0" prefWidth="279.0" styleClass="back1" stylesheets="@../Resources/Style.css">
+                        <Text layoutX="493.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temps restant " wrappingWidth="228.10028076171875">
+                           <font>
+                              <Font name="Marlett" size="25.0" />
+                           </font></Text>
+                        <Pane fx:id="panerejoindre" layoutX="664.0" layoutY="341.0" prefHeight="135.0" prefWidth="279.0" styleClass="back1" stylesheets="@../Resources/Style.css">
                            <children>
-                              <Text layoutX="121.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rejoindre " />
-                              <Text layoutX="6.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom utilisateur:" />
-                              <Text layoutX="9.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Montant :" />
-                              <Text layoutX="6.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe :" />
-                              <PasswordField layoutX="110.0" layoutY="139.0" />
-                              <TextField layoutX="106.0" layoutY="94.0" />
-                              <TextField layoutX="104.0" layoutY="44.0" prefHeight="27.0" prefWidth="149.0" />
+                              <Text layoutX="120.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rejoindre " />
+                              <Text layoutX="9.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Montant :" />
+                              <Text layoutX="6.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe :" />
+                              <PasswordField fx:id="motdepassparticipant" layoutX="110.0" layoutY="94.0" />
+                              <TextField fx:id="montantparticipant" layoutX="109.0" layoutY="53.0" />
                            </children>
                         </Pane>
                         <ImageView fitHeight="112.0" fitWidth="145.0" layoutX="476.0" layoutY="228.0" pickOnBounds="true">
@@ -312,7 +433,7 @@
                            </image>
                         </ImageView>
                         <Button id="btn" fx:id="participer" layoutX="523.0" layoutY="407.0" mnemonicParsing="false" onAction="#participerencher" stylesheets="@../Resources/Style.css" text="Participer" />
-                        <Label fx:id="hour" alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="47.0" prefHeight="32.0" prefWidth="32.0" text="2" textFill="#299cee">
+                        <Label fx:id="hour" alignment="CENTER" contentDisplay="CENTER" layoutX="500.0" layoutY="47.0" prefHeight="32.0" prefWidth="32.0" text="2" textFill="#4197a4">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -322,7 +443,7 @@
                               <Font name="System Bold" size="22.0" />
                            </font>
                         </Label>
-                        <Label fx:id="minute" alignment="CENTER" layoutX="549.0" layoutY="47.0" prefHeight="32.0" prefWidth="32.0" text="00" textFill="#f58080">
+                        <Label fx:id="minute" alignment="CENTER" layoutX="549.0" layoutY="47.0" prefHeight="32.0" prefWidth="32.0" text="00" textFill="#4197a4">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -332,7 +453,7 @@
                               <Font name="System Bold" size="22.0" />
                            </font>
                         </Label>
-                        <Label fx:id="second" alignment="CENTER" layoutX="605.0" layoutY="47.0" prefHeight="32.0" prefWidth="32.0" text="00" textFill="#3dff3d">
+                        <Label fx:id="second" alignment="CENTER" layoutX="605.0" layoutY="47.0" prefHeight="32.0" prefWidth="32.0" text="00" textFill="#4197a4">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>

@@ -11,6 +11,7 @@ import Entities.Besoin;
 import Entities.Don;
 
 import Entities.User;
+import java.awt.Image;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,6 +28,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import tray.notification.TrayNotification;
 
@@ -293,8 +295,40 @@ if (rowsDeleted > 0) {
     }
     return user;
 } 
+  
+/*public void participerEnchere(UserSession us){
+   int id = us.getActualUserId();
+   String pass = us.getActualUserPassword();
 
+}*/
+   public boolean passIsValid(UserSession u,String pwd){
+       if(u.getActualUserPassword().equals(pwd)){
+           return true;
+       }
+       TrayNotification tray = new TrayNotification();
+            AnimationType type = AnimationType.POPUP;
+            tray.setAnimationType(type);
+            String tilte = "ERROR";
+            String message = "Le mot de passe est incorrect";
+            tray.setTitle(tilte);
+            tray.setMessage(message);
+            tray.setNotificationType(NotificationType.ERROR);
+            tray.showAndDismiss(Duration.seconds(3));
+       return false;
+   } 
+   public void participant(UserSession u ,Label name,Label participantTel,Label participantmontant,Float montant){
+       name.setText(u.getActualUserName());
+       participantTel.setText(u.getActualUserPhone());
+       participantmontant.setText(String.valueOf(montant));
    
+   }
+   public boolean dejaParticipe(UserSession us,Label participantNom ,Label participantTel ){
+       if((participantNom.getText().equals(us.getActualUserName())) && (participantTel.getText().equals(us.getActualUserPhone())) ){
+           
+           return true;
+       }
+       return false;
+   }
 
     
 }
