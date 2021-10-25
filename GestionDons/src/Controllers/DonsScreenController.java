@@ -14,6 +14,7 @@ import Entities.Don;
 
 import Entities.User;
 import Service.MailSend;
+import Service.UserSession;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.io.IOException;
@@ -88,6 +89,7 @@ public class DonsScreenController extends Thread implements Initializable,Runnab
 public ComboBox ComboBesoin ;
 public ComboBox ComboBesoinTransport;
 public ComboBox ComboBesoin2;
+    UserSession us = new UserSession();
     @FXML
     private HBox Timer;
     private HBox TimerPane;
@@ -206,18 +208,19 @@ public ComboBox ComboBesoin2;
     private void getmontant(ActionEvent event){
         LocalDate date = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
+        
         DonationCrud dc = new DonationCrud();
         Don d = new Don(); 
-        User u = new User();
+        //User u = new User();
             float montantdonne = Float.parseFloat(montant.getText());
-            d.setDonorId(1);
-            d.setEventId(4);
+            d.setDonorId(us.getActualUserId()); // us.getactualuserid();
+            
+            //d.setEventId(0);
             d.setCategorie("Transport");
             d.setDonationDate(date.format(formatter));
             d.setMontant(montantdonne);
             dc.AjouterDons(d);
-            dc.ModifierDonneur(u,d);
+            dc.ModifierDonneur(us,d);
             System.out.println("clicked");
            String x = (String)ComboBesoinTransport.getValue();
           
@@ -533,8 +536,8 @@ public ComboBox ComboBesoin2;
         Don d = new Don();   
         User u = new User();
             float montantdonne = Float.parseFloat(montantHosp.getText());
-            d.setDonorId(1);
-            d.setEventId(4);
+             d.setDonorId(us.getActualUserId());
+            
             d.setCategorie("Hopiteaux");
             d.setDonationDate(date.format(formatter));
             d.setMontant(montantdonne);
@@ -544,7 +547,7 @@ public ComboBox ComboBesoin2;
           
            float y=montantdonne;
             dc.ModifierBesoin(x,y);
-            dc.ModifierDonneur(u,d);
+            dc.ModifierDonneur(us,d);
             FilltextField();
             increaseprogress();
             print1.setVisible(true);
@@ -620,7 +623,7 @@ public ComboBox ComboBesoin2;
             d.setDonationDate(date.format(formatter));
             d.setMontant(montantdonne);
             dc.AjouterDons(d);
-            dc.ModifierDonneur(u,d);
+            dc.ModifierDonneur(us,d);
             System.out.println("clicked");
            String x = (String)ComboBesoin2.getValue();
           
