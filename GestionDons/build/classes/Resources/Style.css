@@ -1,0 +1,88 @@
+
+
+.side {
+    -fx-background-color: whitesmoke;
+   
+}
+.back {
+-fx-background-color: linear-gradient(to bottom, #91cbe3 20%, #70e0ad 90%);
+
+
+}
+.pane {
+    -fx-background-color: #203A40;
+    -fx-border-style:none;
+    
+    
+    
+}
+
+/*.table {
+    -fx-background-color: linear-gradient( right, #C6E7D8, #87CBAC);
+     -fx-background-color: linear-gradient(to left, #C6E7D8, #87CBAC);
+    -fx-font-family: 'Roboto', sans-serif;
+}*/
+.table {
+	
+	
+        -fx-background-color : linear-gradient( to bottom ,#87CBAC,#203A40 );
+        
+       
+        
+}
+#hd {
+    -fx-background-color: #acb6e9;
+    -fx-alignment:center;
+    -fx-border-style:none;
+    
+}
+#hd1 {
+    -fx-background-color : #87CBAC;
+    -fx-border-style :solid;
+    -fx-border-color : #87CBAC;
+    
+    
+  
+    
+}
+#btn {
+ -fx-opacity: 0.9;
+ -fx-background-color :linear-gradient( to bottom ,#87CBAC,#203A40 );
+ -fx-background-radius : 10%;
+
+    
+    -fx-text-fill:  #FFF;
+
+
+}
+#btn:hover {
+    -fx-background-color: linear-gradient( to top ,#87CBAC,#203A40 );
+-fx-background-radius : 5%;
+    -fx-text-fill:   #FFF;
+}
+#btn:pressed{
+   
+   -fx-background-color: transparent ;
+}
+.font {
+    
+    -fx-text-fill: ladder(background, white 49%, black 50%);
+}
+
+#tabpane
+{
+  
+     -fx-background-color : #203A40 ;
+     -fx-padding: 20px; 
+     -fx-pref-width :235px;
+     -fx-border-style :solid;
+     -fx-border-color: #203A40; 
+     
+     
+     
+} 
+.back1 {
+    -fx-background-color: #acb6e9;
+ 
+    
+}
