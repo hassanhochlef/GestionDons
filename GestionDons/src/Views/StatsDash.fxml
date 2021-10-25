@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="653.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StatsDashController">
+   <children>
+      <BorderPane layoutX="-8.0" prefHeight="679.0" prefWidth="1258.0">
+         <left>
+            <Pane prefHeight="546.0" prefWidth="23.0" BorderPane.alignment="CENTER" />
+         </left>
+         <top>
+            <Pane prefHeight="12.0" prefWidth="816.0" BorderPane.alignment="CENTER" />
+         </top>
+         <right>
+            <Pane prefHeight="862.0" prefWidth="4.0" BorderPane.alignment="CENTER" />
+         </right>
+         <bottom>
+            <Pane prefHeight="9.0" prefWidth="816.0" BorderPane.alignment="CENTER" />
+         </bottom>
+         <center>
+            <Pane prefHeight="736.0" prefWidth="1217.0" styleClass="back" stylesheets="@../Resources/Style.css" BorderPane.alignment="CENTER">
+               <children>
+                  <PieChart fx:id="chart" layoutX="27.0" layoutY="18.0" legendSide="LEFT" prefHeight="462.0" prefWidth="623.0" title="A" />
+                  <LineChart fx:id="linechart" layoutX="658.0" layoutY="113.0" legendVisible="false" prefHeight="270.0" prefWidth="524.0" style="-fx-stroke: blue;" stylesheets="@../Resources/Style.css">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" stylesheets="@../Resources/Style.css" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" stylesheets="@../Resources/Style.css" />
+                    </yAxis>
+                  </LineChart>
+                  <Pane layoutX="27.0" layoutY="508.0" prefHeight="134.0" prefWidth="1192.0" styleClass="pane" stylesheets="@../Resources/Style.css">
+                     <children>
+                        <Label fx:id="totDonneur" alignment="CENTER" contentDisplay="CENTER" layoutX="173.0" layoutY="67.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="81.0" style="-fx-text-fill: rgba(13, 210, 125, 1);" text="25">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="89.0" fitWidth="66.0" layoutX="56.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Resources/users.PNG" />
+                           </image>
+                        </ImageView>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="30.0" prefHeight="32.0" prefWidth="237.0" style="-fx-text-fill: rgba(156, 151, 135, 1);" text="Donneurs">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="nbrDons" alignment="CENTER" contentDisplay="CENTER" layoutX="575.0" layoutY="75.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="99.0" style="-fx-text-fill: rgba(13, 210, 125, 1);" text="1075">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="72.0" fitWidth="66.0" layoutX="407.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Resources/Daily.PNG" />
+                           </image>
+                        </ImageView>
+                        <Label alignment="CENTER" layoutX="473.0" layoutY="76.0" prefHeight="30.0" prefWidth="52.0" style="-fx-text-fill: rgba(156, 151, 135, 1);" text="Total:">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="437.0" layoutY="34.0" prefHeight="32.0" prefWidth="237.0" style="-fx-text-fill: rgba(156, 151, 135, 1);" text="Nombres de dons">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="montantDons" alignment="CENTER" contentDisplay="CENTER" layoutX="952.0" layoutY="76.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="112.0" style="-fx-text-fill: rgba(13, 210, 125, 1);" text="1075">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="86.0" fitWidth="79.0" layoutX="807.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Resources/req.PNG" />
+                           </image>
+                        </ImageView>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="874.0" layoutY="33.0" prefHeight="32.0" prefWidth="237.0" style="-fx-text-fill: rgba(156, 151, 135, 1);" text="Montant total collecté">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="124.0" layoutY="69.0" prefHeight="30.0" prefWidth="52.0" style="-fx-text-fill: rgba(156, 151, 135, 1);" text="Total:">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="894.0" layoutY="75.0" prefHeight="30.0" prefWidth="52.0" style="-fx-text-fill: rgba(156, 151, 135, 1);" text="Total:">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
