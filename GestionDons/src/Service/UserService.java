@@ -5,7 +5,7 @@
  */
 package Service;
 
-import Connection.MyConnection;
+
 import Entities.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
