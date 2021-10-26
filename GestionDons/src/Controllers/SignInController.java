@@ -70,10 +70,11 @@ public class SignInController implements Initializable {
         if (us.verifyUser(mail, password)){
             User u = us.getUserConnected(mail);
             us.addUserSession(u);
-            Parent root = FXMLLoader.load(getClass().getResource("/Views/DonsScreen.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Views/EventsMain.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
+            stage.centerOnScreen();
             stage.show();
             }
 

@@ -5,12 +5,17 @@
  */
 package services;
 
+import Entities.Don;
 import entities.Evenement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -63,28 +68,32 @@ public class EvenementService {
         }
     }
      
-    /*public Evenement getEvent(int id){
-        Evenement event = new Evenement();
-        String req = "SELECT * from evenement WHERE evenement.eventId="+id;
+    public Evenement getEvent(int id){
+        Evenement e = new Evenement();
+        String req = "SELECT * from evenement where eventId ="+id;
             try {
             ste = cnx.prepareStatement(req);
             ResultSet rs = ste.executeQuery();
             while (rs.next()){
-                event.setEventId(rs.getInt("eventId"));
-                event.setDonCategorie(rs.getString("donCategorie"));
-                event.setCause(rs.getString("cause"));
-                event.setNum_participants(rs.getInt("num_participants"));
-                event.setDate_creation(rs.getString("date_creation"));
-                event.setMontant_collecte(rs.getFloat("montant_collecte"));
-                event.setDescription(rs.getString("description"));
+                
+                e.setEventId(rs.getInt("evenement.eventId"));
+                e.setAssociationId(rs.getInt("evenement.associationId"));
+                e.setDonCategorie(rs.getString("evenement.donCategorie"));
+                e.setCause(rs.getString("evenement.cause"));
+                e.setRegion(rs.getString("evenement.Region"));
+                e.setNum_participants(rs.getInt("evenement.num_participants"));
+                e.setDate_creation(rs.getDate("evenement.date_creation"));
+                e.setMontant_collecte(rs.getFloat("evenement.montant_collecte"));
+                e.setDescription(rs.getString("evenement.description"));
+
             }
-            System.out.println("get event success");
+            System.out.println("getMyParticipations Success");
             
         } catch (SQLException ex) {
-                System.out.println("Erreur get event");
+                System.out.println("Erreur getMyParticipations");
         }
-        return event;
-    }*/
+        return e;
+    }
     
     public void updateEvent(int id, Evenement event){
         
@@ -127,7 +136,7 @@ public class EvenementService {
                 e.setDate_creation(rs.getDate("date_creation"));
                 e.setMontant_collecte(rs.getFloat("montant_collecte"));
                 e.setDescription(rs.getString("description"));
-                events.add(e);               
+                events.add(e);   
             }      
         }
         catch(SQLException ex){
@@ -153,6 +162,8 @@ public class EvenementService {
         
     }
     
+    
+    //Initialiser l'interface ParticiperEvent avec le premier evenement présent
     public Evenement getFirstEvent(){
         Evenement e = new Evenement();
         try{
@@ -423,6 +434,264 @@ public class EvenementService {
     
     
     
+    //Tous les evenements que l'utilisateur courant à participé
+    public ObservableList<Evenement> getMyParticipations(int id){
+ 
+        ObservableList<Evenement> myEvents = FXCollections.observableArrayList();
+        //List<Evenement> myEvents = new ArrayList<>();
+        String req = "SELECT * from evenement INNER JOIN event_user ON evenement.eventId = event_user.eventId where event_user.userId ="+id;
+            try {
+            ste = cnx.prepareStatement(req);
+            ResultSet rs = ste.executeQuery();
+            while (rs.next()){
+                Evenement e = new Evenement();
+                e.setEventId(rs.getInt("evenement.eventId"));
+                e.setAssociationId(rs.getInt("evenement.associationId"));
+                e.setDonCategorie(rs.getString("evenement.donCategorie"));
+                e.setCause(rs.getString("evenement.cause"));
+                e.setRegion(rs.getString("evenement.Region"));
+                e.setNum_participants(rs.getInt("evenement.num_participants"));
+                e.setDate_creation(rs.getDate("evenement.date_creation"));
+                e.setMontant_collecte(rs.getFloat("evenement.montant_collecte"));
+                e.setDescription(rs.getString("evenement.description"));
+                myEvents.add(e);
+            }
+            System.out.println("getMyParticipations Success");
+            
+        } catch (SQLException ex) {
+                System.out.println("Erreur getMyParticipations");
+        }
+        return myEvents;
+
+}
+    
+    // Pour initialiser l'affichage de l'interface Donscreen Avec le premier evenement que l'utilisateur courant ayant deja participé
+    public Evenement getMyFirstEvent(int id){
+        Evenement e = new Evenement();
+        try{
+            String req = "SELECT * from evenement INNER JOIN event_user ON evenement.eventId = event_user.eventId where event_user.userId ="+id+" LIMIT 1";
+            ste = cnx.prepareStatement(req);
+            ResultSet rs = ste.executeQuery();
+            while (rs.next()){
+                e.setEventId(rs.getInt("eventId"));
+                e.setAssociationId(rs.getInt("associationId"));
+                e.setDonCategorie(rs.getString("donCategorie"));
+                e.setCause(rs.getString("cause"));
+                e.setNum_participants(rs.getInt("num_participants"));
+                e.setDate_creation(rs.getDate("date_creation"));
+                e.setMontant_collecte(rs.getFloat("montant_collecte"));
+                e.setDescription(rs.getString("description"));               
+            }      
+        }
+        catch(SQLException ex){
+            System.out.println("Erreur affichage evenements");
+        }
+        return e;
+    }
+    
+    
+    //Retourne le montant actuel d'un besoin selon la categorie
+    public float getBesoinByCategorie(String categ){
+        
+        float montant=0;
+        String req = "SELECT montantactuel from besoin WHERE categorie ='"+categ+"'";
+            try {
+            ste = cnx.prepareStatement(req);
+            ResultSet rs = ste.executeQuery();
+            while(rs.next()){
+                montant += rs.getFloat("montantactuel");
+            }
+            
+            
+        } catch (SQLException ex) {
+                System.out.println("Erreur aqcuisition BesoinByCategorie");
+        }
+            
+            return montant;
+        
+    }
+ 
+    
+    
+    
+    
+    
+    /*
+    Permet de :
+        -Inserer un nouveau don dans la table Don 
+        -Mise a jour de la table Besoin (Diminution du besoin total de la categorie de l'évenement)
+        -Mise a jour de la table evenement (Montant donné)
+        -Inserer un nouveau recu dans la table don
+    */
+    public void ajouterDon(int idUser, int idEvent, float montant, String categ){
+        LocalDate date = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        
+        String req = "INSERT INTO don (donorId, eventId,donationDate,montant,Categorie)"+" VALUES (?,?,?,?,?)";
+        try {
+            ste = cnx.prepareStatement(req);
+            ste.setInt(1, idUser);
+            ste.setInt(2, idEvent);
+            ste.setString(3, date.format(formatter));
+            ste.setFloat(4, montant);
+            ste.setString(5, categ);
+            ste.executeUpdate();
+            System.out.println("Don ajouté avec succées");
+            
+        } catch (SQLException ex) {
+            System.out.println("Erreur Ajout Don");
+        }
+        
+        //*************************************************************************
+        
+        float montantBesoin = getBesoinByCategorie(categ) + montant;
+        String req2 = "UPDATE besoin SET montantactuel=? WHERE categorie ='"+categ+"'";
+        
+        try{
+            ste = cnx.prepareStatement(req2);
+            ste.setFloat(1, montantBesoin);
+            
+            ste.executeUpdate();
+            System.out.println("Besoin updated");           
+        }
+        catch(SQLException ex){
+            System.out.println("Erreur update Besoin");
+            
+        }
+        
+        //*************************************************************************
+        
+        String req3 = "UPDATE evenement SET montant_collecte=? WHERE evenement.eventId=" + idEvent;
+        float montant_collecte = getEvent(idEvent).getMontant_collecte() + montant;
+        try{
+            ste = cnx.prepareStatement(req3);
+            ste.setFloat(1, montant_collecte);
+            ste.executeUpdate();
+            System.out.println("Event updated");           
+        }
+        catch(SQLException ex){
+            System.out.println("Erreur update event");
+            
+        }
+        
+        //*************************************************************************
+        
+           
+        
+    }
+    
+    //Retourne tous les categorie des besoins existants
+    public Set<String> getAllBesoinCategories(){
+        String categ;
+        Set<String> categories = new HashSet<>();
+        
+        try{
+            String req = "SELECT * from besoin";
+            ste = cnx.prepareStatement(req);
+            ResultSet rs = ste.executeQuery();
+            while (rs.next()){
+                categ = rs.getString("categorie");
+                categories.add(categ);
+            }
+            
+        }catch(SQLException ex){
+            System.out.println("Erreur getAllBesoinCategories");
+        }
+        return categories;
+    }
+    
+    //Vérifie si lebesoin de la categorie donné existe dans la BD 
+    public boolean besoinExist(String categ){
+        final boolean exists = false;
+        Set<String> allBesoinCateg = getAllBesoinCategories();
+        if (allBesoinCateg.contains(categ))
+            return true;
+        else{
+            return false;
+        }
+    }
+    
+    //Retourne le montant a atteindre d'un besoin selon la categorie
+    public float getBesoinTotalByCategorie(String categ){
+        
+        float montant=0;
+        String req = "SELECT montant from besoin WHERE categorie ='"+categ+"'";
+            try {
+            ste = cnx.prepareStatement(req);
+            ResultSet rs = ste.executeQuery();
+            while(rs.next()){
+                montant += rs.getFloat("montant");
+            }
+            
+            
+        } catch (SQLException ex) {
+                System.out.println("Erreur aqcuisition BesoinTotalByCategorie");
+        }
+            
+            return montant;
+        
+    }
+    
+    //Mise a jour du besoin total de la categorie mentionnée lors de la création d'un évènement
+    public void updateBesoinTotal(String categ, float montant){
+        //String req2 = "UPDATE besoin SET montant=? WHERE categorie ='"+categ+"'";
+        String req2 = "update besoin SET montant=? where categorie='"+categ+"'";
+        Float newMontant = getBesoinTotalByCategorie(categ) + montant;
+        
+        try{
+            ste = cnx.prepareStatement(req2);
+            ste.setFloat(1, newMontant);
+            
+            ste.executeUpdate();
+            System.out.println("Besoin updated");           
+        }
+        catch(SQLException ex){
+            System.out.println("Erreur update Besoin");
+            
+        }
+        
+    }
+    
+    //Inserer une nouvelle ligne dans la table besoin lors de la création d'un évènement
+    public void addBesoin(float montant, String categorie, float montantActuel){
+        
+        String req = "INSERT INTO besoin(montant, quantite,categorie,description,montantactuel)"+" VALUES (?,?,?,?,?)";
+            try {
+            ste = cnx.prepareStatement(req);
+            ste.setFloat(1, montant);
+            ste.setString(2, null);
+            ste.setString(3, categorie);
+            ste.setString(4, null);
+            ste.setInt(5, 0);
+            ste.executeUpdate();
+            System.out.println("Besoin ajouté avec succée !");
+            
+        } catch (SQLException ex) {
+            System.out.println("Erreur Ajout Besoin");
+        }
+        
+    }
+    
+    
+    //Permet de retourner la somme total des dons collectés par tous les evenements créers
+    public float getAllDonsFromEvents(){
+        float montant = 0;
+        
+        try{
+            String req = "SELECT montant_collecte from evenement";
+            ste = cnx.prepareStatement(req);
+            ResultSet rs = ste.executeQuery();
+            while (rs.next()){
+                montant += rs.getFloat("montant_collecte");
+            }
+            
+        }catch(SQLException ex){
+            System.out.println("Erreur getAllDonsFromEvents");
+        }
+        
+        return montant;
+        
+    }
     
     
 }

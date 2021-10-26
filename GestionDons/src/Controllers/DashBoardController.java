@@ -11,10 +11,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +21,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import services.EvenementService;
 import services.UserSession;
@@ -43,8 +38,6 @@ public class DashBoardController implements Initializable {
     private Label totalEvents;
     @FXML
     private JFXButton btnParticipEvent;
-    @FXML
-    private Label actifEvents;
     @FXML
     private Label nbreParticipants;
     @FXML
@@ -106,6 +99,7 @@ public class DashBoardController implements Initializable {
         EvenementService es = new EvenementService();
         totalEvents.setText(String.valueOf(es.getNombreEvents()));
         nbreParticipants.setText(String.valueOf(es.getNombreParticipants()));
+        donCollecte.setText(String.valueOf(es.getAllDonsFromEvents()));
         
         assocLabel1.setText(es.getAssocActive1());
         assocLabel2.setText(es.getAssocActive2());

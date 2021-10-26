@@ -5,20 +5,16 @@
  */
 
 package Controllers;
-import Service.DonationCrud;
-import javafx.print.*;
 
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import javafx.scene.Node;
@@ -27,25 +23,27 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXMLLoader;
-import javafx.print.PageLayout;
-import javafx.print.PageOrientation;
-import javafx.print.Paper;
-import javafx.print.Printer;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.transform.Scale;
+import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
-import javafx.stage.Window;
+import javafx.util.Duration;
+import javax.imageio.ImageIO;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 
 /**
  * FXML Controller class
  *
  * @author Hassan
  */
-public class ItemController implements Initializable {
+public class Item2Controller implements Initializable {
 
     @FXML
     private Button print;
@@ -65,6 +63,8 @@ public class ItemController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    @FXML
+    private Label labelRef;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -90,28 +90,36 @@ public class ItemController implements Initializable {
             i++;
         }
         anne.setText(date.toString());
+        Random rnd = new Random();
+        int number = rnd.nextInt(999999);
+        labelRef.setText(String.valueOf(number));
         
 
     }    
-@FXML
-    private void printimage(ActionEvent event) throws IOException  {
-        
-        PrinterJob job = PrinterJob.createPrinterJob();
-     
-        Parent root = FXMLLoader.load(getClass().getResource("Item.fxml"));
-  
+    @FXML
+    private void printimage(ActionEvent event) throws Exception  {
 
-        if(job != null ){
-            boolean success = job.printPage(root);
-
-                  PrinterJob.JobStatus x = job.getJobStatus();
-                  System.out.println(x);
-            if(success){
-                job.endJob();
-                }
-
-            }
+        String filename = nom.getText() + categ.getText() + anne.getText()+"-"+labelRef.getText();
+        Robot robot = new Robot();
+        Rectangle rectangle = new Rectangle(310,120,753,305);
+        BufferedImage image= robot.createScreenCapture(rectangle);
+        WritableImage myImage = SwingFXUtils.toFXImage(image, null);
+        ImageIO.write(image, "jpg", new File("C:\\Users\\SeifD\\Desktop\\GestionDons\\GestionDons\\src\\recu\\"+filename+".jpg"));
+        print.setDisable(true);
+        //Notification Succées       
+        TrayNotification tray = new TrayNotification();
+        AnimationType type = AnimationType.POPUP;
+        tray.setAnimationType(type);
+        String tilte = "Enregistrement";
+        String message = "Votre reçu a bien été enregistré !";
+        tray.setTitle(tilte);
+        tray.setMessage(message);
+        tray.setNotificationType(NotificationType.SUCCESS);
+        tray.showAndDismiss(Duration.seconds(3));
     }
+        
+       
+    
 
     @FXML
     private void btnBackAction(ActionEvent event) throws IOException {
@@ -130,6 +138,7 @@ public class ItemController implements Initializable {
             while (scanner.hasNextLine()) {
                 dataRecu.add(scanner.nextLine());
             }
+            
             
         }catch(FileNotFoundException e){
             System.out.println("Error reading file");
