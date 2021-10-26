@@ -34,6 +34,8 @@ public class GestionDons extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+        //EvenementService es = new EvenementService();
+        //System.out.println(es.getMyParticipations(1));
     }
 
 }

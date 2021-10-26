@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" onMouseClicked="#mouseClickedTable" prefHeight="721.0" prefWidth="1075.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.DonEventController">
+   <children>
+      <HBox layoutX="35.0" layoutY="24.0" prefHeight="62.0" prefWidth="960.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <ImageView fitHeight="52.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/editer.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="253.0">
+               <children>
+                  <JFXButton fx:id="btnEditProfil" onAction="#btnEditProfilAction" prefHeight="43.0" prefWidth="95.0" styleClass="btnEditProfil" stylesheets="@../css/style.css" text="Editer le profil" />
+               </children>
+            </VBox>
+            <Pane prefHeight="62.0" prefWidth="125.0" />
+            <VBox prefHeight="62.0" prefWidth="239.0">
+               <children>
+                  <JFXToggleButton fx:id="toggleDarkDayMode" onAction="#toggleDarkDayModeAction" prefHeight="58.0" prefWidth="203.0" text="Switch to DarkMode" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="84.0" prefWidth="97.0">
+               <children>
+                  <ImageView fx:id="imgPhotoSession" fitHeight="66.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/profile.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="231.0">
+               <children>
+                  <Label fx:id="labelNomSession" text="Label">
+                     <font>
+                        <Font name="Calibri Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+      <Line endX="311.0" layoutX="666.0" layoutY="96.0" startX="-622.0" />
+      <HBox layoutX="75.0" layoutY="338.0" prefHeight="353.0" prefWidth="885.0" spacing="60.0">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" />
+         </padding>
+         <children>
+            <VBox prefHeight="399.0" prefWidth="432.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 15;">
+               <children>
+                  <TableView fx:id="eventTable" onMouseClicked="#mouseClickedTable" prefHeight="399.0" prefWidth="338.0" styleClass="noheader" stylesheets="@../css/tableParticip.css">
+                     <columns>
+                        <TableColumn fx:id="idEventCol" prefWidth="158.0" text="Date Création" />
+                        <TableColumn fx:id="nameEventCol" prefWidth="254.0" text="Cause" />
+                     </columns>
+                  </TableView>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <VBox fx:id="vboxDescript" alignment="CENTER" prefHeight="399.0" prefWidth="280.0" spacing="50.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 15;">
+               <children>
+                  <Label text="Description de l'évènement">
+                     <font>
+                        <Font name="Ebrima" size="18.0" />
+                     </font>
+                  </Label>
+                  <JFXTextArea fx:id="descriptionText">
+                     <font>
+                        <Font name="Ebrima" size="14.0" />
+                     </font>
+                  </JFXTextArea>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox fx:id="vBoxDisplay1" alignment="CENTER_LEFT" fillHeight="false" layoutX="75.0" layoutY="115.0" prefHeight="210.0" prefWidth="381.0" spacing="30.0">
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="138.0" prefWidth="142.0" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+               <children>
+                  <Label text="Dons collectés">
+                     <font>
+                        <Font name="Ebrima" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelDonCollectes" text="Label">
+                     <font>
+                        <Font name="Ebrima Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="20.0" top="20.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="TOP_CENTER" layoutX="30.0" layoutY="46.0" prefHeight="138.0" prefWidth="142.0" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+               <children>
+                  <Label text="Objectif">
+                     <font>
+                        <Font name="Ebrima" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelObjectif" text="Label">
+                     <font>
+                        <Font name="Ebrima Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" top="20.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox layoutX="564.0" layoutY="115.0" prefHeight="100.0" prefWidth="367.0" />
+      <HBox fx:id="vBoxDisplay2" alignment="CENTER_LEFT" layoutX="520.0" layoutY="215.0" prefHeight="79.0" prefWidth="412.0" spacing="30.0">
+         <children>
+            <JFXButton prefHeight="45.0" prefWidth="159.0" style="-fx-background-color: #7ca76f; -fx-background-radius: 15;" text="Faire un don" textFill="WHITE">
+               <font>
+                  <Font name="Ebrima Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXTextField fx:id="inputMontantDon" focusColor="#7ca76f" prefHeight="35.0" prefWidth="208.0" promptText="Montant" unFocusColor="BLACK" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

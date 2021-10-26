@@ -10,7 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -422,8 +424,58 @@ public class EvenementService {
     }
     
     
+    public ObservableList<Evenement> getMyParticipations(int id){
+ 
+        ObservableList<Evenement> myEvents = FXCollections.observableArrayList();
+        //List<Evenement> myEvents = new ArrayList<>();
+        String req = "SELECT * from evenement INNER JOIN event_user ON evenement.eventId = event_user.eventId where event_user.userId ="+id;
+            try {
+            ste = cnx.prepareStatement(req);
+            ResultSet rs = ste.executeQuery();
+            while (rs.next()){
+                Evenement e = new Evenement();
+                e.setEventId(rs.getInt("evenement.eventId"));
+                e.setAssociationId(rs.getInt("evenement.associationId"));
+                e.setDonCategorie(rs.getString("evenement.donCategorie"));
+                e.setCause(rs.getString("evenement.cause"));
+                e.setRegion(rs.getString("evenement.Region"));
+                e.setNum_participants(rs.getInt("evenement.num_participants"));
+                e.setDate_creation(rs.getDate("evenement.date_creation"));
+                e.setMontant_collecte(rs.getFloat("evenement.montant_collecte"));
+                e.setDescription(rs.getString("evenement.description"));
+                myEvents.add(e);
+            }
+            System.out.println("getMyParticipations Success");
+            
+        } catch (SQLException ex) {
+                System.out.println("Erreur getMyParticipations");
+        }
+        return myEvents;
+
+}
     
-    
+    public Evenement getMyFirstEvent(int id){
+        Evenement e = new Evenement();
+        try{
+            String req = "SELECT * from evenement INNER JOIN event_user ON evenement.eventId = event_user.eventId where event_user.userId ="+id+" LIMIT 1";
+            ste = cnx.prepareStatement(req);
+            ResultSet rs = ste.executeQuery();
+            while (rs.next()){
+                e.setEventId(rs.getInt("eventId"));
+                e.setAssociationId(rs.getInt("associationId"));
+                e.setDonCategorie(rs.getString("donCategorie"));
+                e.setCause(rs.getString("cause"));
+                e.setNum_participants(rs.getInt("num_participants"));
+                e.setDate_creation(rs.getDate("date_creation"));
+                e.setMontant_collecte(rs.getFloat("montant_collecte"));
+                e.setDescription(rs.getString("description"));               
+            }      
+        }
+        catch(SQLException ex){
+            System.out.println("Erreur affichage evenements");
+        }
+        return e;
+    }
     
 }
     
