@@ -21,6 +21,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -72,6 +73,10 @@ public class DonEventController implements Initializable {
     
     UserSession userSession = new UserSession();
     EvenementService es = new EvenementService();
+    @FXML
+    private ProgressIndicator progressIndicator;
+    @FXML
+    private JFXButton btnFaireDon;
 
     /**
      * Initializes the controller class.
@@ -79,8 +84,8 @@ public class DonEventController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Evenement e = es.getMyFirstEvent(userSession.getActualUserId());
-        labelDonCollectes.setText(String.valueOf(e.getMontant_collecte()) + "k");
-        labelObjectif.setText("5000k");
+        labelDonCollectes.setText(String.valueOf(e.getMontant_collecte()) + " TND");
+        labelObjectif.setText(String.valueOf(es.getBesoinTotalByCategorie(e.getDonCategorie())) + " TND");
         descriptionText.setText(e.getDescription());
         showEvents();
         
@@ -108,8 +113,8 @@ public class DonEventController implements Initializable {
    
    public void showEventDetails(){
        Evenement e = eventTable.getSelectionModel().getSelectedItem();
-       labelDonCollectes.setText(String.valueOf(e.getMontant_collecte()) + "k");
-       labelObjectif.setText("5000k");
+       labelDonCollectes.setText(String.valueOf(e.getMontant_collecte()) + " TND");
+       labelObjectif.setText(String.valueOf(es.getBesoinTotalByCategorie(e.getDonCategorie())) + " TND");
        descriptionText.setText(e.getDescription());
    }
 
@@ -161,5 +166,22 @@ public class DonEventController implements Initializable {
                 eventTable.setItems(sortedData);
     
     }*/
+
+    @FXML
+    private void btnFaireDonAction(ActionEvent event) {
+        
+        
+        int idUser = userSession.getActualUserId();
+        int idEvent = eventTable.getSelectionModel().getSelectedItem().getEventId();
+        float montantDon = Float.parseFloat(inputMontantDon.getText());
+        String categ = eventTable.getSelectionModel().getSelectedItem().getDonCategorie();
+        
+        
+        
+        es.ajouterDon(idUser, idEvent, montantDon, categ);
+        showEvents();
+        showEventDetails();
+        
+    }
     
 }

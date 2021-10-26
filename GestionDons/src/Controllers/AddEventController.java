@@ -111,6 +111,8 @@ public class AddEventController implements Initializable {
     private Label labelNomSession;
     
     UserSession us = new UserSession();
+    @FXML
+    private JFXTextField montantnput;
     
     
  
@@ -161,6 +163,7 @@ public class AddEventController implements Initializable {
             int assocId = idAssocInput.getSelectionModel().getSelectedItem();
             String region = regionInput.getSelectionModel().getSelectedItem();
             String cause = causeInput.getText();
+            Float montantDonne = Float.parseFloat(montantnput.getText());
             
             String desc = descInput.getText();
             Evenement e = new Evenement();
@@ -173,6 +176,14 @@ public class AddEventController implements Initializable {
             e.setMontant_collecte(0);
             e.setDescription(desc);       
             es.ajouterEvenement(e);
+            
+            if (!es.besoinExist(donCateg)){
+                es.addBesoin(montantDonne, donCateg, assocId);
+            }
+            else{
+                es.updateBesoinTotal(donCateg, montantDonne);
+            }
+            
             //showEvents();
             filterTable();
             
