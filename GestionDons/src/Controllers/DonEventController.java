@@ -11,15 +11,28 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 import entities.Evenement;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
@@ -29,8 +42,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import services.EvenementService;
 import services.UserSession;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
+
 
 /**
  * FXML Controller class
@@ -77,6 +96,9 @@ public class DonEventController implements Initializable {
     private ProgressIndicator progressIndicator;
     @FXML
     private JFXButton btnFaireDon;
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     /**
      * Initializes the controller class.
@@ -168,20 +190,64 @@ public class DonEventController implements Initializable {
     }*/
 
     @FXML
-    private void btnFaireDonAction(ActionEvent event) {
+    private void btnFaireDonAction(ActionEvent event) throws IOException {
+
+        if(eventTable.getSelectionModel().getSelectedItem() != null){
+            
+            int idUser = userSession.getActualUserId();
+            int idEvent = eventTable.getSelectionModel().getSelectedItem().getEventId();
+            float montantDon = Float.parseFloat(inputMontantDon.getText());
+            String categ = eventTable.getSelectionModel().getSelectedItem().getDonCategorie();
         
+            es.ajouterDon(idUser, idEvent, montantDon, categ);
+            saveDonorData();
+            showEvents();
+
+            //Notification Succées       
+            TrayNotification tray = new TrayNotification();
+            AnimationType type = AnimationType.POPUP;
+            tray.setAnimationType(type);
+            String tilte = "Don Enregistré";
+            String message = "Votre don à bien été effectué !";
+            tray.setTitle(tilte);
+            tray.setMessage(message);
+            tray.setNotificationType(NotificationType.SUCCESS);
+            tray.showAndDismiss(Duration.seconds(3));
+
+            Parent root = FXMLLoader.load(getClass().getResource("/Views/Item2.fxml"));
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.centerOnScreen();
+            stage.show();  
+        }
+        else{
+            new Alert(Alert.AlertType.WARNING, "Veuillez selectionner un évenement de la table", new ButtonType[]{ButtonType.OK}).show();
+        }
         
-        int idUser = userSession.getActualUserId();
-        int idEvent = eventTable.getSelectionModel().getSelectedItem().getEventId();
-        float montantDon = Float.parseFloat(inputMontantDon.getText());
-        String categ = eventTable.getSelectionModel().getSelectedItem().getDonCategorie();
+    }
+    
+    public void saveDonorData() {
         
-        
-        
-        es.ajouterDon(idUser, idEvent, montantDon, categ);
-        showEvents();
-        showEventDetails();
-        
+        String donorName = userSession.getActualUserName();
+        String montant = inputMontantDon.getText();
+        String donorPhone = userSession.getActualUserPhone();
+        String donCategorie = eventTable.getSelectionModel().getSelectedItem().getDonCategorie();
+        try {
+            File fileRecu = new File("C:\\Users\\SeifD\\Desktop\\GestionDons\\GestionDons\\src\\recu\\recucurrentSessionRecuData.txt");
+            FileWriter myWriter = new FileWriter(fileRecu, false);
+            myWriter.write(donorName);
+            myWriter.write("\n");
+            myWriter.write(donCategorie);
+            myWriter.write("\n");
+            myWriter.write(donorPhone);
+            myWriter.write("\n");
+            myWriter.write(montant + " DT");
+            myWriter.close();
+
+            }catch(Exception e){
+            System.out.println("Error writing Recu Data");
+        }
     }
     
 }
