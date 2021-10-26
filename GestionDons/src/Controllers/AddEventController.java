@@ -17,6 +17,8 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -141,6 +143,15 @@ public class AddEventController implements Initializable {
         TextFields.bindAutoCompletion(searchInput, suggets);
         labelNomSession.setText(us.getActualUserName());
         
+        montantnput.textProperty().addListener(new ChangeListener<String>() {               
+                @Override
+                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                    if (!newValue.matches("\\d*")) {
+                        montantnput.setText(newValue.replaceAll("[^\\d]", ""));
+                    }
+                }
+            });
+        
         
         
         
@@ -164,7 +175,6 @@ public class AddEventController implements Initializable {
             String region = regionInput.getSelectionModel().getSelectedItem();
             String cause = causeInput.getText();
             Float montantDonne = Float.parseFloat(montantnput.getText());
-            
             String desc = descInput.getText();
             Evenement e = new Evenement();
             e.setAssociationId(assocId);

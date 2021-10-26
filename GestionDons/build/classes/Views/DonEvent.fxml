@@ -6,7 +6,6 @@
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
@@ -160,13 +159,7 @@
             </VBox>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="511.0" layoutY="115.0" prefHeight="100.0" prefWidth="367.0">
-         <children>
-            <ProgressIndicator fx:id="progressIndicator" prefHeight="100.0" prefWidth="75.0" progress="0.0">
-               <effect>
-                  <DropShadow />
-               </effect></ProgressIndicator>
-         </children></HBox>
+      <HBox alignment="CENTER" layoutX="511.0" layoutY="115.0" prefHeight="100.0" prefWidth="367.0" />
       <HBox fx:id="vBoxDisplay2" alignment="CENTER_LEFT" layoutX="520.0" layoutY="215.0" prefHeight="79.0" prefWidth="412.0" spacing="30.0">
          <children>
             <JFXButton fx:id="btnFaireDon" onAction="#btnFaireDonAction" prefHeight="45.0" prefWidth="159.0" style="-fx-background-color: #7ca76f; -fx-background-radius: 15;" text="Faire un don" textFill="WHITE">

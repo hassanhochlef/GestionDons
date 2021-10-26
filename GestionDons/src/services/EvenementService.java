@@ -673,6 +673,27 @@ public class EvenementService {
     }
     
     
+    //Permet de retourner la somme total des dons collectés par tous les evenements créers
+    public float getAllDonsFromEvents(){
+        float montant = 0;
+        
+        try{
+            String req = "SELECT montant_collecte from evenement";
+            ste = cnx.prepareStatement(req);
+            ResultSet rs = ste.executeQuery();
+            while (rs.next()){
+                montant += rs.getFloat("montant_collecte");
+            }
+            
+        }catch(SQLException ex){
+            System.out.println("Erreur getAllDonsFromEvents");
+        }
+        
+        return montant;
+        
+    }
+    
+    
 }
     
 
