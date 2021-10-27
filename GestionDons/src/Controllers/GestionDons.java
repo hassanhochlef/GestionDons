@@ -40,6 +40,8 @@ public class GestionDons extends Application {
         stage.setScene(scene);
        stage.isResizable();
        stage.initStyle(StageStyle.UNDECORATED);
+     
+   
         /*Parent root1 = FXMLLoader.load(getClass().getResource("StatsDash.fxml"));
         Scene scene1 = new Scene(root1);
          stage.setScene(scene1);*/
@@ -67,7 +69,7 @@ public class GestionDons extends Application {
           Don d = new Don("11-05-1998",500,"Transport",1,2);
           dc.AjouterDons(d);*/
         launch(args);
-       
+      
        
     }
 

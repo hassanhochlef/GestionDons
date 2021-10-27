@@ -53,13 +53,20 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.PasswordField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Affine;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
@@ -130,7 +137,6 @@ public ComboBox ComboBesoin2;
     private Pane panerejoindre;
     @FXML
     private Button participer;
-    @FXML
     private ImageView object;
     @FXML
     private TextField montantfamille;
@@ -182,6 +188,12 @@ public ComboBox ComboBesoin2;
     private ImageView participantProfilepic3;
     @FXML
     private Text finished;
+    @FXML
+    private ImageView photoEnchere;
+    @FXML
+    private Label descriptionEnchere;
+    @FXML
+    private Label montantEnchere;
     /**
      * Initializes the controller class.
      */
@@ -204,9 +216,25 @@ public ComboBox ComboBesoin2;
        print1.setVisible(false);
        print.setVisible(false);
        panerejoindre.setVisible(true);
-       new RollIn(object).setCycleCount(25).setDelay(Duration.valueOf("500ms")).play();
+            //new RollIn(photoEnchere).setCycleCount(25).setDelay(Duration.valueOf("500ms")).play();
+      DonationCrud dc= new DonationCrud();
+      
+ 
      
-
+       /************/
+       Timeline timeline1 = new Timeline(new KeyFrame(Duration.seconds(1), ev -> {
+       
+     
+           try {
+               dc.affObjet(montantEnchere, descriptionEnchere, photoEnchere);
+           } catch (SQLException ex) {
+               Logger.getLogger(DonsScreenController.class.getName()).log(Level.SEVERE, null, ex);
+           }
+      
+    }));
+    timeline1.setCycleCount(Animation.INDEFINITE);
+    timeline1.play();
+        
      }
       
        
@@ -216,6 +244,7 @@ public ComboBox ComboBesoin2;
      
     @FXML
     private void getmontant(ActionEvent event){
+        if(!montant.getText().isEmpty()){
         LocalDate date = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         
@@ -240,8 +269,19 @@ public ComboBox ComboBesoin2;
             increaseprogress2();
             
             print.setVisible(true);
+        }
+        else {
+         TrayNotification tray = new TrayNotification();
+            AnimationType type = AnimationType.POPUP;
+            tray.setAnimationType(type);
+            String tilte = "ERROR";
+            String message = "Montant invalide";
+            tray.setTitle(tilte);
+            tray.setMessage(message);
+            tray.setNotificationType(NotificationType.ERROR);
+            tray.showAndDismiss(Duration.seconds(3));
            
-            
+        } 
             
     }
     @FXML
@@ -482,51 +522,6 @@ public ComboBox ComboBesoin2;
             Logger.getLogger(DonsScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public void persist(Object object) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("GestionDonsPU");
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        try {
-            em.persist(object);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            em.getTransaction().rollback();
-        } finally {
-            em.close();
-        }
-    }
-
-    public void persist1(Object object) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("GestionDonsPU");
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        try {
-            em.persist(object);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            em.getTransaction().rollback();
-        } finally {
-            em.close();
-        }
-    }
-
-    public void persist2(Object object) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("GestionDonsPU");
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        try {
-            em.persist(object);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            em.getTransaction().rollback();
-        } finally {
-            em.close();
-        }
-    }
     @FXML
     public void openscene(ActionEvent event) throws IOException{
          Parent part = FXMLLoader.load(getClass().getResource("/Views/Item.fxml"));
@@ -539,6 +534,7 @@ public ComboBox ComboBesoin2;
 
     @FXML
     private void getmontant1(ActionEvent event) throws Exception {
+         if(!montantHosp.getText().isEmpty() ){
         LocalDate date = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -551,7 +547,9 @@ public ComboBox ComboBesoin2;
             d.setCategorie("Hopiteaux");
             d.setDonationDate(date.format(formatter));
             d.setMontant(montantdonne);
+           
             dc.AjouterDons(d);
+          
             System.out.println("clicked");
            String x = (String)ComboBesoin.getValue();
           
@@ -562,7 +560,17 @@ public ComboBox ComboBesoin2;
             increaseprogress();
             print1.setVisible(true);
            // MailSend.sendMail("kaidoro.hh@gmail.com");
-               
+         }
+          TrayNotification tray = new TrayNotification();
+            AnimationType type = AnimationType.POPUP;
+            tray.setAnimationType(type);
+            String tilte = "ERROR";
+            String message = "Montant invalide";
+            tray.setTitle(tilte);
+            tray.setMessage(message);
+            tray.setNotificationType(NotificationType.ERROR);
+            tray.showAndDismiss(Duration.seconds(3));
+         
     }
 
     @FXML
@@ -576,18 +584,27 @@ public ComboBox ComboBesoin2;
     }
 
     @FXML
-    private void participerencher(ActionEvent event) throws InterruptedException {
+    private void participerencher(ActionEvent event) throws InterruptedException, SQLException {
+       
+            participer.setVisible(true);
+        
         panerejoindre.setVisible(true);
         new Flash(panerejoindre).play();
         int amountOfHours = Integer.parseInt(hour.getText());
           int amountOfMinutes = Integer.parseInt(minute.getText());
         int amountOfSeconds = Integer.parseInt(second.getText());
         int time = amountOfHours *3600 +  amountOfMinutes * 60 + amountOfSeconds;
+     
         ParticiperEnchere(us);
+        
         if(timeline.getStatus() == Status.STOPPED )
          showCountDown(time);
-          finished.setText("Temps restant");
-          
+          finished.setText("Temps restant");    
+       DonationCrud dc = new DonationCrud();
+   dc.affObjet(montantEnchere, descriptionEnchere, photoEnchere);
+     
+         
+         
         
     }
     private Timeline timeline = new Timeline();
@@ -619,6 +636,12 @@ Don d = new Don();
           montantParticipant1.setText("Pas de participant");
           montantParticipant2.setText("Pas de participant");
           montantParticipant3.setText("Pas de participant");
+         /* montantEnchere.setText(String.valueOf("0"));
+          photoEnchere.setImage(new Image(""));
+          descriptionEnchere.setText("");*/
+        
+         dc.SupprimerObjects();
+         
          }
                             }
                     )
@@ -650,6 +673,7 @@ Don d = new Don();
  
     @FXML
     private void getmontant2(ActionEvent event) {
+        if(!montantfamille.getText().isEmpty()){
          LocalDate date = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -671,7 +695,18 @@ Don d = new Don();
             dc.ModifierBesoin(x,y);
             FilltextField();
             increaseprogress();
-            print2.setVisible(true);
+            print2.setVisible(true);}
+        else {
+             TrayNotification tray = new TrayNotification();
+            AnimationType type = AnimationType.POPUP;
+            tray.setAnimationType(type);
+            String tilte = "ERROR";
+            String message = "Montant invalide";
+            tray.setTitle(tilte);
+            tray.setMessage(message);
+            tray.setNotificationType(NotificationType.ERROR);
+            tray.showAndDismiss(Duration.seconds(3));
+        }
     }
 
     
@@ -749,6 +784,7 @@ Don d = new Don();
     }
     }
     public void ParticiperEnchere(UserSession us){
+        if(!montantparticipant.getText().isEmpty() && !motdepassparticipant.getText().isEmpty()){
         DonationCrud dc = new DonationCrud();
      float montantpartic = Float.parseFloat(montantparticipant.getText());
      String motDePasse = motdepassparticipant.getText();
@@ -786,15 +822,46 @@ Don d = new Don();
             tray.setNotificationType(NotificationType.ERROR);
             tray.showAndDismiss(Duration.seconds(3));
      }
-             
          }
         
+         }
+       
      }
-           
+       else {
+                  TrayNotification tray = new TrayNotification();
+            AnimationType type = AnimationType.POPUP;
+            tray.setAnimationType(type);
+            String tilte = "ERROR";
+            String message = "Montant invalide";
+            tray.setTitle(tilte);
+            tray.setMessage(message);
+            tray.setNotificationType(NotificationType.ERROR);
+            tray.showAndDismiss(Duration.seconds(3));
+                 }      
        
          
      }
+
+    @FXML
+    private void ajouterBesoinObjet(ActionEvent event) throws IOException {
+         Parent part = FXMLLoader.load(getClass().getResource("/Views/AjoutBesoinAssociation.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(part);
+        stage.setScene(scene);
+        stage.show();
+    }
     
+       public PreparedStatement ste;
+
+    @FXML
+    private void home(ActionEvent event) {
+    }
+
+    @FXML
+    private void logout(ActionEvent event) {
+    }
+       
+   
     }
     
 

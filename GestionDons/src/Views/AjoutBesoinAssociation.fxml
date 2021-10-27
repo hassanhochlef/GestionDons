@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-radius: 0;" styleClass="besoin" stylesheets="@../css/style1.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AjoutBesoinAssociationController">
+   <children>
+      <Button layoutX="451.0" layoutY="93.0" mnemonicParsing="false" onAction="#AjouterBesoin" style="-fx-background-color: grey;" styleClass="participateBtn" stylesheets="@../css/styleparticipation.css" text="Ajouter besoin" />
+      <ImageView fx:id="photoObjet" fitHeight="93.0" fitWidth="142.0" layoutX="229.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="250.0" layoutY="361.0" mnemonicParsing="false" onAction="#ImporterImage" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: grey;" styleClass="participateBtn" stylesheets="@../css/styleparticipation.css" text="Photo d'objet" />
+      <Button layoutX="470.0" layoutY="274.0" mnemonicParsing="false" onAction="#AjouterObjet" style="-fx-background-color: grey;" styleClass="participateBtn" stylesheets="@../css/styleparticipation.css" text="Ajouter objet" />
+      <Separator layoutY="191.0" prefHeight="5.0" prefWidth="600.0" style="-fx-background-color: lightgrey;" />
+      <Text layoutX="5.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter un besoin :" />
+      <Text layoutX="5.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter un objet :" />
+      <TextField fx:id="categorieBesoin" layoutX="41.0" layoutY="52.0" promptText="Categorie besoin" />
+      <TextField fx:id="descriptionBesoin" layoutX="243.0" layoutY="55.0" promptText="Description Besoin" />
+      <TextField fx:id="montantBesoin" layoutX="41.0" layoutY="123.0" promptText="Montant" />
+      <TextField fx:id="quantiteBesoin" layoutX="245.0" layoutY="125.0" promptText="Quantité" />
+      <TextField fx:id="categorieObjet" editable="false" layoutX="31.0" layoutY="235.0" promptText="Categorie" text="Enchere" />
+      <TextField fx:id="descriptionObjet" layoutX="247.0" layoutY="234.0" promptText="Description" />
+      <TextField fx:id="montantObjet" layoutX="33.0" layoutY="302.0" promptText="Montant" />
+   </children>
+</AnchorPane>

@@ -16,6 +16,17 @@ public class Besoin {
     private String categorie;
     private String description;
     private float montantactuel;
+    private String photo;
+
+    public Besoin(int idBesoin, float montant, int quantite, String categorie, String description, float montantactuel, String photo) {
+        this.idBesoin = idBesoin;
+        this.montant = montant;
+        this.quantite = quantite;
+        this.categorie = categorie;
+        this.description = description;
+        this.montantactuel = montantactuel;
+        this.photo = photo;
+    }
 
     public Besoin(int idBesoin, float montant, int quantite, String categorie, String description, float montantactuel) {
         this.idBesoin = idBesoin;
@@ -24,6 +35,14 @@ public class Besoin {
         this.categorie = categorie;
         this.description = description;
         this.montantactuel = montantactuel;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public Besoin(int idBesoin, String description) {
