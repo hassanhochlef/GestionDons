@@ -2421,7 +2421,6 @@ var dtjava = function() {
        // auto-install is windows only
        if (!ua.win) return false;
 
-
        // if no DT plugin, return false
        // if DT plugin is there but not operational (e.g. blocked)
        //  then pretend there is no autoinstall
@@ -2433,9 +2432,7 @@ var dtjava = function() {
            if (!enableWithoutCertMisMatchWorkaround(platform.jvm)) {
                return false;
            }
-
        }
-
 
        if (fx != "ok") {
             if (!canJavaFXCoBundleSatisfy(platform)) {

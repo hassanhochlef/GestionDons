@@ -8,9 +8,8 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-
-    <jar href="GestionDons.jar" size="16988" download="eager" />
-
+    <jar href="GestionDons.jar" size="1314428" download="eager" />
+    <jar href="lib\AnimateFX-1.2.1.jar" size="94267" download="eager" />
     <jar href="lib\TrayNotification.jar" size="41019" download="eager" />
     <jar href="lib\commons-io-2.6.jar" size="247129" download="eager" />
     <jar href="lib\controlsfx-8.40.11.jar" size="985420" download="eager" />
