@@ -22,7 +22,7 @@ import javax.mail.internet.MimeMessage;
  */
 public class JavaMailUtil {
     
-    public static void sendMail(String recipient) throws Exception{
+    public static void sendMail(String recipient,String mail) throws Exception{
         System.out.println("Preparing to send email");
         Properties properties = new Properties();
         
@@ -40,22 +40,20 @@ public class JavaMailUtil {
                 return new PasswordAuthentication(myAccountEmail, password); 
             }  
         });
-        
-        Message message = prepareMessage(session, myAccountEmail, recipient); 
+        UserService us = new UserService();
+        String pass = us.getPassword1(recipient);
+        Message message = prepareMessage(session, myAccountEmail, recipient,pass); 
         Transport.send(message);
         System.out.println("Message sent succesfully");
     }
     
-    private static Message prepareMessage(Session session, String myAccountEmail, String recipient){
+    private static Message prepareMessage(Session session, String myAccountEmail, String recipient,String pass){
         try {
-            UserService us = new UserService();
-           User u = new User();
-       String password =  us.getPassword1(u.getMail());
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(myAccountEmail));
             message.setRecipient(Message.RecipientType.TO,  new InternetAddress(recipient));
-            message.setSubject("Votre Mot de passe oublié est"+password);
-            message.setText("Test Mail");
+            message.setSubject("Forgotpass");
+            message.setText("Votre mot de passe oublié est :"+pass);
             return message;
         } catch (Exception ex) {
             Logger.getLogger(JavaMailUtil.class.getName()).log(Level.SEVERE, null, ex);

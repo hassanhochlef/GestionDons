@@ -104,7 +104,7 @@ import java.sql.SQLException;
     }
          public String getPassword1(String mail) throws SQLException{
               User u = new User();
-
+             System.out.println(mail);
          //query
             String sql = "SELECT password FROM user Where mail = '"+mail+"'";
             try {
@@ -113,8 +113,9 @@ import java.sql.SQLException;
                  ResultSet rs = ste.executeQuery();
                 
                
-                if (!rs.next()) {
+                if (rs.next()) {
                      u.setPassword(rs.getString("password"));
+                     System.err.println(rs.getString("password"));
                   }
                
             }

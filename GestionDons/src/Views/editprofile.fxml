@@ -44,7 +44,7 @@
                   </Label>
                   <HBox alignment="CENTER" prefHeight="37.0" prefWidth="888.0">
                      <children>
-                        <Label text="Nom" textFill="WHITE">
+                        <Label text="Nom " textFill="WHITE">
                            <font>
                               <Font size="17.0" />
                            </font>

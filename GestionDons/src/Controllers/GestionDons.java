@@ -20,7 +20,7 @@ public class GestionDons extends Application {
     
   @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/Views/Main.fxml"));        
+        Parent root = FXMLLoader.load(getClass().getResource("/Views/editprofile.fxml"));        
         Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);

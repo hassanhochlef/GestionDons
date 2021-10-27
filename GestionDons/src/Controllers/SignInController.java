@@ -103,10 +103,11 @@ public class SignInController implements Initializable {
     private void forgot(ActionEvent event) throws SQLException {
         String mail= inputemail.getText();
         JavaMailUtil ms = new JavaMailUtil();
-        
+        UserService us = new UserService();
+        String x = us.getPassword1(mail);
         try {
             new Alert(Alert.AlertType.ERROR, "Vérifier votre boite Mail et récupérer votre mot de passe", new ButtonType[]{ButtonType.OK}).show();
-            ms.sendMail(mail);
+            ms.sendMail(mail,x);
         } catch (Exception ex) {
             Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
         }
