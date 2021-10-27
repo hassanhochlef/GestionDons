@@ -25,7 +25,8 @@ import Service.DonationCrud;
 
 import java.sql.SQLException;
 import javafx.stage.StageStyle;
-import services.EvenementService;
+
+
 /**
  *
  * @author Hassan
@@ -35,7 +36,8 @@ public class GestionDons extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/Views/Main.fxml"));        
+        Parent root = FXMLLoader.load(getClass().getResource("/Views/DonsScreen.fxml"));
+
         Scene scene = new Scene(root);
         stage.setScene(scene);
        stage.isResizable();
