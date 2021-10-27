@@ -24,19 +24,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -55,30 +49,20 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import animatefx.animation.*;
-import com.paypal.api.payments.Transaction;
-import com.paypal.base.rest.PayPalModel;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
-import javafx.animation.AnimationTimer;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
-import javax.annotation.PostConstruct;
-
-import sun.util.resources.cldr.ta.CalendarData_ta_IN;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.concurrent.TimeUnit;
+import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
-import javafx.event.EventHandler;
+import javafx.scene.control.PasswordField;
 import javafx.scene.layout.HBox;
-
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 /**
  * FXML Controller class
  *
@@ -90,8 +74,6 @@ public ComboBox ComboBesoin ;
 public ComboBox ComboBesoinTransport;
 public ComboBox ComboBesoin2;
     UserSession us = new UserSession();
-    @FXML
-    private HBox Timer;
     private HBox TimerPane;
     private AnchorPane pane;
     @FXML
@@ -171,7 +153,35 @@ public ComboBox ComboBesoin2;
     @FXML
     private Label second;
     @FXML
-    private Label nanosecond;
+    private Label NomParticipant1;
+    @FXML
+    private Label telParticipant1;
+    @FXML
+    private Label montantParticipant1;
+    @FXML
+    private Label NomParticipant2;
+    @FXML
+    private Label telParticipant2;
+    @FXML
+    private Label montantParticipant2;
+    @FXML
+    private Label NomParticipant3;
+    @FXML
+    private Label telParticipant3;
+    @FXML
+    private Label montantParticipant3;
+    @FXML
+    private PasswordField motdepassparticipant;
+    @FXML
+    private TextField montantparticipant;
+    @FXML
+    private ImageView participantProfilepic1;
+    @FXML
+    private ImageView participantProfilepic2;
+    @FXML
+    private ImageView participantProfilepic3;
+    @FXML
+    private Text finished;
     /**
      * Initializes the controller class.
      */
@@ -193,7 +203,7 @@ public ComboBox ComboBesoin2;
        print2.setVisible(false);
        print1.setVisible(false);
        print.setVisible(false);
-       panerejoindre.setVisible(false);
+       panerejoindre.setVisible(true);
        new RollIn(object).setCycleCount(25).setDelay(Duration.valueOf("500ms")).play();
      
 
@@ -573,15 +583,17 @@ public ComboBox ComboBesoin2;
           int amountOfMinutes = Integer.parseInt(minute.getText());
         int amountOfSeconds = Integer.parseInt(second.getText());
         int time = amountOfHours *3600 +  amountOfMinutes * 60 + amountOfSeconds;
-
-        showCountDown(time);
-  
+        ParticiperEnchere(us);
+        if(timeline.getStatus() == Status.STOPPED )
+         showCountDown(time);
+          finished.setText("Temps restant");
+          
+        
     }
-      @FXML
     private Timeline timeline = new Timeline();
         private void showCountDown(int time) {
-      
-
+       DonationCrud dc = new DonationCrud();
+Don d = new Don();
         int nextFrameTime = 0;
 
         for (int i = 0; i <= time; time--) {
@@ -590,20 +602,48 @@ public ComboBox ComboBesoin2;
             timeline.getKeyFrames().add(new KeyFrame(
                             Duration.millis(nextFrameTime),
                             action -> {
-                                hour.setText(String.format("%02d", finalTime / 3600));
+                                //hour.setText(String.format("%02d", finalTime / 3600));
                                 minute.setText(String.format("%02d", (finalTime / 120)));
                                 second.setText(String.format("%02d", (finalTime % 60)));
-                               
+                                if("00".equals(minute.getText()) && "01".equals(second.getText()) ){
+              float x =dc.montantGagnant(montantParticipant1, montantParticipant2, montantParticipant3);
+              String winner =dc.Whoisthewinner(x, montantParticipant1, montantParticipant2, montantParticipant3, telParticipant1, telParticipant2, telParticipant3);
+              dc.gagne(winner);
+              dc.AjouterWinnerDons(winner,d,x);
+                   NomParticipant1.setText("Pas de participant");
+          NomParticipant2.setText("Pas de participant");
+          NomParticipant3.setText("Pas de participant");
+          telParticipant1.setText("Pas de participant");
+          telParticipant2.setText("Pas de participant");
+          telParticipant3.setText("Pas de participant");
+          montantParticipant1.setText("Pas de participant");
+          montantParticipant2.setText("Pas de participant");
+          montantParticipant3.setText("Pas de participant");
+         }
                             }
                     )
             );
             nextFrameTime += 1000;
+         
         }
-
+         
         timeline.setCycleCount(1);
+        timeline.setOnFinished(event -> 
+                finished.setText("Finished") );
+        
         timeline.play();
-
+       
+     
+             
     }
+        /*public void eventOver(){
+            DonationCrud dc = new DonationCrud();
+            if(dc.VerifyEventOver(finished)){
+             float x =dc.montantGagnant(montantParticipant1, montantParticipant2, montantParticipant3);
+              String winner =dc.Whoisthewinner(x, montantParticipant1, montantParticipant2, montantParticipant3, telParticipant1, telParticipant2, telParticipant3);
+              dc.gagne(winner);
+            }
+        }*/
      
   
           
@@ -708,11 +748,58 @@ public ComboBox ComboBesoin2;
         Logger.getLogger(DonsScreenController.class.getName()).log(Level.SEVERE, null, ex);
     }
     }
+    public void ParticiperEnchere(UserSession us){
+        DonationCrud dc = new DonationCrud();
+     float montantpartic = Float.parseFloat(montantparticipant.getText());
+     String motDePasse = motdepassparticipant.getText();
+     if(dc.passIsValid(us,motDePasse)==true){
+         if(dc.dejaParticipe(us, NomParticipant1, telParticipant1)){
+             dc.participant(us ,NomParticipant1,telParticipant1,montantParticipant1,montantpartic);
+         }
+         else if(dc.dejaParticipe(us, NomParticipant2, telParticipant2)){
+             dc.participant(us ,NomParticipant2,telParticipant2,montantParticipant2,montantpartic);
+         }
+         else if(dc.dejaParticipe(us, NomParticipant3, telParticipant3)){
+             dc.participant(us ,NomParticipant3,telParticipant3,montantParticipant3,montantpartic);
+         }
+         
+    else {
+             if("Pas de participant".equals(NomParticipant1.getText())){
+             dc.participant(us,NomParticipant1,telParticipant1,montantParticipant1,montantpartic);
+            
+               }
+                    else if("Pas de participant".equals(NomParticipant2.getText())){
+                    dc.participant(us,NomParticipant2,telParticipant2,montantParticipant2,montantpartic);
+                    }
+                    else if("Pas de participant".equals(NomParticipant3.getText())){
+                    dc.participant(us,NomParticipant3,telParticipant3,montantParticipant3,montantpartic);
+            
+                     }
+            else {
+            TrayNotification tray = new TrayNotification();
+            AnimationType type = AnimationType.POPUP;
+            tray.setAnimationType(type);
+            String tilte = "ERROR";
+            String message = "Session pleine";
+            tray.setTitle(tilte);
+            tray.setMessage(message);
+            tray.setNotificationType(NotificationType.ERROR);
+            tray.showAndDismiss(Duration.seconds(3));
+     }
+             
+         }
+        
+     }
+           
+       
+         
+     }
     
+    }
     
 
 
-}
+
  
    
    
