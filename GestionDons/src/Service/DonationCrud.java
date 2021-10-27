@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,6 +31,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import tray.notification.TrayNotification;
 
@@ -67,7 +70,8 @@ public void AjouterDons(Don d){
 public List<Don> afficherDons(){
         List<Don> donation = new ArrayList<>() ;
     try {
-        
+        LocalDate date = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         String sql = "Select * from Don";
         ResultSet rs ;
         ste = cnx.prepareStatement(sql);
@@ -261,11 +265,10 @@ public void afficherrecu(Label fieldDate, Label fieldMontant, Label fieldCategor
     }
    
 }
-/******************************************************************************/
-  public List<User> ModifierDonneur(User u,Don d){
+public List<User> ModifierDonneur(UserSession u,Don d){
         List<User> user = new ArrayList<>() ;
     try {
-        int x = d.getDonorId();
+        int x = u.getActualUserId();
         float y = 0;
         String sql1 = "SELECT SUM(montant) from Don where donorId='"+x+"'"; 
        String sql = "UPDATE User SET montant_donne=? where userId='"+x+"'";
@@ -328,6 +331,92 @@ if (rowsDeleted > 0) {
        }
        return false;
    }
+   public float montantGagnant(Label participant1,Label participant2,Label participant3){
+       float max0 = 0;
+       float max1 = 0;
+       if(!"Pas de participant".equals(participant1.getText()) &&  "Pas de participant".equals(participant2.getText())){
+           return max1= Float.parseFloat(participant1.getText()) ;
+       }
+       else if(!"Pas de participant".equals(participant1.getText()) &&  !"Pas de participant".equals(participant2.getText()) && "Pas de participant".equals(participant3.getText()) )
+        return max1 = Math.max(Float.parseFloat(participant1.getText()), Float.parseFloat(participant2.getText())) ;
+        
+       else{ 
+           
+           max0 = Math.max(Float.parseFloat(participant1.getText()), Float.parseFloat(participant2.getText()));
+           return max1 = Math.max(max0, Float.parseFloat(participant3.getText()));
+       
+       }
+
+       
+     
+   
 
     
 }
+   public String Whoisthewinner(float max,Label montantParticipant1,Label montantParticipant2,Label montantParticipant3,Label phoneParticipant1,Label phoneParticipant2,Label phoneParticipant3){
+       
+       if(max == Float.parseFloat(montantParticipant1.getText())){
+          return phoneParticipant1.getText(); 
+       }
+       else if (max == Float.parseFloat(montantParticipant2.getText())){
+          return phoneParticipant2.getText(); 
+       }
+       return phoneParticipant3.getText();
+   }
+public void gagne(String winner){
+    TrayNotification tray = new TrayNotification();
+            AnimationType type = AnimationType.POPUP;
+            tray.setAnimationType(type);
+            String tilte = "Félicitation";
+            String message = "Num tel : " +winner ;
+            tray.setTitle(tilte);
+            tray.setMessage(message);
+            tray.setNotificationType(NotificationType.ERROR);
+            tray.showAndDismiss(Duration.seconds(3));
+            
+}
+public Boolean VerifyEventOver(Text finish){
+    
+       if("Finished".equals(finish.getText()))
+       { 
+          return true;
+          }
+       return false;
+}
+public void AjouterWinnerDons(String winner,Don d,float x){
+    try {
+         LocalDate date = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        User u = new User();
+        String  mywinner = "SELECT * from user where user.phone='"+winner+"'";
+       PreparedStatement statement = cnx.prepareStatement(mywinner);
+       ResultSet rs = statement.executeQuery();
+       while(rs.next()){
+           
+           u.setUserId((rs.getInt("userId")));
+           u.setName(rs.getString("name"));
+           u.setPhone(rs.getString("phone"));
+           
+       }
+            
+        String sql="insert into Don(donorId,eventId,categorie,montant,donationDate)" + "values(?,?,?,?,?)";
+        ste =cnx.prepareStatement(sql);
+        ste.setInt(1,u.getUserId());
+        ste.setInt(2,0);
+        ste.setString(3,"Enchere");
+        ste.setFloat(4,x);
+        ste.setString(5,date.format(formatter));
+        ste.executeUpdate();
+        System.out.println("\nSucces d'ajout");
+    } catch (SQLException ex) {
+       System.out.println(ex.getMessage());
+       System.out.println("no");
+    }
+    }
+}
+ 
+ /*if(Float.parseFloat(participant1.getText()) < Float.parseFloat(participant2.getText()))
+           max = Float.parseFloat(participant2.getText());
+       else {
+           max = Float.parseFloat(participant1.getText());
+       }  */
