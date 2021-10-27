@@ -32,6 +32,8 @@ public class EventsMainController implements Initializable {
     private JFXButton homeButton;
     @FXML
     private JFXButton newEventButton;
+    @FXML
+    private JFXButton myEventsButton;
 
     
     
@@ -59,11 +61,19 @@ public class EventsMainController implements Initializable {
     }
 
     
+    @FXML
+    private void myEventsButtonAction(ActionEvent event) throws IOException {
+        loadUI("DonEvent");
+        new FadeIn(context).play();
+    }
+
+    
     
     private void loadUI(String ui) throws IOException{
         context.getChildren().clear();
         context.getChildren().add(FXMLLoader.load(this.getClass().getResource("/views/" + ui + ".fxml")));
     }
 
+    
     
 }

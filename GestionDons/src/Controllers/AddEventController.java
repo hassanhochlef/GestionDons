@@ -17,6 +17,8 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -111,6 +113,8 @@ public class AddEventController implements Initializable {
     private Label labelNomSession;
     
     UserSession us = new UserSession();
+    @FXML
+    private JFXTextField montantnput;
     
     
  
@@ -139,6 +143,15 @@ public class AddEventController implements Initializable {
         TextFields.bindAutoCompletion(searchInput, suggets);
         labelNomSession.setText(us.getActualUserName());
         
+        montantnput.textProperty().addListener(new ChangeListener<String>() {               
+                @Override
+                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                    if (!newValue.matches("\\d*")) {
+                        montantnput.setText(newValue.replaceAll("[^\\d]", ""));
+                    }
+                }
+            });
+        
         
         
         
@@ -161,7 +174,7 @@ public class AddEventController implements Initializable {
             int assocId = idAssocInput.getSelectionModel().getSelectedItem();
             String region = regionInput.getSelectionModel().getSelectedItem();
             String cause = causeInput.getText();
-            
+            Float montantDonne = Float.parseFloat(montantnput.getText());
             String desc = descInput.getText();
             Evenement e = new Evenement();
             e.setAssociationId(assocId);
@@ -173,6 +186,14 @@ public class AddEventController implements Initializable {
             e.setMontant_collecte(0);
             e.setDescription(desc);       
             es.ajouterEvenement(e);
+            
+            if (!es.besoinExist(donCateg)){
+                es.addBesoin(montantDonne, donCateg, assocId);
+            }
+            else{
+                es.updateBesoinTotal(donCateg, montantDonne);
+            }
+            
             //showEvents();
             filterTable();
             

@@ -4,15 +4,13 @@
  * and open the template in the editor.
  */
 
-package Controllers;
-import Connection.MyConnection;
-import Service.DonationCrud;
-import Entities.Don;
-import static java.awt.SystemColor.window;
-import java.io.*;
-import javafx.application.*;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
+package MainEntry;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
@@ -27,6 +25,7 @@ import Service.DonationCrud;
 
 import java.sql.SQLException;
 import javafx.stage.StageStyle;
+import services.EvenementService;
 /**
  *
  * @author Hassan
@@ -35,7 +34,8 @@ public class GestionDons extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/Views/DonsScreen.fxml"));
+
+        Parent root = FXMLLoader.load(getClass().getResource("/Views/Main.fxml"));        
         Scene scene = new Scene(root);
         stage.setScene(scene);
        stage.isResizable();
@@ -67,8 +67,11 @@ public class GestionDons extends Application {
           Don d = new Don("11-05-1998",500,"Transport",1,2);
           dc.AjouterDons(d);*/
         launch(args);
-       
-       
+
+        //EvenementService es = new EvenementService();
+        //System.out.println(es.getMyParticipations(1));
+        //System.out.println(es.getBesoinTotalByCategorie("Pauvreté"));
+
     }
 
     

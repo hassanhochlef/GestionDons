@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -103,6 +104,9 @@
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
+               <effect>
+                  <DropShadow />
+               </effect>
             </VBox>
          </children>
       </Pane>
