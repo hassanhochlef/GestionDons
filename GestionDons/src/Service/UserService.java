@@ -10,6 +10,7 @@ import Connection.MyConnection;
 import Entities.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -74,6 +75,53 @@ import java.sql.SQLException;
             return u;
         }
 */
+        
+        
+         public void updateUser(int userId, User user1){
+        
+        //String req = "UPDATE user SET WHERE user.userId="+userId;
+        String req = "UPDATE user SET name=?,photo=?,password=?,city=?,gouvernorat=?,phone=?,mail=?,role=?  WHERE user.userId=" + userId;
+        
+        try{
+            ste = cnx.prepareStatement(req);
+            ste.setString(1, user1.getName());
+            ste.setString(2, user1.getPhoto());
+            ste.setString(3, user1.getPassword());
+            ste.setString(4, user1.getCity());
+            ste.setString(5, user1.getGouvernorat());
+            ste.setString(6, user1.getPhone());
+            ste.setString(7, user1.getMail());
+            ste.setString(8, user1.getRole());
+            ste.executeUpdate();
+            System.out.println("User updated");
+            
+        }
+        catch(SQLException ex){
+            System.out.println("Erreur update event");
+            
+        }
+        
+    }
+         public String getPassword1(String mail) throws SQLException{
+              User u = new User();
+             System.out.println(mail);
+         //query
+            String sql = "SELECT password FROM user Where mail = '"+mail+"'";
+            try {
+                ste = cnx.prepareStatement(sql);
+               
+                 ResultSet rs = ste.executeQuery();
+                
+               
+                if (rs.next()) {
+                     u.setPassword(rs.getString("password"));
+                     System.err.println(rs.getString("password"));
+                  }
+               
+            }
+            catch (SQLException ex){}
+            return u.getPassword();
+         }
     }
 
 
