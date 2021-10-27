@@ -16,9 +16,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  *
@@ -34,6 +38,14 @@ public class EventsMainController implements Initializable {
     private JFXButton newEventButton;
     @FXML
     private JFXButton myEventsButton;
+    @FXML
+    private JFXButton homeScreenBtn;
+    @FXML
+    private JFXButton btnLogout;
+    
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     
     
@@ -72,6 +84,24 @@ public class EventsMainController implements Initializable {
     private void loadUI(String ui) throws IOException{
         context.getChildren().clear();
         context.getChildren().add(FXMLLoader.load(this.getClass().getResource("/views/" + ui + ".fxml")));
+    }
+
+    @FXML
+    private void homeScreenBtnAction(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/views/HomeScreen.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show(); 
+    }
+
+    @FXML
+    private void btnLogoutAction(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Views/Main.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show(); 
     }
 
     
