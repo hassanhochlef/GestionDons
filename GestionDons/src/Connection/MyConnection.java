@@ -3,45 +3,51 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package Connection;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 
 /**
  *
- * @author Hassan
+ * @author ahmed
  */
-public class MyConnection {
-    public String url="jdbc:mysql://localhost:3306/bugbustersprojet";
-    public String user="root";
-    public String password="";
+public class MyConnection {  
+    /**
+     *
+     */
+    public String URL="jdbc:mysql://localhost:3306/bugbustersprojet";
+    public String User="root";
+    public String Password="";
     public Connection cnx;
-    public static MyConnection ct ;
-    private MyConnection(){
+    public static MyConnection ct;
+    private MyConnection() {
         try {
-            
-            cnx = DriverManager.getConnection(url, user, password);
-            System.out.print("Success");
-        } catch (SQLException ex) {
+            cnx = DriverManager.getConnection(URL, User, Password);
+            System.out.println("Connection établie");
+        }catch (SQLException ex) {
             System.out.println(ex.getMessage());
+            System.err.println("Problème de connection");
         }
         
     }
-
-   
-    
+    //interdire la creation des plusieurs instance dans la base de donnée
     public Connection getConnection(){
-        return cnx;
-    }
-
-    public static MyConnection getInstance() {
-        if(ct==null){
-            ct= new MyConnection();
+            return cnx;
         }
-      
-            return ct;
-        
+    public static MyConnection getInstance(){
+        if(ct==null){
+            ct=new MyConnection();
+        }
+       
+        return ct;
     }
+    
+    
+    
     
     
 }
