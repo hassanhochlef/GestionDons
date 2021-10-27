@@ -103,5 +103,7 @@
    -fx-background-color: #7ca76f; 
    -fx-text-background-color: white;
 }
-
+#btncolor {
+     -fx-background-color : #d7e5e3;
+}
 

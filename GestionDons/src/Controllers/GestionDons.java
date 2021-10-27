@@ -20,8 +20,10 @@ public class GestionDons extends Application {
         Scene scene = new Scene(root);
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
+
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
+
     }
 
     /**
@@ -29,5 +31,6 @@ public class GestionDons extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+
     }
 }

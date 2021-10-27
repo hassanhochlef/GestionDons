@@ -13,8 +13,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Glow?>
-<?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
@@ -76,7 +76,7 @@
                                     <TableColumn fx:id="col_desc" editable="false" prefWidth="428.0" resizable="false" text="                                                 Description" />
                                  </columns>
                                  <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                   
                                  </columnResizePolicy>
                                  <styleClass>
                                     <String fx:value="table-row-cell" />
@@ -151,9 +151,7 @@
                                     <TableColumn id="hd" fx:id="col_id1" editable="false" prefWidth="53.0" resizable="false" text="      ID" />
                                     <TableColumn id="hd" fx:id="col_desc1" editable="false" prefWidth="428.0" resizable="false" text="                                                 Description" />
                                  </columns>
-                                 <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
+                               
                               </TableView>
                               <Text layoutX="189.0" layoutY="50.0" opacity="0.76" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: gray;" text="Faire un don pour le transport" textAlignment="CENTER" wrappingWidth="587.3164157867432">
                                  <font>
@@ -193,7 +191,7 @@
                                                 <Font name="Consolas" size="15.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="labeldescFamille" alignment="CENTER" layoutX="120.0" layoutY="6.0" prefHeight="21.0" prefWidth="281.0" text="Pas d'objectif pour le moment" textAlignment="CENTER">
+                                          <Label fx:id="labeldescFamille" alignment="CENTER" layoutX="106.0" layoutY="6.0" prefHeight="21.0" prefWidth="281.0" stylesheets="@../css/skeleton2.css" text="Pas d'objectif pour le moment" textAlignment="CENTER">
                                              <font>
                                                 <Font name="Consolas" size="16.0" />
                                              </font>
@@ -208,14 +206,12 @@
                                                 <Font name="Consolas" size="14.9" />
                                              </font>
                                           </Text>
-                                          <Button id="btn" fx:id="btnconfirm2" alignment="CENTER" contentDisplay="CENTER" layoutX="63.0" layoutY="281.0" mnemonicParsing="false" onAction="#getmontant2" prefHeight="35.0" prefWidth="113.0" style="-fx-background-color: #B0C2BF;" styleClass="participateBtn" stylesheets="@../css/styleparticipation.css" text="Confirmer" />
-                                          <Button id="btn" fx:id="print2" layoutX="28.0" layoutY="340.0" mnemonicParsing="false" onAction="#openscene" prefHeight="42.0" prefWidth="178.0" style="-fx-background-color: #B0C2BF;" styleClass="participateBtn" stylesheets="@../css/styleparticipation.css" text="Imprimer reçu" />
-                                          <ComboBox fx:id="ComboBesoin2" layoutX="39.0" layoutY="116.0" prefWidth="150.0" style="-fx-background-color: #B0C2BF;" styleClass="participateBtn">
-                                             <stylesheets>
-                                                <URL value="@../Resources/Style.css" />
-                                                <URL value="@../css/styleparticipation.css" />
-                                             </stylesheets>
-                                          </ComboBox>
+                                          <Button fx:id="btnconfirm2" alignment="CENTER" contentDisplay="CENTER" layoutX="63.0" layoutY="281.0" mnemonicParsing="false" onAction="#getmontant2" prefHeight="35.0" prefWidth="113.0" stylesheets="@../Resources/Style.css" text="Confirmer">
+                                             <effect>
+                                                <DropShadow />
+                                             </effect></Button>
+                                          <Button fx:id="print2" layoutX="28.0" layoutY="340.0" mnemonicParsing="false" onAction="#openscene" prefHeight="42.0" prefWidth="178.0" styleClass="mbutton" stylesheets="@../Resources/Style.css" text="Imprimer reçu" />
+                                          <ComboBox fx:id="ComboBesoin2" layoutX="39.0" layoutY="116.0" prefWidth="150.0" styleClass="participateBtn" stylesheets="@../css/styleparticipation.css" />
                                        </children>
                                     </Pane>
                                     <TableView fx:id="table2" blendMode="DARKEN" depthTest="DISABLE" layoutX="430.0" layoutY="160.0" opacity="0.44" pickOnBounds="false" prefHeight="193.0" prefWidth="484.0" stylesheets="@../Resources/Style1.css">
@@ -223,9 +219,7 @@
                                           <TableColumn id="hd" fx:id="col_id_fam" editable="false" prefWidth="53.0" resizable="false" text="      ID" />
                                           <TableColumn id="hd" fx:id="cold_desc_fam" editable="false" prefWidth="428.0" resizable="false" text="                                                 Description" />
                                        </columns>
-                                       <columnResizePolicy>
-                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                       </columnResizePolicy>
+                                       
                                     </TableView>
                                     <Text layoutX="171.0" layoutY="55.0" opacity="0.76" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: gray;" text="Faire un don pour les familles pauvres " textAlignment="CENTER" wrappingWidth="636.6497287750244">
                                        <font>
@@ -273,9 +267,7 @@
                                              <bumpInput>
                                                 <Shadow />
                                              </bumpInput>
-                                             <light>
-                                                <Light.Distant />
-                                             </light>
+                                             
                                           </Lighting>
                                        </effect>
                                     </Label>
@@ -289,9 +281,7 @@
                                              <bumpInput>
                                                 <Shadow />
                                              </bumpInput>
-                                             <light>
-                                                <Light.Distant />
-                                             </light>
+                                             
                                           </Lighting>
                                        </effect>
                                     </Label>
@@ -304,9 +294,7 @@
                                              <bumpInput>
                                                 <Shadow />
                                              </bumpInput>
-                                             <light>
-                                                <Light.Distant />
-                                             </light>
+                                             
                                           </Lighting>
                                        </effect>
                                     </Label>
@@ -331,9 +319,7 @@
                                              <bumpInput>
                                                 <Shadow />
                                              </bumpInput>
-                                             <light>
-                                                <Light.Distant />
-                                             </light>
+                                             
                                           </Lighting>
                                        </effect>
                                     </Label>
@@ -346,9 +332,7 @@
                                              <bumpInput>
                                                 <Shadow />
                                              </bumpInput>
-                                             <light>
-                                                <Light.Distant />
-                                             </light>
+                                            
                                           </Lighting>
                                        </effect>
                                     </Label>
@@ -361,9 +345,7 @@
                                              <bumpInput>
                                                 <Shadow />
                                              </bumpInput>
-                                             <light>
-                                                <Light.Distant />
-                                             </light>
+                                          
                                           </Lighting>
                                        </effect>
                                     </Label>
@@ -388,9 +370,7 @@
                                              <bumpInput>
                                                 <Shadow />
                                              </bumpInput>
-                                             <light>
-                                                <Light.Distant />
-                                             </light>
+                                          
                                           </Lighting>
                                        </effect>
                                     </Label>
@@ -403,9 +383,7 @@
                                              <bumpInput>
                                                 <Shadow />
                                              </bumpInput>
-                                             <light>
-                                                <Light.Distant />
-                                             </light>
+                                           
                                           </Lighting>
                                        </effect>
                                     </Label>
@@ -418,24 +396,27 @@
                                              <bumpInput>
                                                 <Shadow />
                                              </bumpInput>
-                                             <light>
-                                                <Light.Distant />
-                                             </light>
+                                        
                                           </Lighting>
                                        </effect>
                                     </Label>
                                  </children>
                               </Pane>
                               <Separator layoutX="217.0" layoutY="8.0" orientation="VERTICAL" prefHeight="480.0" prefWidth="6.0" />
-                              <Text layoutX="95.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Objet " wrappingWidth="63.65625" />
-                              <ImageView fx:id="object" fitHeight="153.0" fitWidth="137.0" layoutX="40.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../Resources/raq_1.jpg" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="43.0" layoutY="299.0" text="Raquette : Rafael Nadal" />
-                              <Text layoutX="57.0" layoutY="397.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Montant de depart:" />
-                              <Label layoutX="95.0" layoutY="419.0" text="10000" />
+                              <Text layoutX="84.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Objet " wrappingWidth="63.65625">
+                                 <font>
+                                    <Font name="System Bold" size="19.0" />
+                                 </font></Text>
+                              <ImageView fx:id="photoEnchere" fitHeight="153.0" fitWidth="137.0" layoutX="40.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="descriptionEnchere" layoutX="60.0" layoutY="310.0" prefHeight="17.0" prefWidth="96.0" textAlignment="CENTER" />
+                              <Text layoutX="51.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Montant de depart:">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font></Text>
+                              <Label fx:id="montantEnchere" contentDisplay="CENTER" layoutX="81.0" layoutY="338.0" prefHeight="17.0" prefWidth="55.0">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font></Label>
                               <Text fx:id="finished" layoutX="493.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temps restant " wrappingWidth="228.10028076171875">
                                  <font>
                                     <Font name="Marlett" size="25.0" />
@@ -503,7 +484,7 @@
             </TabPane>
          </children>
       </Pane>
-      <VBox layoutX="-2.0" layoutY="-3.0" prefHeight="718.0" prefWidth="162.0" style="-fx-background-radius: 25; -fx-background-color: #68B0AB;" styleClass="mainpane">
+      <VBox layoutX="-2.0" layoutY="-3.0" prefHeight="718.0" prefWidth="181.0" style="-fx-background-radius: 25; -fx-background-color: #68B0AB;" styleClass="mainpane">
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="97.0">
                <children>
@@ -519,15 +500,15 @@
                </children></HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Don des produits" textAlignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#home" prefHeight="47.0" prefWidth="197.0" text="Acceuil" />
                </children></HBox>
             <HBox alignment="CENTER" prefHeight="127.0" prefWidth="171.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dons service" textAlignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#ajouterBesoinObjet" prefHeight="45.0" prefWidth="183.0" text="Ajouter Besoin/Objet" />
                </children></HBox>
-            <HBox alignment="CENTER" prefHeight="127.0" prefWidth="171.0">
+            <HBox alignment="CENTER" prefHeight="127.0" prefWidth="178.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Evenement" textAlignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#logout" prefHeight="49.0" prefWidth="185.0" text="Se deconnecter" />
                </children></HBox>
          </children>
          <stylesheets>
