@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1075.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ParticiperEventController">
+   <children>
+      <Pane prefHeight="700.0" prefWidth="376.0" styleClass="right-bar" stylesheets="@../css/styleparticipation.css">
+         <children>
+            <VBox layoutY="14.0" prefHeight="200.0" prefWidth="376.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="84.0" prefWidth="316.0">
+                     <children>
+                        <Label text="Participer à un évènement" textFill="#878787">
+                           <font>
+                              <Font name="Ebrima Bold" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="46.0" prefWidth="333.0" stylesheets="@../css/styleparticipation.css">
+                     <children>
+                        <TextField fx:id="searchInput" alignment="CENTER" prefHeight="30.0" prefWidth="226.0" promptText="Rechercher un évènement" stylesheets="@../css/styleparticipation.css">
+                           <styleClass>
+                              <String fx:value="transparent" />
+                              <String fx:value="shadow" />
+                           </styleClass>
+                        </TextField>
+                     </children>
+                     <styleClass>
+                        <String fx:value="search-box" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="30.0" right="30.0" />
+               </padding>
+            </VBox>
+            <VBox fx:id="vboxEventItem" alignment="TOP_CENTER" layoutX="15.0" layoutY="165.0" prefHeight="451.0" prefWidth="344.0" spacing="5.0" styleClass="chosen-event-card" stylesheets="@../css/styleparticipation.css">
+               <children>
+                  <ImageView fx:id="imageCateg" fitHeight="117.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true" />
+                  <Pane prefHeight="30.0" prefWidth="324.0" VBox.vgrow="ALWAYS" />
+                  <HBox prefHeight="45.0" prefWidth="262.0">
+                     <children>
+                        <Label fx:id="labelAssoc" text="Association Organisatrice" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="289.0" prefHeight="45.0" prefWidth="262.0">
+                     <children>
+                        <Label fx:id="labelCateg" text="Catégorie de l'évènement" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="311.0" prefHeight="45.0" prefWidth="262.0">
+                     <children>
+                        <Label fx:id="labelNumParti" text="Nombre de Participants" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="334.0" prefHeight="45.0" prefWidth="262.0">
+                     <children>
+                        <Label fx:id="labelCollect" text="Dons Collectés" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <JFXButton fx:id="btnParticiper" onAction="#ParticiperAction" prefHeight="26.0" prefWidth="207.0" styleClass="participateBtn" text="Participer" textFill="#828282">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="30.0" />
+               </padding>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </VBox>
+         </children>
+      </Pane>
+      <HBox layoutX="405.0" layoutY="298.0" prefHeight="388.0" prefWidth="699.0" spacing="30.0">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" />
+         </padding>
+         <children>
+            <VBox prefHeight="399.0" prefWidth="432.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 15;">
+               <children>
+                  <TableView fx:id="eventTable" onMouseClicked="#mouseClickedTable" prefHeight="399.0" prefWidth="338.0" styleClass="noheader" stylesheets="@../css/tableParticip.css">
+                    <columns>
+                      <TableColumn fx:id="idEventCol" prefWidth="158.0" text="Date Création" />
+                      <TableColumn fx:id="nameEventCol" prefWidth="211.0" text="Cause" />
+                    </columns>
+                  </TableView>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <VBox fx:id="vboxDescript" alignment="CENTER" prefHeight="399.0" prefWidth="280.0" spacing="50.0" style="-fx-background-color: #f9f9f9; -fx-background-radius: 15;">
+               <children>
+                  <Label text="Description de l'évènement">
+                     <font>
+                        <Font name="Ebrima" size="18.0" />
+                     </font>
+                  </Label>
+                  <JFXTextArea fx:id="descriptionText">
+                     <font>
+                        <Font name="Ebrima" size="14.0" />
+                     </font>
+                  </JFXTextArea>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox fillHeight="false" layoutX="422.0" layoutY="99.0" prefHeight="186.0" prefWidth="665.0" styleClass="upHBox" stylesheets="@../css/styleparticipation.css">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="178.0" prefWidth="414.0" spacing="5.0">
+               <children>
+                  <Label text="Aider les gens à travers vos dons " textFill="WHITE">
+                     <font>
+                        <Font name="Ebrima Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="Et profiez de notre programme de fidelité !" textFill="WHITE">
+                     <font>
+                        <Font name="Ebrima Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="46.0" prefWidth="411.0" />
+                  <JFXButton fx:id="btnRetourAcceuil" onAction="#RetourAcceuilAction" prefHeight="73.0" prefWidth="229.0" style="-fx-background-color: black; -fx-background-radius: 20;" text="Retour vers l'écran d'acceuil" textFill="WHITE">
+                     <font>
+                        <Font name="Ebrima Bold" size="13.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" top="30.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="189.0" prefWidth="235.0">
+               <children>
+                  <ImageView fitHeight="121.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/loudspeaker.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets top="10.0" />
+         </padding></HBox>
+      <HBox layoutX="400.0" layoutY="17.0" prefHeight="62.0" prefWidth="674.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <ImageView fitHeight="52.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/editer.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="182.0">
+               <children>
+                  <JFXButton fx:id="btnEditProfil" onAction="#btnEditProfilAction" styleClass="btnEditProfil" stylesheets="@../css/style.css" text="Editer le profil" />
+               </children>
+            </VBox>
+            <Pane prefHeight="62.0" prefWidth="263.0" />
+            <VBox alignment="CENTER" prefHeight="84.0" prefWidth="97.0">
+               <children>
+                  <ImageView fx:id="imgPhotoSession" fitHeight="66.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/profile.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="193.0">
+               <children>
+                  <Label fx:id="labelNomSession" text="Label">
+                     <font>
+                        <Font name="Calibri Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+      <Line endX="562.0" layoutX="523.0" layoutY="86.0" startX="-115.0" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,37 @@
+.search-box{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 100;
+}
+
+.transparent{
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+.right-bar{
+    -fx-background-color: #D3D3D3;
+}
+
+.shadow{
+    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1), 10.0, 0.0, 0.0, 10.0);
+}
+
+.chosen-event-card{
+    -fx-background-color: #f16C31;
+    -fx-background-radius: 30;
+}
+
+.participateBtn{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 100;
+}
+
+.event-item{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 30;
+}
+
+.upHBox{
+    -fx-background-color: #dbc872;
+    -fx-background-radius: 20;
+}
+

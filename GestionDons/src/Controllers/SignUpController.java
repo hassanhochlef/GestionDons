@@ -18,6 +18,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import Service.UserService;
 import Connection.MyConnection;
+import javafx.scene.control.PasswordField;
 import javafx.util.Duration;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
@@ -40,10 +41,11 @@ public class SignUpController implements Initializable {
     private TextField inputville;
     @FXML
     private ComboBox<String> inputrole;
-    @FXML
-    private TextField inputpassword;
+    
     @FXML
     private Button signup;
+    @FXML
+    private PasswordField inputpassword;
 
     /**
      * Initializes the controller class.
@@ -60,20 +62,22 @@ public class SignUpController implements Initializable {
     private void signupAction(ActionEvent event) {
         
         UserService us = new UserService();
-        
-         if (inputname.getText().isEmpty() || inputphone.getText().isEmpty() || inputmail.getText().isEmpty()|| inputville.getText().isEmpty()|| inputrole.getSelectionModel()==null|| inputpassword.getText().isEmpty())
-        {
-            new Alert(Alert.AlertType.ERROR, "Veuillez verifier les champs", new ButtonType[]{ButtonType.OK}).show();
-        }
-            
-        else {         
-                    String name = inputname.getText();
+          String name = inputname.getText();
                     String phone = inputphone.getText();
                     String mail = inputmail.getText();
                     String city = inputville.getText();
                     String role = inputrole.getSelectionModel().getSelectedItem();
                     String password = inputpassword.getText();
-                    
+         if (inputname.getText().isEmpty() || inputphone.getText().isEmpty() || inputmail.getText().isEmpty()|| inputville.getText().isEmpty()|| inputrole.getSelectionModel()==null|| inputpassword.getText().isEmpty())
+        {
+            new Alert(Alert.AlertType.ERROR, "Veuillez verifier les champs", new ButtonType[]{ButtonType.OK}).show();
+        }
+          else if (!mail.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" )) {
+               new Alert(Alert.AlertType.ERROR, "Merci de saisir une adresse mail valide.", new ButtonType[]{ButtonType.OK}).show();
+           }
+            
+        else {         
+                 
                     User u = new User();
             u.setName(name);
             u.setPhone(phone);

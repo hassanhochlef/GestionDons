@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="405.0" prefWidth="763.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Item2Controller">
+   <children>
+      <Pane prefHeight="338.0" prefWidth="763.0" style="-fx-background-color: white;" stylesheets="@../Resources/Style.css">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="587.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resources/Inkedged_LI_1.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="70.0" fitWidth="76.0" layoutX="40.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resources/charity-logo-free-vector.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="123.0" layoutY="18.0" text="Reçu de don" textFill="#3a1c9d">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="51.0" layoutY="113.0" style="-fx-text-fill: Blue;" text="Donneur" textFill="#aeacac">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="51.0" layoutY="186.0" style="-fx-text-fill: blue;" text="Categorie" textFill="#aeacac">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="271.0" layoutY="186.0" style="-fx-text-fill: blue;" text="Montant" textFill="#aeacac">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="280.0" layoutY="113.0" prefHeight="20.0" prefWidth="35.0" style="-fx-text-fill: blue;" text="Tel :" textFill="#aeacac">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="nom" layoutX="58.0" layoutY="139.0" text="Mr.Foulen" textFill="#4d4c4c">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="tel" layoutX="287.0" layoutY="139.0" text="\$1000" textFill="#4d4c4c">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="montant" layoutX="287.0" layoutY="211.0" text="Between $190 and $270" textFill="#4d4c4c">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="categ" layoutX="58.0" layoutY="211.0" text="Transport" textFill="#4d4c4c">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Pane layoutY="269.0" prefHeight="70.0" prefWidth="763.0" styleClass="back1" stylesheets="@../Resources/Style.css">
+               <children>
+                  <Label layoutX="61.0" layoutY="26.0" prefHeight="19.0" prefWidth="348.0" text="Merci pour votre don, quelqu'un est heureux grace a vous" textFill="#504df2">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Label layoutX="644.0" layoutY="24.0" text="Date de création" textFill="#3a1c9d">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="anne" layoutX="677.0" layoutY="50.0" prefHeight="27.0" prefWidth="105.0" text="2018" textFill="#aeacac" />
+            <Label fx:id="labelRef" layoutX="123.0" layoutY="51.0" text="Ref: 20178" textFill="#b2b0b0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Separator layoutX="-12.0" layoutY="76.0" prefHeight="12.0" prefWidth="770.0" />
+         </children>
+         <effect>
+            <DropShadow color="#d7d2d2" height="50.0" radius="24.5" width="50.0" />
+         </effect>
+      </Pane>
+      <Button id="btn" fx:id="print" layoutX="224.0" layoutY="350.0" mnemonicParsing="false" onAction="#printimage" prefHeight="40.0" prefWidth="105.0" stylesheets="@../Resources/Style.css" text="Enregistrer" />
+      <Button id="btn" fx:id="btnBack" layoutX="396.0" layoutY="350.0" mnemonicParsing="false" onAction="#btnBackAction" prefHeight="40.0" prefWidth="105.0" stylesheets="@../Resources/Style.css" text="Retour" />
+   </children>
+</AnchorPane>

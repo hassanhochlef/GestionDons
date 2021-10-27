@@ -46,3 +46,6 @@
   -fx-prompt-text-fill: white;
     
 }
+.forgotBtn{
+    -fx-background-color:  transparent;
+}
