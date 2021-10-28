@@ -25,6 +25,7 @@ import Service.DonationCrud;
 
 import java.sql.SQLException;
 import javafx.stage.StageStyle;
+import services.RecompenseService;
 
 
 /**
@@ -36,7 +37,7 @@ public class GestionDons extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/Views/DonsScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Views/HomeScreen.fxml"));
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -73,6 +74,8 @@ public class GestionDons extends Application {
         //EvenementService es = new EvenementService();
         //System.out.println(es.getMyParticipations(1));
         //System.out.println(es.getBesoinTotalByCategorie("Pauvreté"));
+        /*RecompenseService rs = new RecompenseService();
+        System.out.println(rs.checkExist(1));*/
 
     }
 

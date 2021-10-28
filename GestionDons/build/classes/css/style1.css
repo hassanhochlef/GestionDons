@@ -12,15 +12,52 @@
 
 
 
+.tabpanepane{
+     -fx-background-color : white ;
+     
+     -fx-margin-bottom : 10px;
+     -fx-pref-width :245px;
+     -fx-border-style :solid;
+     -fx-border-color: white; 
+      -fx-background-insets: 0;
+      -fx-pref-height: 50px; 
+      -fx-padding: 10 10 10 10;
+}
+.tab-pane *.tab-header-area *.tab-header-background {
+  -fx-background-color:transparent;
+ 
+}
+
+.tab-pane {
+  -fx-tab-min-width:120px;
+  -fx-tab-max-width:120px;
+  -fx-tab-min-height:50px;
+  -fx-tab-max-height:50px;
+}
+
+.tab {
+  -fx-font-family: Arial;
+  -fx-font-size: 18;
+  -fx-text-alignment: center;
+  -fx-background-color: #68B0AB ;
+   -fx-background-radius: 0;
+}
+
+.tab:selected {
+    -fx-background-color:  #68B0AB ;
+}
 
 .table-view {
     -fx-control-inner-background-alt: -fx-control-inner-background ;
 }
-
+.paneH{
+    -fx-background-radius:25;
+    -fx-background-color:  #8FC0A9 ;
+}
 
 
 .table-view .column-header-background{
-    -fx-background-color: linear-gradient(#ffffff 0%, #7ca76f 100%);
+    -fx-background-color: white;
 }
 
 .table-view .column-header-background .label{

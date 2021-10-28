@@ -3,3 +3,13 @@
     -fx-scale-y: 1.1;
     -fx-scale-x: 1.1;
 }
+
+.left-pane{
+    -fx-background-color: #284499;
+}
+
+.btnMain:hover{
+    -fx-text-fill: #284499;
+    -fx-scale-y: 1.1;
+    -fx-scale-x: 1.1;
+}

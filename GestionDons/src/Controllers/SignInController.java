@@ -25,10 +25,16 @@ import Connection.MyConnection;
 import Service.JavaMailUtil;
 import Service.UserService ;
 import Service.UserSession;
+import java.io.IOException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
@@ -51,6 +57,10 @@ public class SignInController implements Initializable {
     private PasswordField inputpassword;
     @FXML
     private Button forgotBtn;
+    
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
 
     /**
@@ -85,6 +95,12 @@ public class SignInController implements Initializable {
         if (us.verifyUser(mail, password)){
             User u = us.getUserConnected(mail);
             us.addUserSession(u);
+            Parent root = FXMLLoader.load(getClass().getResource("/Views/EventsMain.fxml"));
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.centerOnScreen();
+            stage.show();
 
              TrayNotification tray = new TrayNotification();
             AnimationType type = AnimationType.POPUP;

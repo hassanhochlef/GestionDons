@@ -11,7 +11,7 @@ import Entities.Besoin;
 import Entities.Don;
 
 import Entities.User;
-import java.awt.Image;
+//import java.awt.Image;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,12 +24,16 @@ import java.util.logging.Logger;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Timer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -413,6 +417,94 @@ public void AjouterWinnerDons(String winner,Don d,float x){
        System.out.println("no");
     }
     }
+public void AjouterBesoinD(Besoin b){
+    try {
+        String sql="insert into Besoin(idBesoin,montant,quantite,categorie,description,montantactuel,photo)" + "values(?,?,?,?,?,?,?)";
+        ste =cnx.prepareStatement(sql);
+        ste.setInt(1,b.getIdBesoin());
+        ste.setFloat(2,b.getMontant());
+        ste.setInt(3,b.getQuantite());
+        ste.setString(4,b.getCategorie());
+        ste.setString(5,b.getDescription());
+        ste.setFloat(6,b.getMontantactuel());
+        ste.setString(7,b.getPhoto());
+        ste.executeUpdate();
+        System.out.println("\nSucces d'ajout");
+    } catch (SQLException ex) {
+       System.out.println(ex.getMessage());
+       System.out.println("no");
+    }
+    }
+
+
+public List<Besoin> afficherObjet(){
+        List<Besoin> objet = new ArrayList<>() ;
+    try {
+       
+        String sql = "Select montant,categorie,description,photo from besoin";
+        ResultSet rs ;
+        ste = cnx.prepareStatement(sql);
+        rs = ste.executeQuery();
+        
+        while (rs.next()) {
+            
+            Besoin p = new Besoin() ;
+            p.setIdBesoin(rs.getInt("idBesoin"));
+            p.setCategorie(rs.getString(2));
+            p.setDescription(rs.getString(3));
+            p.setPhoto(rs.getString(4));
+            
+            objet.add(p);
+            
+    }
+      
+    } 
+        catch (SQLException ex) {
+        Logger.getLogger(DonationCrud.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return objet;
+}
+public void affObjet(Label x,Label y , ImageView z) throws SQLException{
+   
+ String sql = "Select montant,description,photo from besoin where categorie='Enchere' LIMIT 1";
+ ste = cnx.prepareStatement(sql);
+  ResultSet rs = ste.executeQuery();
+        try {
+       
+        while(rs.next()){
+                 x.setText(Float.toString(rs.getFloat(1)));
+                  y.setText(rs.getString(2));
+           z.setImage(new Image("file:///"+rs.getString(3)));
+       
+        }
+      
+    } 
+        catch (SQLException ex) {
+            System.out.println("");
+    }
+    }
+ public void SupprimerObjects(){
+       
+    try {
+        
+       String sql = "DELETE FROM besoin WHERE categorie='Enchere'";
+    
+PreparedStatement statement = cnx.prepareStatement(sql);
+
+ 
+int rowsDeleted = statement.executeUpdate();
+if (rowsDeleted > 0) {
+    System.out.println("A donation was deleted successfully!");
+}
+        
+       
+ 
+    } 
+        catch (SQLException ex) {
+        Logger.getLogger(DonationCrud.class.getName()).log(Level.SEVERE, null, ex);
+    }
+   
+}
 }
  
  /*if(Float.parseFloat(participant1.getText()) < Float.parseFloat(participant2.getText()))

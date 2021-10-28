@@ -47,6 +47,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import services.EvenementService;
+import services.RecompenseService;
 import services.UserSession;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
@@ -168,6 +169,8 @@ public class DonEventController implements Initializable {
 
     @FXML
     private void btnFaireDonAction(ActionEvent event) throws IOException {
+        
+        RecompenseService serviceRec = new RecompenseService();
 
         if(eventTable.getSelectionModel().getSelectedItem() != null){
             
@@ -184,6 +187,7 @@ public class DonEventController implements Initializable {
             else{
                 montantDon = Float.parseFloat(inputMontantDon.getText());
                 es.ajouterDon(idUser, idEvent, montantDon, categ);
+                serviceRec.updateUserMontant(idUser, montantDon);
                 saveDonorData();
                 showEvents();
 

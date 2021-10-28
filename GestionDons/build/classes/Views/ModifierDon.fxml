@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ModifierDonController">
+   <children>
+      <JFXComboBox fx:id="modifierertypeservice" focusColor="#7ca76f" labelFloat="true" layoutX="38.0" layoutY="53.0" prefHeight="25.0" prefWidth="326.0" promptText="Type de service" />
+      <JFXTextField fx:id="modifiererdéscription" focusColor="#7ca76f" labelFloat="true" layoutX="38.0" layoutY="131.0" prefHeight="25.0" prefWidth="326.0" promptText="Déscription" unFocusColor="BLACK" />
+      <JFXTextField fx:id="modifierlieu" focusColor="#7ca76f" labelFloat="true" layoutX="38.0" layoutY="209.0" prefHeight="25.0" prefWidth="326.0" promptText="Lieu" unFocusColor="BLACK" />
+      <DatePicker fx:id="modifierdate" layoutX="38.0" layoutY="278.0" prefHeight="34.0" prefWidth="326.0" promptText="Date de Disponibilité" />
+      <JFXButton fx:id="enregistrerbutton" layoutX="125.0" layoutY="323.0" onAction="#enregistrerbutton" prefHeight="47.0" prefWidth="162.0" style="-fx-background-color: #7ca76f; -fx-background-radius: 15;" text="Confirmer" textFill="WHITE">
+         <font>
+            <Font name="Ebrima" size="16.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
