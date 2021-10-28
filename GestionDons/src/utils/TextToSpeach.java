@@ -6,6 +6,10 @@
 package utils;
 
 //import com.sun.speech.freetts.Voice;
+
+import com.sun.speech.freetts.Voice;
+import com.sun.speech.freetts.VoiceManager;
+
 //import com.sun.speech.freetts.VoiceManager;
 
 /**
@@ -15,15 +19,15 @@ package utils;
 public class TextToSpeach {
     
     public static void speak(String text){
-        /*    
+       /*     
         Voice voice;
         VoiceManager vm = VoiceManager.getInstance();
-        voice = vm.getVoice("kevin16");
+        voice = vm.getVoice("kevin");
         voice.allocate();
         try{
         voice.speak(text);
         }catch(Exception e){
 
-        }*/
-    }
+        }
+    */}
 }

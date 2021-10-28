@@ -5,31 +5,34 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="644.0" prefWidth="1512.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RéclamationController">
+<AnchorPane fx:id="page" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="1230.0" styleClass="mainpane" stylesheets="@../css/style1.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RéclamationController">
    <children>
-      <JFXTextField fx:id="objet" focusColor="#7ca76f" layoutX="600.0" layoutY="260.0" prefHeight="25.0" prefWidth="350.0" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="300.0" />
-      <JFXTextArea fx:id="texte" focusColor="#7ca76f" labelFloat="true" layoutX="550.0" layoutY="293.0" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="300.0" />
-      <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="498.0" layoutY="80.0" prefHeight="17.0" prefWidth="214.0" text="Veuillez remplir les champs nécessaires" textFill="#070707" AnchorPane.leftAnchor="498.0" AnchorPane.rightAnchor="322.0">
-         <font>
-            <Font size="18.0" />
-         </font></Label>
-      <Label layoutX="362.0" layoutY="277.0" text="Objet" textFill="#7ca76f" />
-      <Label layoutX="349.0" layoutY="460.0" text="Explication" textFill="#7ca76f" />
-      <JFXTextField fx:id="passtext" focusColor="#7ca76f" layoutX="600.0" layoutY="213.0" onAction="#passtext" prefHeight="25.0" prefWidth="350.0" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="300.0" />
-      <JFXTextField fx:id="emailtext" focusColor="#7ca76f" layoutX="600.0" layoutY="173.0" onAction="#emailtext" prefHeight="25.0" prefWidth="350.0" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="300.0" />
-      <Label layoutX="363.0" layoutY="190.0" text="Email" textFill="#7ca76f" />
-      <Label layoutX="352.0" layoutY="230.0" text="Password" textFill="#7ca76f" />
-      <JFXButton fx:id="Lancer" layoutX="866.0" layoutY="519.0" onAction="#SaveLancer" prefHeight="47.0" prefWidth="162.0" style="-fx-background-color: #7ca76f; -fx-background-radius: 15;" text="Lancer" textFill="WHITE">
-         <font>
-            <Font name="Ebrima" size="16.0" />
-         </font>
-      </JFXButton>
-      <JFXButton fx:id="RetourRéclamation" layoutX="594.0" layoutY="519.0" onAction="#RetourRéclamation" prefHeight="47.0" prefWidth="162.0" style="-fx-background-color: #7ca76f; -fx-background-radius: 15;" text="Retour" textFill="WHITE">
-         <font>
-            <Font name="Ebrima" size="16.0" />
-         </font>
-      </JFXButton>
+      <VBox layoutX="218.0" layoutY="14.0" prefHeight="647.0" prefWidth="1003.0" />
+      <VBox layoutX="19.0" layoutY="15.0" prefHeight="638.0" prefWidth="1198.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+         <children>
+            <Pane fx:id="context" prefHeight="570.0" prefWidth="1122.0">
+               <children>
+                  <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="410.0" layoutY="51.0" prefHeight="27.0" prefWidth="378.0" text="Veuillez remplir les champs nécessaires" textFill="#070707">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <JFXTextField fx:id="objet" focusColor="#7ca76f" layoutX="338.0" layoutY="135.0" prefHeight="25.0" prefWidth="553.0" />
+                  <JFXTextArea fx:id="texte" focusColor="#7ca76f" labelFloat="true" layoutX="246.0" layoutY="212.0" prefHeight="175.0" prefWidth="706.0" />
+                  <JFXButton fx:id="Lancer" layoutX="518.0" layoutY="450.0" onAction="#SaveLancer" prefHeight="47.0" prefWidth="162.0" style="-fx-background-color: #7ca76f; -fx-background-radius: 15;" text="Lancer" textFill="WHITE">
+                     <font>
+                        <Font name="Ebrima" size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <Label layoutX="188.0" layoutY="148.0" text="Objet" textFill="#7ca76f" />
+                  <Label layoutX="146.0" layoutY="370.0" text="Explication" textFill="#7ca76f" />
+               </children>
+            </Pane>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

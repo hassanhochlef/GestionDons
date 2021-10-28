@@ -3,78 +3,42 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AjouterDonController">
+<AnchorPane fx:id="page" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="1135.0" styleClass="mainpane" stylesheets="@../css/style1.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AjouterDonController">
    <children>
-      <AnchorPane layoutX="-3.0" prefHeight="644.0" prefWidth="1512.0" style="-fx-background-color: transparent;">
+      <VBox layoutX="218.0" layoutY="14.0" prefHeight="647.0" prefWidth="906.0" />
+      <VBox layoutX="19.0" layoutY="15.0" prefHeight="638.0" prefWidth="1104.0" style="-fx-background-color: white; -fx-background-radius: 25;">
          <children>
-            <TableView fx:id="table" layoutX="-18.0" layoutY="322.0" prefHeight="365.0" prefWidth="1512.0" AnchorPane.bottomAnchor="-69.0" AnchorPane.leftAnchor="-18.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="322.0">
-              <columns>
-                <TableColumn fx:id="colserviceid" prefWidth="175.99996948242188" text="ServiceID" />
-                <TableColumn fx:id="coldonneurid" prefWidth="195.0" text="DonneurId" />
-                  <TableColumn fx:id="coltypedeservice" prefWidth="263.0000305175781" text="Type service" />
-                  <TableColumn fx:id="coldéscription" prefWidth="364.0" text="Déscription" />
-                  <TableColumn fx:id="coldatededisponibilité" prefWidth="200.0" text="Date disponibilité" />
-                  <TableColumn fx:id="collieu" prefWidth="178.0" text="lieu" />
-              </columns>
-            </TableView>
-            <VBox alignment="TOP_CENTER" layoutX="1015.0" layoutY="13.0" prefHeight="278.0" prefWidth="497.0" spacing="30.0">
+            <Pane fx:id="context" prefHeight="570.0" prefWidth="1000.0">
                <children>
-                  <JFXButton fx:id="Validerbutton" onAction="#SaveDon" prefHeight="47.0" prefWidth="162.0" style="-fx-background-color: #7ca76f; -fx-background-radius: 15;" text="Ajouter" textFill="WHITE">
+                  <Label layoutX="410.0" layoutY="62.0" prefHeight="18.0" prefWidth="211.0" text="Veuillez siasir vos informations">
+                     <font>
+                        <Font name="Corbel Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="Validerbutton" layoutX="447.0" layoutY="493.0" onAction="#SaveDon" prefHeight="34.0" prefWidth="162.0" style="-fx-background-color: #7ca76f; -fx-background-radius: 15;" text="Ajouter" textFill="WHITE">
                      <font>
                         <Font name="Ebrima" size="16.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="supprimerbutton" layoutX="10.0" layoutY="10.0"  prefHeight="47.0" prefWidth="162.0" style="-fx-background-color: #ae8c8c; -fx-background-radius: 15;" text="Supprimer" textFill="WHITE">
+                  <DatePicker fx:id="date" layoutX="383.0" layoutY="411.0" prefHeight="37.0" prefWidth="289.0" promptText="Date de Disponibilité" />
+                  <JFXTextField fx:id="ajouterdéscription" alignment="TOP_CENTER" focusColor="#7ca76f" labelFloat="true" layoutX="609.0" layoutY="319.0" prefHeight="25.0" prefWidth="289.0" promptText="Déscription" unFocusColor="BLACK" />
+                  <JFXTextField fx:id="ajouterlieu" alignment="TOP_CENTER" focusColor="#7ca76f" labelFloat="true" layoutX="609.0" layoutY="178.0" prefHeight="25.0" prefWidth="289.0" promptText="Lieu" unFocusColor="BLACK" />
+                  <JFXComboBox fx:id="ajoutertypeservice" focusColor="#7ca76f" labelFloat="true" layoutX="116.0" layoutY="319.0" prefHeight="25.0" prefWidth="315.0" promptText="Type de service" />
+                  <JFXTextField fx:id="ajouterdonneurid" alignment="TOP_CENTER" focusColor="#7ca76f" labelFloat="true" layoutX="121.0" layoutY="178.0" prefHeight="25.0" prefWidth="305.0" promptText="Num Matricule" unFocusColor="BLACK">
                      <font>
-                        <Font name="Ebrima" size="16.0" />
+                        <Font name="Century Schoolbook Bold Italic" size="12.0" />
                      </font>
-                     <effect>
-                        <DropShadow radius="10.7425" width="23.97" />
-                     </effect>
-                  </JFXButton>
-                  <JFXButton fx:id="modifierbutton" layoutX="10.0" layoutY="57.0"  prefHeight="47.0" prefWidth="162.0" style="-fx-background-color: #504545; -fx-background-radius: 15;" text="Modifier" textFill="WHITE">
-                     <font>
-                        <Font name="Ebrima" size="16.0" />
-                     </font>
-                     <effect>
-                        <DropShadow radius="10.7425" width="23.97" />
-                     </effect>
-                  </JFXButton>
-                  <JFXButton fx:id="showbutton" onAction="#showbutton" prefHeight="47.0" prefWidth="162.0" style="-fx-background-color: #7ca76f; -fx-background-radius: 15;" text="Actualiser" textFill="WHITE">
-                     <font>
-                        <Font name="Ebrima" size="16.0" />
-                     </font>
-                  </JFXButton>
+                  </JFXTextField>
                </children>
-               <padding>
-                  <Insets bottom="30.0" top="10.0" />
-               </padding>
-            </VBox>
-            <Label layoutX="510.0" layoutY="34.0" prefHeight="14.0" prefWidth="166.0" text="Veuillez siasir vos informations" AnchorPane.bottomAnchor="592.0" AnchorPane.leftAnchor="510.0" AnchorPane.rightAnchor="545.0">
-               <font>
-                  <Font name="Corbel Bold" size="15.0" />
-               </font>
-            </Label>
-            <JFXTextField fx:id="ajouterdonneurid" alignment="TOP_CENTER" focusColor="#7ca76f" labelFloat="true" layoutX="94.0" layoutY="127.0" prefHeight="25.0" prefWidth="289.0" promptText="Donneur ID" unFocusColor="#171717" AnchorPane.bottomAnchor="492.0" AnchorPane.leftAnchor="94.0">
-               <font>
-                  <Font name="Century Schoolbook Bold Italic" size="12.0" />
-               </font>
-            </JFXTextField>
-            <DatePicker fx:id="date" layoutX="834.0" layoutY="174.0" prefHeight="37.0" prefWidth="253.0" promptText="Date de Disponibilité" />
-            <JFXTextField fx:id="ajouterdéscription" alignment="TOP_CENTER" focusColor="#7ca76f" labelFloat="true" layoutX="510.0" layoutY="127.0" prefHeight="25.0" prefWidth="289.0" promptText="Déscription" unFocusColor="BLACK" AnchorPane.bottomAnchor="492.0" AnchorPane.leftAnchor="510.0" />
-            <JFXTextField fx:id="ajouterlieu" alignment="TOP_CENTER" focusColor="#7ca76f" labelFloat="true" layoutX="509.0" layoutY="192.0" prefHeight="25.0" prefWidth="289.0" promptText="Lieu" unFocusColor="BLACK" AnchorPane.bottomAnchor="401.0" AnchorPane.leftAnchor="509.0" />
-            <JFXComboBox fx:id="ajoutertypeservice" focusColor="#7ca76f" labelFloat="true" layoutX="94.0" layoutY="218.0" prefHeight="25.0" prefWidth="289.0" promptText="Type de service" />
+            </Pane>
          </children>
-      </AnchorPane>
+      </VBox>
    </children>
 </AnchorPane>

@@ -36,9 +36,7 @@ public class RéclamationController implements Initializable {
     @FXML
     private JFXButton Lancer;
     @FXML
-    private JFXTextField passtext;
-    @FXML
-    private JFXTextField emailtext;
+    private JFXButton RetourRéclamation;
 
     /**
      * Initializes the controller class.
@@ -108,4 +106,12 @@ public class RéclamationController implements Initializable {
     }
     */
 }
+
+    @FXML
+    private void SaveLancer(ActionEvent event) {
+    }
+
+    @FXML
+    private void RetourRéclamation(ActionEvent event) {
+    }
 }

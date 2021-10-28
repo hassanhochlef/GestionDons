@@ -29,11 +29,11 @@ public class BugBustersProject extends Application {
       
         Parent root;  
             try {
-                root = FXMLLoader.load(getClass().getResource("/Views/AjouterDon.fxml"));
+                root = FXMLLoader.load(getClass().getResource("/Views/Home.fxml"));
                  Scene scene = new Scene(root);
-        primarystage.setTitle("Ajouter un don");
-        primarystage.setScene(scene);
-        primarystage.show();
+                 primarystage.setTitle("Home");
+                 primarystage.setScene(scene);
+                 primarystage.show();
             } catch (IOException ex) {
                 Logger.getLogger(BugBustersProject.class.getName()).log(Level.SEVERE, null, ex);
             }

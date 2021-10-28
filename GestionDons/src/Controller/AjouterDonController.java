@@ -32,12 +32,18 @@ import java.util.logging.Logger;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.InputMethodEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -61,10 +67,6 @@ import utils.TextToSpeach;
  * @author 21654
  */
 public class AjouterDonController implements Initializable {
-    
-    private ObservableList<Don> DonList;
-    private ObservableList<Don> dataList;
-
 
     @FXML
     private JFXTextField ajouterdonneurid;
@@ -82,59 +84,31 @@ public class AjouterDonController implements Initializable {
     private JFXComboBox<String> ajoutertypeservice;
 
     @FXML
-    private TableView<Don> table;
-
-    @FXML
-    private TableColumn<Don, Integer> colserviceid;
-
-    @FXML
-    private TableColumn<Don, Integer> coldonneurid;
-
-    @FXML
-    private TableColumn<Don, String> coltypedeservice;
-
-    @FXML
-    private TableColumn<Don, String> coldéscription;
-
-    @FXML
-    private TableColumn<Don, String> coldatededisponibilité;
-
-    @FXML
-    private TableColumn<Don, String> collieu;
-
-    private JFXTextField recherchertext;
-
-
-    @FXML
-    private JFXButton supprimerbutton;
-
-    @FXML
-    private JFXButton modifierbutton;
-
-   
-    @FXML
-    private JFXButton showbutton;
-    @FXML
     private DatePicker date;
+    @FXML
+    private AnchorPane page;
+    @FXML
+    private Pane context;
+
+
     
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //TextToSpeach
+        TextToSpeach.speak("Votre Don est crée ");
         
-        TextToSpeach.speak("Bienveunue dans la gestion de services ");
         DonService ds = new DonService();
         ajoutertypeservice.getItems().add("Transport");
         ajoutertypeservice.getItems().add("Construction");
         ajoutertypeservice.getItems().add("Santé");
         ajoutertypeservice.getItems().add("Education");
         ajoutertypeservice.getItems().add("Autre");
-        //Recherche();
-        //showbutton();    
+    
     }
     @FXML
     void SaveDon(ActionEvent event) {
-        TextToSpeach.speak("Votre Don est ajoutée ");
+        
         if (ajoutertypeservice.getSelectionModel() == null ||ajouterdonneurid.getText().isEmpty() || ajouterlieu.getText().isEmpty() || date.getValue() == null)
         {
             new Alert(Alert.AlertType.ERROR, "Veuillez remplir tous les champs !", new ButtonType[]{ButtonType.OK}).show();
@@ -161,86 +135,12 @@ public class AjouterDonController implements Initializable {
         tay.setMessage(message);
         tay.setNotificationType(NotificationType.SUCCESS);
         tay.showAndDismiss(Duration.millis(1));
+        
+         
      }
     
     }
-      @FXML
-    private void showbutton() {
-        
-        ObservableList<Don> DonList = FXCollections.observableArrayList();
-        DonService ds = new DonService();
-        DonList = ds.afficherDoneService();
-      
-        colserviceid.setCellValueFactory(new PropertyValueFactory<>("serviceId") );
-        coldonneurid.setCellValueFactory(new PropertyValueFactory<>("donorId") );
-        coltypedeservice.setCellValueFactory(new PropertyValueFactory<>("TypeService") );
-        collieu.setCellValueFactory(new PropertyValueFactory<>("lieu") ); 
-        coldatededisponibilité.setCellValueFactory(new PropertyValueFactory<>("DateDisponibilité") );
-        coldéscription.setCellValueFactory(new PropertyValueFactory<>("déscription") );           
-        table.setItems(DonList);          
-}
-
-    void savebesoin(ActionEvent event) {
-
-    }
-
-    void saveretour1(ActionEvent event) {
-
-    }
-
-    void saveréclamation(ActionEvent event, String recepient, String objet, String texte) {
-        
-    }
     
-    public void Recherche(){
-        DonService ds = new DonService();  
-        colserviceid.setCellValueFactory(new PropertyValueFactory<>("serviceId") );
-        coldonneurid.setCellValueFactory(new PropertyValueFactory<>("donorId") );
-        coltypedeservice.setCellValueFactory(new PropertyValueFactory<>("TypeService") );
-        collieu.setCellValueFactory(new PropertyValueFactory<>("lieu") ); 
-        coldatededisponibilité.setCellValueFactory(new PropertyValueFactory<>("DateDisponibilité") );
-        coldéscription.setCellValueFactory(new PropertyValueFactory<>("déscription") );
-        
-        
-        dataList = ds.afficherDoneService();
-        table.setItems(dataList);
-        FilteredList<Don> filteredData = new FilteredList<>(dataList, b -> true);
-		
-		// 2. Set the filter Predicate whenever the filter changes.
-/*		recherchertext.textProperty().addListener((observable, oldValue, newValue) -> {
-			filteredData.setPredicate(Don -> {
-				// If filter text is empty, display all persons.
-								
-				if (newValue == null || newValue.isEmpty()) {
-					return true;
-				}
-				
-				// Compare first name and last name of every person with filter text.
-				String lowerCaseFilter = newValue.toLowerCase();
-                                
-				
-				 if (Don.getTypeService().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-					return true; 
-				}
-                                else if (Don.getLieu().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-					return true; 
-				}
-				else if (String.valueOf(Don.getDéscription()).indexOf(lowerCaseFilter)!=-1)
-				     return true;
-                                
-				else  
-                                    return false; // Does not match.
-			});
-		});
-                
-                SortedList<Don> sortedData = new SortedList<>(filteredData);
-                sortedData.comparatorProperty().bind(table.comparatorProperty());
-                table.setItems(sortedData);
-    
-    }*/
-
-    }
-      
 }
 
 

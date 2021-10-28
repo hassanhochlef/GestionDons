@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="page" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="1034.0" styleClass="mainpane" stylesheets="@../css/style1.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ListeDonController">
+   <children>
+      <VBox layoutX="218.0" layoutY="14.0" prefHeight="647.0" prefWidth="792.0" />
+      <Pane layoutX="3.0" layoutY="6.0" prefHeight="307.0" prefWidth="211.0">
+         <children>
+            <Rectangle arcHeight="35.0" arcWidth="35.0" fill="#9ebd73" height="663.0" layoutY="-1.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Rectangle>
+            <VBox alignment="CENTER" layoutX="-2.0" layoutY="484.0" prefHeight="0.0" prefWidth="211.0" />
+            <VBox layoutX="7.0" layoutY="20.0" prefHeight="634.0" prefWidth="977.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+               <children>
+                  <Pane fx:id="context" prefHeight="327.0" prefWidth="944.0">
+                     <children>
+                        <Pane fx:id="context1" layoutX="217.0" layoutY="10.0" minWidth="-Infinity" prefHeight="647.0" prefWidth="756.0">
+                           <children>
+                              <JFXButton fx:id="supprimerbutton" layoutX="-79.0" layoutY="72.0" onAction="#SaveDelete" prefHeight="37.0" prefWidth="211.0" style="-fx-background-color: #ae8c8c; -fx-background-radius: 15;" text="Supprimer" textFill="WHITE">
+                                 <font>
+                                    <Font name="Ebrima" size="16.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow radius="10.7425" width="23.97" />
+                                 </effect>
+                              </JFXButton>
+                              <JFXButton fx:id="modifierbutton" layoutX="397.0" layoutY="72.0" onAction="#SaveUpdate" prefHeight="37.0" prefWidth="211.0" style="-fx-background-color: #868d80; -fx-background-radius: 15;" text="Modifier" textFill="WHITE">
+                                 <font>
+                                    <Font name="Ebrima" size="16.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow radius="10.7425" width="23.97" />
+                                 </effect>
+                              </JFXButton>
+                              <JFXButton fx:id="showbutton" layoutX="177.0" layoutY="145.0" onAction="#showbutton" prefHeight="37.0" prefWidth="211.0" style="-fx-background-color: #504545; -fx-background-radius: 15;" text="Actualiser" textFill="WHITE">
+                                 <font>
+                                    <Font name="Ebrima" size="16.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXTextField fx:id="recherchertext" alignment="TOP_CENTER" focusColor="#7ca76f" labelFloat="true" layoutX="44.0" layoutY="237.0" onInputMethodTextChanged="#filterTable" prefHeight="37.0" prefWidth="573.0" promptText="Rechercher" unFocusColor="BLACK" />
+                              <TableView fx:id="table" layoutX="-179.0" layoutY="327.0" prefHeight="231.0" prefWidth="931.0">
+                                 <columns>
+                                    <TableColumn fx:id="colserviceid" prefWidth="100.0" text="Num Service" />
+                                    <TableColumn fx:id="coldonneurid" prefWidth="100.0" text="Num Matricule" />
+                                    <TableColumn fx:id="collieu" prefWidth="200.0" text="lieu" />
+                                    <TableColumn fx:id="coldatededisponibilité" prefWidth="126.0" text="Date disponibilité" />
+                                    <TableColumn fx:id="coltypedeservice" prefWidth="136.0" text="Type service" />
+                                    <TableColumn fx:id="coldéscription" prefWidth="270.0" text="Déscription" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </Pane>
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
