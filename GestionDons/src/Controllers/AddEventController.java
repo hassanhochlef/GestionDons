@@ -164,7 +164,7 @@ public class AddEventController implements Initializable {
         EvenementService es = new EvenementService();
 
         
-        if (categInput.getSelectionModel() == null ||causeInput.getText().isEmpty() || dateInput.getValue() == null)
+        if (categInput.getValue() == null ||causeInput.getText().isEmpty() || dateInput.getValue() == null || montantnput.getText().isEmpty() || idAssocInput.getValue() == null)
         {
             new Alert(Alert.AlertType.ERROR, "Veuillez verifier les champs", new ButtonType[]{ButtonType.OK}).show();
         }

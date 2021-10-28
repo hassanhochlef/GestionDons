@@ -20,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import services.RecompenseService;
 import services.UserSession;
 
 /**
@@ -55,6 +56,10 @@ public class HomeScreenController implements Initializable {
     private Parent root;
     
     UserSession session = new UserSession();
+    RecompenseService serviceRec = new RecompenseService();
+    
+    @FXML
+    private Label labelPts;
 
     /**
      * Initializes the controller class.
@@ -62,6 +67,7 @@ public class HomeScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         labelNomSession.setText(session.getActualUserName());
+        labelPts.setText(labelPts.getText() + " " + serviceRec.getNbrePts(session.getActualUserId()) + " Points");
     }    
 
     @FXML
