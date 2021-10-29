@@ -23,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import services.UserSession;
 
 /**
  *
@@ -46,6 +47,10 @@ public class EventsMainController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    
+    UserSession session = new UserSession();
+    @FXML
+    private ImageView imageAddEvent;
 
     
     
@@ -55,6 +60,11 @@ public class EventsMainController implements Initializable {
             loadUI("DashBoard");
         } catch (IOException ex) {
             Logger.getLogger(EventsMainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if (session.getActualUserRole().equals("Donneur")){
+            newEventButton.setVisible(false);
+            imageAddEvent.setVisible(false);
         }
     }    
 

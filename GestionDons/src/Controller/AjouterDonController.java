@@ -32,12 +32,17 @@ import java.util.logging.Logger;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.InputMethodEvent;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -116,6 +121,12 @@ public class AjouterDonController implements Initializable {
     private JFXButton showbutton;
     @FXML
     private DatePicker date;
+    @FXML
+    private JFXButton homeBtn;
+    
+            private Stage stage;
+    private Scene scene;
+    private Parent root;
     
     
     @Override
@@ -239,6 +250,16 @@ public class AjouterDonController implements Initializable {
     
     }*/
 
+    }
+
+    @FXML
+    private void homeBtnAction(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Views/HomeScreen.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
     }
       
 }

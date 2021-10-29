@@ -28,12 +28,16 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import org.controlsfx.control.textfield.TextFields;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
@@ -59,6 +63,14 @@ public class AdmindashboardController implements Initializable {
     private Button btnReclamation;
     @FXML
     private Button btnRecompense;
+    @FXML
+    private Button btnHome;
+    @FXML
+    private Button btnLogout;
+    
+        private Stage stage;
+    private Scene scene;
+    private Parent root;
    
 
     /**
@@ -66,6 +78,11 @@ public class AdmindashboardController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        try {
+            loadUI("UsersAdmin");
+        } catch (IOException ex) {
+            Logger.getLogger(AdmindashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -91,6 +108,26 @@ public class AdmindashboardController implements Initializable {
     private void loadUI(String ui) throws IOException{
         mainpane.getChildren().clear();
         mainpane.getChildren().add(FXMLLoader.load(this.getClass().getResource("/Views/" + ui + ".fxml")));
+    }
+
+    @FXML
+    private void btnHomeAction(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Views/HomeScreen.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show(); 
+    }
+
+    @FXML
+    private void btnLogoutAction(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Views/Main.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show(); 
     }
         
         

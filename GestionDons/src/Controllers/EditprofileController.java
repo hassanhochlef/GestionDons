@@ -10,11 +10,16 @@ import Service.UserService;
 import Service.UserSession;
 import com.jfoenix.controls.JFXComboBox;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -24,6 +29,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Duration;
 import tray.animations.AnimationType;
@@ -61,7 +67,14 @@ public class EditprofileController implements Initializable {
     @FXML
     private PasswordField inputpassword;
     
+                    private Stage stage;
+    private Scene scene;
+    private Parent root;
+
+    
     String path;
+    @FXML
+    private Button retour;
   
 
     /**
@@ -142,6 +155,16 @@ public class EditprofileController implements Initializable {
           }
     
 }
+
+    @FXML
+    private void retourAction(ActionEvent event) throws IOException {
+                Parent root = FXMLLoader.load(getClass().getResource("/Views/HomeScreen.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
+    }
         
     }
     

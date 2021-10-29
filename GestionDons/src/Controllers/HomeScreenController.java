@@ -20,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import services.RecompenseService;
 import services.UserSession;
 
@@ -60,6 +61,8 @@ public class HomeScreenController implements Initializable {
     
     @FXML
     private Label labelPts;
+    @FXML
+    private JFXButton btnAdmin;
 
     /**
      * Initializes the controller class.
@@ -68,6 +71,9 @@ public class HomeScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         labelNomSession.setText(session.getActualUserName());
         labelPts.setText(labelPts.getText() + " " + serviceRec.getNbrePts(session.getActualUserId()) + " Points");
+        if (session.getActualUserRole().equals("Donneur") || session.getActualUserRole().equals("Association")){
+            btnAdmin.setVisible(false);
+        }
     }    
 
     @FXML
@@ -85,12 +91,14 @@ public class HomeScreenController implements Initializable {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.centerOnScreen();
         stage.show(); 
     }
 
     @FXML
     private void btnGestionDonsAction(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Views/ParticiperEvent.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Views/DonsScreen.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -116,10 +124,11 @@ public class HomeScreenController implements Initializable {
 
     @FXML
     private void btnReclamationAction(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Views/Réclamation.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Views/Reclamation.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show(); 
     }
 
@@ -129,6 +138,17 @@ public class HomeScreenController implements Initializable {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show(); 
+    }
+
+    @FXML
+    private void btnAdminAction(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Views/admindashboard.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show(); 
     }
 

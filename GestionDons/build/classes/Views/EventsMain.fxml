@@ -40,19 +40,19 @@
                </font>
             </Label>
             <Line endX="38.0" layoutX="103.0" layoutY="207.0" startX="-100.0" stroke="#9ebd73" strokeWidth="5.0" />
-            <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="15.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="15.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/home.png" />
                </image>
             </ImageView>
             <VBox layoutX="23.0" layoutY="236.0" prefHeight="189.0" prefWidth="176.0" spacing="20.0">
                <children>
-                  <JFXButton fx:id="homeButton" onAction="#homeButtonAction" text="Acceuil" textFill="WHITE">
+                  <JFXButton fx:id="newEventButton" layoutX="10.0" layoutY="10.0" onAction="#newEventButtonAction" text="Gestion" textFill="WHITE">
                      <font>
                         <Font name="Calibri Bold" size="19.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="newEventButton" layoutX="10.0" layoutY="10.0" onAction="#newEventButtonAction" text="Gestion" textFill="WHITE">
+                  <JFXButton fx:id="homeButton" onAction="#homeButtonAction" text="Acceuil" textFill="WHITE">
                      <font>
                         <Font name="Calibri Bold" size="19.0" />
                      </font>
@@ -72,7 +72,7 @@
                   <Insets left="20.0" />
                </padding>
             </VBox>
-            <ImageView fitHeight="35.0" fitWidth="30.0" layoutX="15.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imageAddEvent" fitHeight="35.0" fitWidth="30.0" layoutX="15.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/add.png" />
                </image>

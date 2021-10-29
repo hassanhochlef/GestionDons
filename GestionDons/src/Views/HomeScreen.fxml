@@ -244,6 +244,14 @@
                   </JFXButton>
                </children>
             </VBox>
+            <JFXButton fx:id="btnAdmin" layoutX="28.0" layoutY="317.0" onAction="#btnAdminAction" prefHeight="54.0" prefWidth="156.0" style="-fx-background-color: #14318a; -fx-background-radius: 20; -fx-border-radius: 50;" text="Espace Admin" textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="17.0" />
+               </font>
+               <effect>
+                  <DropShadow color="WHITE" height="9.14" radius="3.3275" spread="0.08" width="6.17" />
+               </effect>
+            </JFXButton>
          </children>
       </Pane>
    </children>

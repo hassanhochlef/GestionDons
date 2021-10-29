@@ -132,6 +132,8 @@ public class DashBoardController implements Initializable {
         }
         
         labelNomSession.setText(us.getActualUserName());
+        
+        
 
     }    
 

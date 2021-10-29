@@ -68,7 +68,18 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="USD" size="30" />
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" text=" Log Out" textFill="WHITE">
+            <Button fx:id="btnHome" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="10.0" layoutY="395.0" mnemonicParsing="false" onAction="#btnHomeAction" prefHeight="75.0" prefWidth="394.0" stylesheets="@css/fullpackstyling.css" text="Menu Principal" textFill="#fcfcfc">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="HOME" size="30" />
+               </graphic>
+            </Button>
+            <Button fx:id="btnLogout" mnemonicParsing="false" onAction="#btnLogoutAction" text=" Log Out" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -84,6 +95,9 @@
             <URL value="@css/fullpackstyling.css" />
             <URL value="@../fullpackstyling.css" />
          </stylesheets>
+         <padding>
+            <Insets bottom="80.0" />
+         </padding>
       </VBox>
       <Pane fx:id="mainpane" layoutX="394.0" prefHeight="811.0" prefWidth="932.0" />
    </children>

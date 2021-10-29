@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package Controllers;
-import java.util.Calendar;
-import java.util.Date;
 import Connection.MyConnection;
 import Service.DonationCrud;
 import Service.progressCalculator;
@@ -15,11 +13,8 @@ import Entities.Don;
 import Entities.User;
 import Service.MailSend;
 import Service.UserSession;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -45,29 +40,19 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import animatefx.animation.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 import javafx.animation.Animation;
 import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.PasswordField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.scene.transform.Affine;
-import javafx.stage.StageStyle;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
@@ -848,13 +833,21 @@ public ComboBox ComboBesoin2;
 
     @FXML
     private void home(ActionEvent event) throws IOException {
-       FXMLLoader.load(getClass().getResource("/Views/HomeScreenController.fxml"));
+        Parent part = FXMLLoader.load(getClass().getResource("/views/HomeScreen.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(part);
+        stage.setScene(scene);
+        stage.show();
   
     }
 
     @FXML
     private void logout(ActionEvent event) throws IOException {
-        FXMLLoader.load(getClass().getResource("/Views/Main.fxml"));
+         Parent part = FXMLLoader.load(getClass().getResource("/Views/Main.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(part);
+        stage.setScene(scene);
+        stage.show();
     }
        
    

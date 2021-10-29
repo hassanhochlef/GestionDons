@@ -216,7 +216,15 @@
                   <Font name="System Bold" size="15.0" />
                </font>
                <VBox.margin>
-                  <Insets left="350.0" />
+                  <Insets bottom="-20.0" left="350.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="retour" layoutX="360.0" layoutY="688.0" mnemonicParsing="false" onAction="#retourAction" prefHeight="33.0" prefWidth="100.0" text="Retour" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="780.0" />
                </VBox.margin>
             </Button>
          </children>

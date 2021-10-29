@@ -39,6 +39,19 @@ public class User {
         this.montant_donne = montant_donne;
     }
 
+    public User(String name, String photo, String password, String city, String gouvernorat, String phone, String mail, String role) {
+        this.name = name;
+        this.photo = photo;
+        this.password = password;
+        this.city = city;
+        this.gouvernorat = gouvernorat;
+        this.phone = phone;
+        this.mail = mail;
+        this.role = role;
+    }
+    
+    
+
     public User(String name, String city, String gouvernorat, String phone, String mail, String role) {
         this.name = name;
         this.password=password;
