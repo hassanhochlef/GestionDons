@@ -46,8 +46,6 @@ public class HomeController implements Initializable {
     @FXML
     private JFXButton réclamation;
 
-    @FXML
-    private JFXButton propositions;
 
     @FXML
     private JFXButton guide;

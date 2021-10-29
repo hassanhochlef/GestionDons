@@ -21,12 +21,7 @@
                <children>
                   <Pane fx:id="context" prefHeight="570.0" prefWidth="863.0">
                      <children>
-                        <JFXButton fx:id="réclamation" layoutX="220.0" layoutY="212.0" onAction="#saveréclamation" prefHeight="73.0" prefWidth="542.0" style="-fx-background-color: #c27ba0; -fx-background-radius: 15;" text="Lancer une réclamation" textFill="WHITE">
-                           <font>
-                              <Font name="Ebrima" size="16.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton fx:id="propositions" layoutX="214.0" layoutY="338.0" prefHeight="73.0" prefWidth="549.0" style="-fx-background-color: #ae8c8c; -fx-background-radius: 15;" text="Envoyer des propositions" textFill="WHITE">
+                        <JFXButton fx:id="réclamation" layoutX="217.0" layoutY="265.0" onAction="#saveréclamation" prefHeight="73.0" prefWidth="542.0" style="-fx-background-color: #c27ba0; -fx-background-radius: 15;" text="Lancer une réclamation" textFill="WHITE">
                            <font>
                               <Font name="Ebrima" size="16.0" />
                            </font>

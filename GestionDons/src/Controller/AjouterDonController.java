@@ -26,34 +26,13 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Properties;
 import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
@@ -73,6 +52,9 @@ public class AjouterDonController implements Initializable {
 
     @FXML
     private JFXTextField ajouterdéscription;
+    
+    @FXML
+    private JFXComboBox<String> ajoutertypeservice;
 
     @FXML
     private JFXTextField ajouterlieu;
@@ -80,8 +62,7 @@ public class AjouterDonController implements Initializable {
     @FXML
     private JFXButton Validerbutton;
 
-    @FXML
-    private JFXComboBox<String> ajoutertypeservice;
+   
 
     @FXML
     private DatePicker date;
@@ -95,8 +76,7 @@ public class AjouterDonController implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //TextToSpeach
-        TextToSpeach.speak("Votre Don est crée ");
+
         
         DonService ds = new DonService();
         ajoutertypeservice.getItems().add("Transport");

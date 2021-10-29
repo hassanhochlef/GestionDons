@@ -7,6 +7,7 @@ package Controller;
 
 import Entité.Don;
 import Service.DonService;
+import animatefx.animation.FadeIn;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -21,6 +22,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
@@ -88,7 +90,7 @@ public class ListeDonController {
     
      
     public void initialize(URL location, ResourceBundle resources) {
-        //TextToSpeach
+      
        Recherche();
        
 }
@@ -176,16 +178,21 @@ public class ListeDonController {
 
     @FXML
     private void SaveUpdate(ActionEvent event) throws IOException {
-       
+            loadUI("ModifierDon");
+            new FadeIn(context).play();
  
             Don d = table.getSelectionModel().getSelectedItem();           
             coltypedeservice.setText((d.getTypeService()));
             coldéscription.setText(d.getDéscription());
-           // date.setValue(LocalDate.parse(d.getDateDisponibilité().toString()));
+            //collieu.set(LocalDate.parse(d.getDateDisponibilité().toString()));
     }
 
     @FXML
     private void filterTable(InputMethodEvent event) {
+    }
+     private void loadUI(String ui) throws IOException {
+        context.getChildren().clear();
+        context.getChildren().add(FXMLLoader.load(this.getClass().getResource("/views/" + ui + ".fxml")));
     }
 
 }

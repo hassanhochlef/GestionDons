@@ -21,15 +21,19 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="objet" focusColor="#7ca76f" layoutX="338.0" layoutY="135.0" prefHeight="25.0" prefWidth="553.0" />
-                  <JFXTextArea fx:id="texte" focusColor="#7ca76f" labelFloat="true" layoutX="246.0" layoutY="212.0" prefHeight="175.0" prefWidth="706.0" />
-                  <JFXButton fx:id="Lancer" layoutX="518.0" layoutY="450.0" onAction="#SaveLancer" prefHeight="47.0" prefWidth="162.0" style="-fx-background-color: #7ca76f; -fx-background-radius: 15;" text="Lancer" textFill="WHITE">
+                  <JFXTextField fx:id="objet" focusColor="#7ca76f" layoutX="339.0" layoutY="305.0" prefHeight="25.0" prefWidth="553.0" />
+                  <JFXTextArea fx:id="texte" focusColor="#7ca76f" labelFloat="true" layoutX="246.0" layoutY="283.0" prefHeight="175.0" prefWidth="706.0" />
+                  <JFXButton fx:id="Lancer" layoutX="534.0" layoutY="491.0" onAction="#SaveLancer" prefHeight="47.0" prefWidth="162.0" style="-fx-background-color: #7ca76f; -fx-background-radius: 15;" text="Lancer" textFill="WHITE">
                      <font>
                         <Font name="Ebrima" size="16.0" />
                      </font>
                   </JFXButton>
-                  <Label layoutX="188.0" layoutY="148.0" text="Objet" textFill="#7ca76f" />
-                  <Label layoutX="146.0" layoutY="370.0" text="Explication" textFill="#7ca76f" />
+                  <Label layoutX="159.0" layoutY="322.0" text="Objet" textFill="#7ca76f" />
+                  <Label layoutX="146.0" layoutY="450.0" text="Explication" textFill="#7ca76f" />
+                  <JFXTextField fx:id="emailtext" focusColor="#7ca76f" layoutX="340.0" layoutY="126.0" onAction="#emailtext" prefHeight="25.0" prefWidth="559.0" />
+                  <Label layoutX="167.0" layoutY="138.0" text="Email" textFill="#7ca76f" />
+                  <JFXTextField fx:id="passtext" focusColor="#7ca76f" layoutX="339.0" layoutY="227.0" onAction="#passtext" prefHeight="25.0" prefWidth="553.0" />
+                  <Label layoutX="149.0" layoutY="240.0" text="Password" textFill="#7ca76f" />
                </children>
             </Pane>
          </children>

@@ -24,9 +24,9 @@
             <VBox alignment="CENTER" layoutX="-2.0" layoutY="484.0" prefHeight="0.0" prefWidth="211.0" />
             <VBox layoutX="7.0" layoutY="20.0" prefHeight="634.0" prefWidth="977.0" style="-fx-background-color: white; -fx-background-radius: 25;">
                <children>
-                  <Pane fx:id="context" prefHeight="327.0" prefWidth="944.0">
+                  <Pane fx:id="context" prefHeight="350.0" prefWidth="979.0">
                      <children>
-                        <Pane fx:id="context1" layoutX="217.0" layoutY="10.0" minWidth="-Infinity" prefHeight="647.0" prefWidth="756.0">
+                        <Pane fx:id="context1" layoutX="217.0" layoutY="10.0" minWidth="-Infinity" prefHeight="26.0" prefWidth="756.0">
                            <children>
                               <JFXButton fx:id="supprimerbutton" layoutX="-79.0" layoutY="72.0" onAction="#SaveDelete" prefHeight="37.0" prefWidth="211.0" style="-fx-background-color: #ae8c8c; -fx-background-radius: 15;" text="Supprimer" textFill="WHITE">
                                  <font>
@@ -49,7 +49,6 @@
                                     <Font name="Ebrima" size="16.0" />
                                  </font>
                               </JFXButton>
-                              <JFXTextField fx:id="recherchertext" alignment="TOP_CENTER" focusColor="#7ca76f" labelFloat="true" layoutX="44.0" layoutY="237.0" onInputMethodTextChanged="#filterTable" prefHeight="37.0" prefWidth="573.0" promptText="Rechercher" unFocusColor="BLACK" />
                               <TableView fx:id="table" layoutX="-179.0" layoutY="327.0" prefHeight="231.0" prefWidth="931.0">
                                  <columns>
                                     <TableColumn fx:id="colserviceid" prefWidth="100.0" text="Num Service" />
@@ -60,6 +59,7 @@
                                     <TableColumn fx:id="coldéscription" prefWidth="270.0" text="Déscription" />
                                  </columns>
                               </TableView>
+                              <JFXTextField fx:id="recherchertext" alignment="TOP_CENTER" focusColor="#7ca76f" labelFloat="true" layoutX="145.0" layoutY="250.0" onInputMethodTextChanged="#filterTable" prefHeight="37.0" prefWidth="312.0" promptText="Rechercher" unFocusColor="BLACK" />
                            </children>
                         </Pane>
                      </children>
