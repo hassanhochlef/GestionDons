@@ -6,11 +6,14 @@
 package Service;
 import Controllers.DonsScreenController;
 import Connection.MyConnection;
+import Controllers.GestionDons;
 import Entities.Besoin;
 
 import Entities.Don;
 
 import Entities.User;
+import com.sun.glass.ui.Application;
+import java.io.IOException;
 //import java.awt.Image;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,10 +30,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Timer;
+import javafx.application.HostServices;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -234,11 +239,12 @@ public float CalculMontant() throws SQLException{
       }
       return nombre;
 }
-public void afficherrecu(Label fieldDate, Label fieldMontant, Label fieldCategorie , Label fieldName, Label fieldTel ){
-      
+public void afficherrecu(UserSession us,Label fieldDate, Label fieldMontant, Label fieldCategorie , Label fieldName, Label fieldTel ){
+      us = new UserSession();
+    String  actualdonor = Integer.toString(us.getActualUserId());
     try {
         
-        String sql = "SELECT donationDate,montant,Categorie,name,phone  FROM recu INNER JOIN don ON recu.donationId = don.donId INNER JOIN user ON user.userId=don.donorId ";
+        String sql = "SELECT MAX(donId),montant,donationDate,Categorie,name,phone  FROM don INNER JOIN user ON don.donorId = user.userId  where donorId='"+actualdonor+"'";
         ResultSet rs ;
         ste = cnx.prepareStatement(sql);
         rs = ste.executeQuery();
@@ -250,11 +256,11 @@ public void afficherrecu(Label fieldDate, Label fieldMontant, Label fieldCategor
         while (rs.next()) {
             
             
-            date = rs.getString(1);
+            date = rs.getString(3);
             montant = rs.getFloat(2);
-            Categorie = rs.getString(3);
-            name = rs.getString(4);
-            tel = rs.getString(5);
+            Categorie = rs.getString(4);
+            name = rs.getString(5);
+            tel = rs.getString(6);
             fieldDate.setText(String.valueOf(date));
             fieldMontant.setText(String.valueOf(montant));
             fieldCategorie.setText(String.valueOf(Categorie));
@@ -326,7 +332,8 @@ if (rowsDeleted > 0) {
        name.setText(u.getActualUserName());
        participantTel.setText(u.getActualUserPhone());
        participantmontant.setText(String.valueOf(montant));
-   
+       
+      
    }
    public boolean dejaParticipe(UserSession us,Label participantNom ,Label participantTel ){
        if((participantNom.getText().equals(us.getActualUserName())) && (participantTel.getText().equals(us.getActualUserPhone())) ){
@@ -402,7 +409,6 @@ public void AjouterWinnerDons(String winner,Don d,float x){
            u.setPhone(rs.getString("phone"));
            
        }
-            
         String sql="insert into Don(donorId,eventId,categorie,montant,donationDate)" + "values(?,?,?,?,?)";
         ste =cnx.prepareStatement(sql);
         ste.setInt(1,u.getUserId());
@@ -411,6 +417,7 @@ public void AjouterWinnerDons(String winner,Don d,float x){
         ste.setFloat(4,x);
         ste.setString(5,date.format(formatter));
         ste.executeUpdate();
+      
         System.out.println("\nSucces d'ajout");
     } catch (SQLException ex) {
        System.out.println(ex.getMessage());
@@ -466,6 +473,7 @@ public List<Besoin> afficherObjet(){
 }
 public void affObjet(Label x,Label y , ImageView z) throws SQLException{
    
+
  String sql = "Select montant,description,photo from besoin where categorie='Enchere' LIMIT 1";
  ste = cnx.prepareStatement(sql);
   ResultSet rs = ste.executeQuery();
@@ -482,7 +490,8 @@ public void affObjet(Label x,Label y , ImageView z) throws SQLException{
         catch (SQLException ex) {
             System.out.println("");
     }
-    }
+    
+}
  public void SupprimerObjects(){
        
     try {
@@ -505,6 +514,12 @@ if (rowsDeleted > 0) {
     }
    
 }
+ public void UserOnline(Text nomPrenom , ImageView photoProfil){
+     UserSession us = new UserSession();
+     nomPrenom.setText(us.getActualUserName());
+     photoProfil.setImage(new Image("file:///"+us.getActualUserPhoto()));
+ }
+ 
 }
  
  /*if(Float.parseFloat(participant1.getText()) < Float.parseFloat(participant2.getText()))

@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package Controllers;
+import java.util.Calendar;
+import java.util.Date;
 import Connection.MyConnection;
 import Service.DonationCrud;
 import Service.progressCalculator;
@@ -11,9 +13,14 @@ import Entities.Besoin;
 import Entities.Don;
 
 import Entities.User;
+import Service.MailSend;
 import Service.UserSession;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -38,6 +45,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import animatefx.animation.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -57,6 +67,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Affine;
+import javafx.stage.StageStyle;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
@@ -71,6 +82,7 @@ public ComboBox ComboBesoin ;
 public ComboBox ComboBesoinTransport;
 public ComboBox ComboBesoin2;
     UserSession us = new UserSession();
+    public PreparedStatement ste;
     private HBox TimerPane;
     private AnchorPane pane;
     @FXML
@@ -184,9 +196,24 @@ public ComboBox ComboBesoin2;
     private Label descriptionEnchere;
     @FXML
     private Label montantEnchere;
-    /**
-     * Initializes the controller class.
-     */
+     ObservableList<Besoin> oblist = FXCollections.observableArrayList();
+     ObservableList<Besoin> Transport = FXCollections.observableArrayList();
+    ObservableList<Besoin> Familles = FXCollections.observableArrayList();
+    @FXML
+    private Label labelbesoin11;
+    @FXML
+    private Label labelbesoin111;
+    @FXML
+    private Label labelFamilleObj1;
+    @FXML
+    private Label labelFamilleObj11;
+    @FXML
+    private Text useronlineField;
+    @FXML
+    private ImageView userOnline;
+    @FXML
+    private Button besoinsociete;
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {    
@@ -206,17 +233,18 @@ public ComboBox ComboBesoin2;
        print1.setVisible(false);
        print.setVisible(false);
        panerejoindre.setVisible(true);
+      participer.setVisible(true);
             //new RollIn(photoEnchere).setCycleCount(25).setDelay(Duration.valueOf("500ms")).play();
       DonationCrud dc= new DonationCrud();
+      dc.UserOnline( useronlineField, userOnline);
       
  
      
        /************/
        Timeline timeline1 = new Timeline(new KeyFrame(Duration.seconds(1), ev -> {
-       
-     
            try {
                dc.affObjet(montantEnchere, descriptionEnchere, photoEnchere);
+            
            } catch (SQLException ex) {
                Logger.getLogger(DonsScreenController.class.getName()).log(Level.SEVERE, null, ex);
            }
@@ -228,13 +256,11 @@ public ComboBox ComboBesoin2;
      }
       
        
-     ObservableList<Besoin> oblist = FXCollections.observableArrayList();
-     ObservableList<Besoin> Transport = FXCollections.observableArrayList();
-     ObservableList<Besoin> Familles = FXCollections.observableArrayList();
+     
      
     @FXML
-    private void getmontant(ActionEvent event){
-        if(!montant.getText().isEmpty()){
+    private void getmontant(ActionEvent event) throws Exception{
+        
         LocalDate date = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         
@@ -259,20 +285,8 @@ public ComboBox ComboBesoin2;
             increaseprogress2();
             
             print.setVisible(true);
-        }
-        else {
-         TrayNotification tray = new TrayNotification();
-            AnimationType type = AnimationType.POPUP;
-            tray.setAnimationType(type);
-            String tilte = "ERROR";
-            String message = "Montant invalide";
-            tray.setTitle(tilte);
-            tray.setMessage(message);
-            tray.setNotificationType(NotificationType.ERROR);
-            tray.showAndDismiss(Duration.seconds(3));
-           
-        } 
-            
+            MailSend.sendMail("kaidoro.hh@gmail.com");
+              
     }
     @FXML
     public void FilltextField(){
@@ -512,7 +526,6 @@ public ComboBox ComboBesoin2;
             Logger.getLogger(DonsScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     @FXML
     public void openscene(ActionEvent event) throws IOException{
          Parent part = FXMLLoader.load(getClass().getResource("/Views/Item.fxml"));
@@ -550,7 +563,8 @@ public ComboBox ComboBesoin2;
             FilltextField();
             increaseprogress();
             print1.setVisible(true);
-           // MailSend.sendMail("kaidoro.hh@gmail.com");
+           
+            MailSend.sendMail("kaidoro.hh@gmail.com");
          }
           TrayNotification tray = new TrayNotification();
             AnimationType type = AnimationType.POPUP;
@@ -576,8 +590,7 @@ public ComboBox ComboBesoin2;
 
     @FXML
     private void participerencher(ActionEvent event) throws InterruptedException, SQLException {
-       
-            participer.setVisible(true);
+      
         
         panerejoindre.setVisible(true);
         new Flash(panerejoindre).play();
@@ -585,7 +598,7 @@ public ComboBox ComboBesoin2;
           int amountOfMinutes = Integer.parseInt(minute.getText());
         int amountOfSeconds = Integer.parseInt(second.getText());
         int time = amountOfHours *3600 +  amountOfMinutes * 60 + amountOfSeconds;
-     
+      
         ParticiperEnchere(us);
         
         if(timeline.getStatus() == Status.STOPPED )
@@ -593,15 +606,14 @@ public ComboBox ComboBesoin2;
           finished.setText("Temps restant");    
        DonationCrud dc = new DonationCrud();
    dc.affObjet(montantEnchere, descriptionEnchere, photoEnchere);
+   
      
-         
-         
-        
     }
     private Timeline timeline = new Timeline();
         private void showCountDown(int time) {
+            
        DonationCrud dc = new DonationCrud();
-Don d = new Don();
+       Don d = new Don();
         int nextFrameTime = 0;
 
         for (int i = 0; i <= time; time--) {
@@ -609,7 +621,7 @@ Don d = new Don();
 
             timeline.getKeyFrames().add(new KeyFrame(
                             Duration.millis(nextFrameTime),
-                            action -> {
+                            (ActionEvent action) -> {
                                 //hour.setText(String.format("%02d", finalTime / 3600));
                                 minute.setText(String.format("%02d", (finalTime / 120)));
                                 second.setText(String.format("%02d", (finalTime % 60)));
@@ -618,7 +630,7 @@ Don d = new Don();
               String winner =dc.Whoisthewinner(x, montantParticipant1, montantParticipant2, montantParticipant3, telParticipant1, telParticipant2, telParticipant3);
               dc.gagne(winner);
               dc.AjouterWinnerDons(winner,d,x);
-                   NomParticipant1.setText("Pas de participant");
+          NomParticipant1.setText("Pas de participant");
           NomParticipant2.setText("Pas de participant");
           NomParticipant3.setText("Pas de participant");
           telParticipant1.setText("Pas de participant");
@@ -627,10 +639,9 @@ Don d = new Don();
           montantParticipant1.setText("Pas de participant");
           montantParticipant2.setText("Pas de participant");
           montantParticipant3.setText("Pas de participant");
-         /* montantEnchere.setText(String.valueOf("0"));
-          photoEnchere.setImage(new Image(""));
-          descriptionEnchere.setText("");*/
-        
+          montantEnchere.setText("N/A");
+          descriptionEnchere.setText(" ");
+          photoEnchere.setImage(null);
          dc.SupprimerObjects();
          
          }
@@ -650,20 +661,9 @@ Don d = new Don();
      
              
     }
-        /*public void eventOver(){
-            DonationCrud dc = new DonationCrud();
-            if(dc.VerifyEventOver(finished)){
-             float x =dc.montantGagnant(montantParticipant1, montantParticipant2, montantParticipant3);
-              String winner =dc.Whoisthewinner(x, montantParticipant1, montantParticipant2, montantParticipant3, telParticipant1, telParticipant2, telParticipant3);
-              dc.gagne(winner);
-            }
-        }*/
-     
-  
-          
- 
+      
     @FXML
-    private void getmontant2(ActionEvent event) {
+    private void getmontant2(ActionEvent event) throws Exception {
         if(!montantfamille.getText().isEmpty()){
          LocalDate date = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -672,8 +672,7 @@ Don d = new Don();
         Don d = new Don();    
         User u =new User();
             float montantdonne = Float.parseFloat(montantfamille.getText());
-            d.setDonorId(1);
-            d.setEventId(4);
+            d.setDonorId(us.getActualUserId());
             d.setCategorie("Familles");
             d.setDonationDate(date.format(formatter));
             d.setMontant(montantdonne);
@@ -686,7 +685,9 @@ Don d = new Don();
             dc.ModifierBesoin(x,y);
             FilltextField();
             increaseprogress();
-            print2.setVisible(true);}
+            print2.setVisible(true);
+            MailSend.sendMail("kaidoro.hh@gmail.com");
+        }
         else {
              TrayNotification tray = new TrayNotification();
             AnimationType type = AnimationType.POPUP;
@@ -745,7 +746,6 @@ Don d = new Don();
         Logger.getLogger(DonsScreenController.class.getName()).log(Level.SEVERE, null, ex);
     }
     }
-
     @FXML
     private void FilltextFieldFam() {
         try {
@@ -775,8 +775,9 @@ Don d = new Don();
     }
     }
     public void ParticiperEnchere(UserSession us){
-        if(!montantparticipant.getText().isEmpty() && !motdepassparticipant.getText().isEmpty()){
+        if(!montantparticipant.getText().isEmpty() || !motdepassparticipant.getText().isEmpty()){
         DonationCrud dc = new DonationCrud();
+        
      float montantpartic = Float.parseFloat(montantparticipant.getText());
      String motDePasse = motdepassparticipant.getText();
      if(dc.passIsValid(us,motDePasse)==true){
@@ -840,16 +841,20 @@ Don d = new Don();
         Scene scene = new Scene(part);
         stage.setScene(scene);
         stage.show();
+        
     }
     
-       public PreparedStatement ste;
+       
 
     @FXML
-    private void home(ActionEvent event) {
+    private void home(ActionEvent event) throws IOException {
+       FXMLLoader.load(getClass().getResource("/Views/HomeScreenController.fxml"));
+  
     }
 
     @FXML
-    private void logout(ActionEvent event) {
+    private void logout(ActionEvent event) throws IOException {
+        FXMLLoader.load(getClass().getResource("/Views/Main.fxml"));
     }
        
    

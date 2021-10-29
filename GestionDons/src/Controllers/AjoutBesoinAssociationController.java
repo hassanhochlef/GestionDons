@@ -22,11 +22,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 
 /**
  * FXML Controller class
@@ -53,13 +60,14 @@ public class AjoutBesoinAssociationController implements Initializable {
     
 DonationCrud dc = new DonationCrud();
 String path;
+    @FXML
+    private Button close;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
-    }    
+         }    
 
     @FXML
     private void AjouterBesoin(ActionEvent event) throws SQLException {
@@ -71,6 +79,9 @@ String path;
         b.setQuantite(Integer.parseInt(quantiteBesoin.getText()));
        
         dc.AjouterBesoinD(b);
+         Stage stage = (Stage) close.getScene().getWindow();
+        stage.close();
+       
         
     }
 
@@ -103,27 +114,10 @@ String path;
         b.setDescription(descriptionObjet.getText());
         b.setMontant(Float.parseFloat(montantObjet.getText()));
         b.setPhoto(path);
-         
         dc.AjouterBesoinD(b);
-      
-    
-        
-           
-        
-        
+        Stage stage = (Stage) close.getScene().getWindow();
+        stage.close();
        
     }
-     public Connection cnx;
-        public PreparedStatement ste;
-    private int isEnchereActive() throws SQLException{
-        String sql = "select count(*) from besoin where categorie='Enchere'";
-        PreparedStatement statement = cnx.prepareStatement(sql);
-        ResultSet rs;
-         rs = statement.executeQuery();
-        int x=0;
-       while(rs.next()){
-             x = rs.getInt(1);
-            }
-   return x;
-    }
+    
 }

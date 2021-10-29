@@ -36,14 +36,12 @@ public class MailSend {
     }
     private static Message prepareMessage(Session session,String myAccountEmail,String recepient){
         try{
-            Don d = new Don(1,"23-10-2021",500,"Hopiteaux");
-            float x = d.getMontant();
-            
+       
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(myAccountEmail));
             message.setRecipient(Message.RecipientType.TO,new InternetAddress(recepient));
-            message.setSubject("Merci pour votre don");
-            message.setText("Merci pour votre don de montant"+x+"TND");
+            message.setSubject("HelpLineCharity");
+            message.setText("Merci pour votre don");
             return message;
         }catch (Exception ex){
            

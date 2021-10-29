@@ -6,6 +6,7 @@
 
 package Controllers;
 import Service.DonationCrud;
+import Service.UserSession;
 import javafx.print.*;
 
 import java.net.URL;
@@ -19,15 +20,8 @@ import java.awt.image.BufferedImage;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
-import java.io.File;
-import java.io.FileNotFoundException;
 import javafx.scene.Node;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 import javafx.fxml.FXMLLoader;
 import javafx.print.PageLayout;
 import javafx.print.PageOrientation;
@@ -59,83 +53,30 @@ public class ItemController implements Initializable {
     private Label categ;
     @FXML
     private Label anne;
-    @FXML
-    private Button btnBack;
-    
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        List<String> dataList = getDataList();
-        LocalDate date = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        date.format(formatter);
-        int i=0;
-        for (String item : dataList){
-            if (i==0){
-                nom.setText(item);
-            }
-            
-            if (i==1){
-                categ.setText(item);
-            }
-            else if (i==2){
-                tel.setText(item);
-            }
-            else if (i==3){
-                montant.setText(item);
-            }
-            i++;
-        }
-        anne.setText(date.toString());
-        
-
+        DonationCrud dc = new DonationCrud();
+        UserSession us = new UserSession();
+        dc.afficherrecu(us, anne,  montant,  categ ,  nom,  tel );
     }    
 @FXML
     private void printimage(ActionEvent event) throws IOException  {
         
-        PrinterJob job = PrinterJob.createPrinterJob();
+      PrinterJob job = PrinterJob.createPrinterJob();
      
-        Parent root = FXMLLoader.load(getClass().getResource("Item.fxml"));
+ Parent root = FXMLLoader.load(getClass().getResource("Item.fxml"));
   
 
-        if(job != null ){
-            boolean success = job.printPage(root);
-
-                  PrinterJob.JobStatus x = job.getJobStatus();
-                  System.out.println(x);
-            if(success){
-                job.endJob();
-                }
-
-            }
+if(job != null ){
+    boolean success = job.printPage(root);
+   
+          PrinterJob.JobStatus x = job.getJobStatus();
+          System.out.println(x);
+    if(success){
+        job.endJob();
     }
-
-    @FXML
-    private void btnBackAction(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/views/EventsMain.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.centerOnScreen();
-        stage.show();
-    }
-    
-    public List<String> getDataList(){
-        List<String> dataRecu = new ArrayList<>();
-        try{
-            Scanner scanner = new Scanner(new File("C:\\Users\\SeifD\\Desktop\\GestionDons\\GestionDons\\src\\recu\\recucurrentSessionRecuData.txt"));
-            while (scanner.hasNextLine()) {
-                dataRecu.add(scanner.nextLine());
-            }
-            
-        }catch(FileNotFoundException e){
-            System.out.println("Error reading file");
-        }
-        
-        return dataRecu;
-    }
+   
 }
+    }}
 

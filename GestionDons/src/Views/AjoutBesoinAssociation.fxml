@@ -7,13 +7,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-radius: 0;" styleClass="besoin" stylesheets="@../css/style1.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AjoutBesoinAssociationController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-radius: 0; -fx-background-color: lightblue;" styleClass="besoin" stylesheets="@../css/style1.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AjoutBesoinAssociationController">
    <children>
-      <Button layoutX="451.0" layoutY="93.0" mnemonicParsing="false" onAction="#AjouterBesoin" style="-fx-background-color: grey;" styleClass="participateBtn" stylesheets="@../css/styleparticipation.css" text="Ajouter besoin" />
+      <Button fx:id="close" layoutX="451.0" layoutY="93.0" mnemonicParsing="false" onAction="#AjouterBesoin" style="-fx-background-color: white; -fx-text-fill: black;" styleClass="participateBtn" stylesheets="@../css/styleparticipation.css" text="Ajouter besoin" textAlignment="CENTER" textOverrun="LEADING_ELLIPSIS" />
       <ImageView fx:id="photoObjet" fitHeight="93.0" fitWidth="142.0" layoutX="229.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="250.0" layoutY="361.0" mnemonicParsing="false" onAction="#ImporterImage" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: grey;" styleClass="participateBtn" stylesheets="@../css/styleparticipation.css" text="Photo d'objet" />
-      <Button layoutX="470.0" layoutY="274.0" mnemonicParsing="false" onAction="#AjouterObjet" style="-fx-background-color: grey;" styleClass="participateBtn" stylesheets="@../css/styleparticipation.css" text="Ajouter objet" />
-      <Separator layoutY="191.0" prefHeight="5.0" prefWidth="600.0" style="-fx-background-color: lightgrey;" />
+      <Button layoutX="250.0" layoutY="361.0" mnemonicParsing="false" onAction="#ImporterImage" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: white; -fx-text-fill: black;" styleClass="participateBtn" stylesheets="@../css/styleparticipation.css" text="Photo d'objet" />
+      <Button fx:id="close" layoutX="470.0" layoutY="274.0" mnemonicParsing="false" onAction="#AjouterObjet" style="-fx-background-color: white; -fx-text-fill: black;" styleClass="participateBtn" stylesheets="@../css/styleparticipation.css" text="Ajouter objet" />
+      <Separator layoutY="183.0" prefHeight="5.0" prefWidth="600.0" />
       <Text layoutX="5.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter un besoin :" />
       <Text layoutX="5.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter un objet :" />
       <TextField fx:id="categorieBesoin" layoutX="41.0" layoutY="52.0" promptText="Categorie besoin" />
