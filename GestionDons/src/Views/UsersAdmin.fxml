@@ -61,12 +61,17 @@
                   </TableView>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                      <children>
-                        <TextField fx:id="searchInput" prefHeight="31.0" prefWidth="269.0">
+                        <Button mnemonicParsing="false" onAction="#export_excel" prefHeight="31.0" prefWidth="210.0" style="-fx-background-color: green;" text="Export en Excel" textFill="WHITE">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="TABLE" size="20" />
+                           </graphic></Button>
+                        <TextField fx:id="searchInput" prefHeight="31.0" prefWidth="227.0" promptText="Rechercher">
                            <HBox.margin>
-                              <Insets left="300.0" />
+                              <Insets left="90.0" />
                            </HBox.margin>
                         </TextField>
-                        <Button fx:id="deleteuser" mnemonicParsing="false" onAction="#deleteuserAction" prefHeight="31.0" prefWidth="167.0" style="-fx-background-color: red;" text="Supprimer Compte" textFill="#f8f8f8">
+                        <FontAwesomeIconView fill="#04ff00" glyphName="SEARCH" size="20" />
+                        <Button fx:id="deleteuser" mnemonicParsing="false" onAction="#deleteuserAction" prefHeight="31.0" prefWidth="184.0" style="-fx-background-color: red;" text="Supprimer Compte" textFill="#f8f8f8">
                            <HBox.margin>
                               <Insets left="100.0" />
                            </HBox.margin>

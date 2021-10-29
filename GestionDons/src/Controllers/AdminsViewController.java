@@ -9,6 +9,7 @@ import Entities.User;
 import Service.UserService;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Set;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -23,6 +24,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
+import org.controlsfx.control.textfield.TextFields;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
@@ -55,18 +57,37 @@ public class AdminsViewController implements Initializable {
     @FXML
     private Button AddAdmin;
     @FXML
-    private Button ModifyAdmin;
-    @FXML
     private TextField searchInput;
 
     
     private ObservableList<User> dataList;
+    @FXML
+    private Button UpdateAdmin;
+    @FXML
+    private TextField inputName;
+    @FXML
+    private TextField inputCity;
+    @FXML
+    private TextField inputGouvernorat;
+    @FXML
+    private TextField inputPhone;
+    @FXML
+    private TextField inputmail;
+    @FXML
+    private TextField inputRole;
+    @FXML
+    private TextField inputpassword;
+    @FXML
+    private Button cofirmupdate;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         filterTable();
+         UserService us = new UserService();
+ Set<String> suggets = us.getSuggests();
+       TextFields.bindAutoCompletion(searchInput, suggets);
     }    
 
     @FXML
@@ -144,5 +165,114 @@ public class AdminsViewController implements Initializable {
                 tableAdmin.setItems(sortedData);
     
     }
+
+    @FXML
+    private void AddAdminAction(ActionEvent event) {
+          UserService us = new UserService();
+          String name = inputName.getText();
+                    String password = inputpassword.getText();
+                    String phone = inputPhone.getText();
+                    String mail = inputmail.getText();
+                    String city = inputCity.getText();
+                    String role = inputRole.getText();
+                    String gouvernorat = inputGouvernorat.getText();
+         if (inputName.getText().isEmpty() || inputPhone.getText().isEmpty()|| inputpassword.getText().isEmpty() || inputmail.getText().isEmpty()|| inputCity.getText().isEmpty()||  inputGouvernorat.getText().isEmpty())
+        {
+            new Alert(Alert.AlertType.ERROR, "Veuillez verifier les champs", new ButtonType[]{ButtonType.OK}).show();
+               }
+          else if (! inputRole.getText() .equalsIgnoreCase("Admin")) {
+               new Alert(Alert.AlertType.ERROR, "Le role Admin est Obligatoire !", new ButtonType[]{ButtonType.OK}).show();
+        }
+          else if (!mail.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" )) {
+               new Alert(Alert.AlertType.ERROR, "Merci de saisir une adresse mail valide.", new ButtonType[]{ButtonType.OK}).show();
+           }
+            
+        else {         
+                 
+                    User u = new User();
+            u.setName(name);
+            u.setPassword(password);
+            u.setPhone(phone);
+            u.setMail(mail);
+            u.setCity(city);
+            u.setRole(role);
+            u.setGouvernorat(gouvernorat);
+            us.addAdmin(u);
+             filterTable();
+                     
+            TrayNotification tray = new TrayNotification();
+            AnimationType type = AnimationType.POPUP;
+            tray.setAnimationType(type);
+            String tilte = "Ajout Admin avec succés";
+            String message = "Un nouveau Admin est ajouté !";
+            tray.setTitle(tilte);
+            tray.setMessage(message);
+            tray.setNotificationType(NotificationType.SUCCESS);
+            tray.showAndDismiss(Duration.seconds(3));
+          }
+        
+    }
+
+    @FXML
+    private void UpdateAdminAction(ActionEvent event) {
+        
+        if(tableAdmin.getSelectionModel().getSelectedItem() == null) {
+            new Alert(Alert.AlertType.WARNING, "Veuillez selectionner un administrateur à modifier de la table", new ButtonType[]{ButtonType.OK}).show();         
+        }
+        else{
+            User u = tableAdmin.getSelectionModel().getSelectedItem();
+            inputName.setText(u.getName());
+            inputCity.setText(u.getCity());
+            inputGouvernorat.setText(u.getGouvernorat());
+            inputPhone.setText(u.getPhone());
+            inputmail.setText(u.getMail());
+            inputRole.setText(u.getRole());
+            AddAdmin.setDisable(true);
+            deleteAdmin.setDisable(true);
+            tableAdmin.setDisable(true);
+            UpdateAdmin.setDisable(true);
+            cofirmupdate.setVisible(true);
+            
+            
+       
+    }
+    }
+
+    @FXML
+    private void cofirmupdateAction(ActionEvent event) {
+          UserService us = new UserService();
+             User u1 = new User();
+       
+         String name = inputName.getText();
+                    String password = inputpassword.getText();
+                    String phone = inputPhone.getText();
+                    String mail = inputmail.getText();
+                    String city = inputCity.getText();
+                    String role = inputRole.getText();
+                    String gouvernorat = inputGouvernorat.getText();
+          if (! inputRole.getText() .equalsIgnoreCase("Admin")) {
+               new Alert(Alert.AlertType.ERROR, "Le role Admin est Obligatoire !", new ButtonType[]{ButtonType.OK}).show();
+        }
+          else if (!mail.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" )) {
+               new Alert(Alert.AlertType.ERROR, "Merci de saisir une adresse mail valide.", new ButtonType[]{ButtonType.OK}).show();
+           }
+            
+        else {         
+                  u1.setName(name);
+                  u1.setPassword(password);
+                  u1.setCity(city);
+                  u1.setGouvernorat(gouvernorat);
+                   u1.setPhone(phone);
+                    u1.setRole(role);
+us.updateAdmin(mail, u1);
+AddAdmin.setDisable(false);
+        deleteAdmin.setDisable(false);
+        tableAdmin.setDisable(false);
+        filterTable();
+    }
     
+    
+    }
+    
+
 }
