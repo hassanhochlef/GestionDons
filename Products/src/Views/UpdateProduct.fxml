@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="517.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UpdateProductController">
+   <children>
+      <ImageView fitHeight="173.0" fitWidth="150.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@edit.jpg" />
+         </image>
+      </ImageView>
+      <TextField fx:id="txtidDuP" layoutX="198.0" layoutY="81.0" />
+      <TextField fx:id="txtnameuP" layoutX="198.0" layoutY="144.0" />
+      <TextField fx:id="txtqntuP" layoutX="198.0" layoutY="217.0" />
+      <TextField fx:id="txtprixuP" layoutX="198.0" layoutY="294.0" />
+      <Label layoutX="198.0" layoutY="64.0" text="Id Donneur" />
+      <Label layoutX="198.0" layoutY="129.0" text="Nom" />
+      <Label layoutX="198.0" layoutY="200.0" text="Quantité" />
+      <Label layoutX="198.0" layoutY="277.0" text="Prix Approximative" />
+      <Button fx:id="btnsaveUP" layoutX="211.0" layoutY="361.0" mnemonicParsing="false" onAction="#SaveUpdate" text="Valider Modification" />
+   </children>
+</AnchorPane>

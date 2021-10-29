@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="412.0" prefWidth="525.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HomeProductsController">
+   <children>
+      <ImageView fitHeight="412.0" fitWidth="527.0" layoutX="-1.0" pickOnBounds="true" smooth="false">
+         <image>
+            <Image url="@vert.jpg" />
+         </image>
+      </ImageView>
+      <TextField fx:id="txtiddonor" layoutX="126.0" layoutY="80.0" />
+      <TextField fx:id="txtnom" layoutX="122.0" layoutY="161.0" />
+      <TextField fx:id="txtqualite" layoutX="122.0" layoutY="241.0" />
+      <TextField fx:id="txtprx" layoutX="122.0" layoutY="323.0" />
+      <Button fx:id="valideradd" contentDisplay="BOTTOM" layoutX="347.0" layoutY="187.0" mnemonicParsing="false" onAction="#SaveAdd" text="Valider Ajout" textAlignment="CENTER" textOverrun="CLIP">
+         <opaqueInsets>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </opaqueInsets>
+         <cursor>
+            <Cursor fx:constant="NE_RESIZE" />
+         </cursor>
+      </Button>
+      <Label layoutX="127.0" layoutY="62.0" text="ID Donneur" />
+      <Label layoutX="122.0" layoutY="143.0" text="Nom Produit" />
+      <Label layoutX="121.0" layoutY="223.0" text="Quantité" />
+      <Label layoutX="122.0" layoutY="305.0" text="Prix Approximative" />
+   </children>
+</AnchorPane>

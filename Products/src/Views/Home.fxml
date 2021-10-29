@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HomeController">
+   <children>
+      <TableView fx:id="showT" layoutX="216.0" layoutY="49.0" onMouseClicked="#clickTreeV" prefHeight="303.0" prefWidth="327.0">
+        <columns>
+          <TableColumn fx:id="colidD" prefWidth="75.0" text="Id Doneur" />
+          <TableColumn fx:id="colNOM" prefWidth="62.0" text="Nom" />
+            <TableColumn fx:id="colqnt" prefWidth="73.0" text="Quantité" />
+            <TableColumn fx:id="colprix" prefWidth="116.0" text="Prix Approximative" />
+        </columns>
+      </TableView>
+      <ImageView fitHeight="144.0" fitWidth="130.0" pickOnBounds="true">
+         <image>
+            <Image url="@coeur.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnajoutH" layoutX="24.0" layoutY="168.0" mnemonicParsing="false" onAction="#AJOUTER" prefHeight="32.0" prefWidth="85.0" style="-fx-background-color: green;" text="Ajouter" />
+      <Button fx:id="btnmodH" layoutX="24.0" layoutY="226.0" mnemonicParsing="false" onAction="#MODIFIER" prefHeight="32.0" prefWidth="85.0" style="-fx-background-color: green;" text="modifier" />
+      <Button fx:id="btnsupH" layoutX="24.0" layoutY="284.0" mnemonicParsing="false" onAction="#SUPPRIMER" prefHeight="32.0" prefWidth="85.0" style="-fx-background-color: green;" text="Supprimer" />
+      <Button fx:id="btndemandeH" layoutX="23.0" layoutY="340.0" mnemonicParsing="false" onAction="#DEMANDE" prefHeight="32.0" prefWidth="85.0" style="-fx-background-color: green;" text="Demande " />
+      <Label layoutX="20.0" layoutY="135.0" text="Helpline Charity" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" underline="true" />
+   </children>
+</AnchorPane>
