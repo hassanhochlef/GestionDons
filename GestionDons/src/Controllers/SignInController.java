@@ -95,7 +95,7 @@ public class SignInController implements Initializable {
         if (us.verifyUser(mail, password)){
             User u = us.getUserConnected(mail);
             us.addUserSession(u);
-            Parent root = FXMLLoader.load(getClass().getResource("/Views/EventsMain.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/Views/HomeScreen.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
