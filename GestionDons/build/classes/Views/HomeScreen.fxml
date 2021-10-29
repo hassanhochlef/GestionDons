@@ -165,7 +165,7 @@
                                           <Font size="17.0" />
                                        </font>
                                     </Label>
-                                    <Label text="Points Acquis :  1200 " textFill="WHITE">
+                                    <Label fx:id="labelPts" prefHeight="26.0" prefWidth="225.0" text="Points Acquis :   " textFill="WHITE">
                                        <font>
                                           <Font size="17.0" />
                                        </font>

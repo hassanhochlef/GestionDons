@@ -12,6 +12,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -102,6 +106,77 @@ import java.sql.SQLException;
         }
         
     }
+         
+           public void deleteUser(int userId){
+        
+            //String req = "DELETE FROM user WHERE (userId="+userId+")";
+            String req = "DELETE FROM user WHERE user.userId="+userId;
+            try {
+            ste = cnx.prepareStatement(req);
+            ste.executeUpdate();
+            System.out.println("User deleted");
+        } catch (SQLException ex) {
+                System.out.println("Erreur delete user");
+        }
+    }
+           
+           
+           
+           public ObservableList<User> retrieveallUser(){
+    ObservableList<User> users = FXCollections.observableArrayList();
+   
+        try {
+             String sql = "select name, city, gouvernorat, phone, mail, role,montant_donne from user";
+     
+             ste = cnx.prepareStatement(sql);
+             ResultSet rs = ste.executeQuery();
+             while (rs.next()) {   
+                 User u = new User(); 
+                 u.setName(rs.getString("name"));
+                 u.setCity(rs.getString("city"));
+                 u.setGouvernorat(rs.getString("gouvernorat"));
+                  u.setPhone(rs.getString("phone"));
+                 u.setMail(rs.getString("mail"));
+                 u.setRole(rs.getString("role"));
+                  u.setMontant_donne(rs.getFloat("montant_donne"));
+                 users.add(u);
+               
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    
+    return  users;
+    
+}
+           public ObservableList<User> retrieveallAdmin(){
+    ObservableList<User> admins = FXCollections.observableArrayList();
+   
+        try {
+             String sql = "select name, city, gouvernorat, phone, mail, role,montant_donne from user where role='admin' ";
+     
+             ste = cnx.prepareStatement(sql);
+             ResultSet rs = ste.executeQuery();
+             while (rs.next()) {   
+                 User u = new User(); 
+                 u.setName(rs.getString("name"));
+                 u.setCity(rs.getString("city"));
+                 u.setGouvernorat(rs.getString("gouvernorat"));
+                  u.setPhone(rs.getString("phone"));
+                 u.setMail(rs.getString("mail"));
+                 u.setRole(rs.getString("role"));
+                  u.setMontant_donne(rs.getFloat("montant_donne"));
+                 admins.add(u);
+               
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    
+    return  admins;
+    
+}
+           
          public String getPassword1(String mail) throws SQLException{
               User u = new User();
              System.out.println(mail);
@@ -122,6 +197,49 @@ import java.sql.SQLException;
             catch (SQLException ex){}
             return u.getPassword();
          }
+         
+         
+          public Set<String> getSuggests(){
+        
+        Set<String> names = new HashSet<>();
+        Set<String>  mails= new HashSet<>();
+        Set<String> Suggests = new HashSet<>();
+        try{
+            String req = "select name from user";
+            ste = cnx.prepareStatement(req);
+            ResultSet rs = ste.executeQuery();
+            while (rs.next()){
+                String name;
+                name = rs.getString("name");              
+                names.add(name);               
+            }      
+        }
+        catch(SQLException ex){
+            System.out.println("Erreur Suggestion mail");
+        }
+        
+        
+        try{
+            String req = "select mail from user";
+            ste = cnx.prepareStatement(req);
+            ResultSet rs = ste.executeQuery();
+            while (rs.next()){
+                String mail;
+                mail = rs.getString("mail");              
+                mails.add(mail);               
+            }      
+        }
+        catch(SQLException ex){
+            System.out.println("Erreur Suggestion Noms");
+        }
+        
+        Suggests.addAll(mails);
+        Suggests.addAll(names);
+        
+        return Suggests;   
+    }
+          
+          
     }
 
 
