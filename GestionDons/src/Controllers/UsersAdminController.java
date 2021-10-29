@@ -22,6 +22,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import Service.UserService;
 import Connection.MyConnection;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import java.sql.PreparedStatement;
 import java.util.Set;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -32,6 +36,9 @@ import javafx.scene.control.ButtonType;
 import org.controlsfx.control.textfield.TextFields;
 import javafx.scene.control.TextField;
 import javafx.util.Duration;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import tray.notification.TrayNotification;
@@ -70,15 +77,20 @@ public class UsersAdminController implements Initializable {
 
     @FXML
     private Button deleteuser;
-   
-
+private Connection cnx;
+        private PreparedStatement ste;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //showAllUsers();
-        filterTable();
+        
+       filterTable();
+           UserService us = new UserService();
+ Set<String> suggets = us.getSuggests();
+       TextFields.bindAutoCompletion(searchInput, suggets);
+        
         
         
        // TextFields.bindAutoCompletion(searchInput, suggets);
@@ -175,11 +187,23 @@ public class UsersAdminController implements Initializable {
    
     }
 
+    @FXML
+    private void export_excel(ActionEvent event) throws SQLException  {
+      UserService us = new UserService();
+        try {
+            us.export();
+        } catch (IOException ex) {
+            Logger.getLogger(UsersAdminController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+      
+    }
+
    
     
     
     
-    }
+    
         
         
     

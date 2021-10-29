@@ -7,7 +7,9 @@ package Service;
 
 
 import Connection.MyConnection;
+import Controllers.UsersAdminController;
 import Entities.User;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,12 +19,18 @@ import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-/**
- *
- * @author LENOVO
- */
 
-    public class UserService {
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.scene.control.Alert;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class UserService {
       private Connection cnx;
         private PreparedStatement ste;
 
@@ -46,6 +54,26 @@ import javafx.collections.ObservableList;
             ste.setString(6, u.getRole());
             ste.executeUpdate();
             System.out.println("User added");
+            
+        } catch (SQLException ex) {
+            System.out.println("error add");
+            
+        }
+        
+    }
+        public void addAdmin(User u){
+        String req ="INSERT INTO user (name,password,city,gouvernorat,phone,mail,role)"+"values (?,?,?,?,?,?,?)";
+        try {
+            ste = cnx.prepareStatement(req);
+            ste.setString(1, u.getName());
+            ste.setString(2, u.getPassword());
+            ste.setString(3, u.getCity());
+           ste.setString(4, u.getGouvernorat());
+            ste.setString(5, u.getPhone());
+            ste.setString(6, u.getMail());
+            ste.setString(7, u.getRole());
+            ste.executeUpdate();
+            System.out.println("Admin added");
             
         } catch (SQLException ex) {
             System.out.println("error add");
@@ -101,7 +129,7 @@ import javafx.collections.ObservableList;
             
         }
         catch(SQLException ex){
-            System.out.println("Erreur update event");
+            System.out.println("Erreur update user");
             
         }
         
@@ -199,7 +227,7 @@ import javafx.collections.ObservableList;
          }
          
          
-          public Set<String> getSuggests(){
+          public  Set<String> getSuggests(){
         
         Set<String> names = new HashSet<>();
         Set<String>  mails= new HashSet<>();
@@ -240,7 +268,82 @@ import javafx.collections.ObservableList;
     }
           
           
+      public void export() throws SQLException, IOException{
+            try {
+            UserService us =new UserService();
+            String sql = "select name, city, gouvernorat, phone, mail, role, montant_donne from user";
+            
+            ste = cnx.prepareStatement(sql);
+            ResultSet rs = ste.executeQuery();
+            XSSFWorkbook wb =new XSSFWorkbook();
+            XSSFSheet sheet =wb.createSheet();
+            XSSFRow header =sheet.createRow(0);
+            header.createCell(0).setCellValue("name");
+            header.createCell(1).setCellValue("city");
+            header.createCell(2).setCellValue("gouvernorat");
+            header.createCell(3).setCellValue("phone");
+            header.createCell(4).setCellValue("mail");
+             header.createCell(5).setCellValue("role");
+            header.createCell(6).setCellValue("montant_donne");
+            
+            int index=1;
+            while(rs.next()){
+                XSSFRow row =sheet.createRow(index);
+                
+                row.createCell(0).setCellValue(rs.getString("name"));
+                row.createCell(1).setCellValue(rs.getString("city"));
+                row.createCell(2).setCellValue(rs.getString("gouvernorat"));
+                row.createCell(3).setCellValue(rs.getString("phone"));
+                row.createCell(4).setCellValue(rs.getString("mail"));
+                 header.createCell(5).setCellValue("role");
+                row.createCell(6).setCellValue(rs.getString("montant_donne"));
+                index++;
+            }
+            
+            FileOutputStream fileOut= new FileOutputStream("UsersDetails1.xlsx");
+            wb.write(fileOut);
+            fileOut.close();
+            
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText("Votre fichier est exporté avec succés");
+            alert.showAndWait();
+            ste.close();
+            rs.close();
+        } catch (IOException ex) {
+            Logger.getLogger(UsersAdminController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+          
+
     }
+      
+      
+      public void updateAdmin(String mail, User user1){
+        
+        //String req = "UPDATE user SET WHERE user.userId="+userId;
+        String req = "UPDATE user SET name=?,password=?,city=?,gouvernorat=?,phone=?,role=?  WHERE user.mail=" + mail;
+        
+        try{
+            ste = cnx.prepareStatement(req);
+            ste.setString(1, user1.getName());
+            ste.setString(2, user1.getPassword());
+            ste.setString(3, user1.getCity());
+            ste.setString(4, user1.getGouvernorat());
+            ste.setString(5, user1.getPhone());
+            ste.setString(6, user1.getRole());
+            ste.executeUpdate();
+            System.out.println("Admin updated");
+            
+        }
+        catch(SQLException ex){
+            System.out.println("Erreur update Admin");
+            
+        }
+        
+    }
+    }
+    
 
 
 

@@ -18,7 +18,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AdminsViewController">
    <children>
-      <Pane layoutX="12.0" layoutY="89.0" prefHeight="811.0" prefWidth="939.0">
+      <Pane layoutX="6.0" layoutY="89.0" prefHeight="811.0" prefWidth="939.0">
          <children>
             <Pane layoutY="-11.0" prefHeight="131.0" prefWidth="870.0" style="-fx-background-color: #C70039;">
                <children>
@@ -46,8 +46,8 @@
                <children>
                   <TableView fx:id="tableAdmin" prefHeight="452.0" prefWidth="858.0" GridPane.rowIndex="1">
                      <columns>
-                        <TableColumn fx:id="col_name" prefWidth="129.0" text="Name" />
-                        <TableColumn fx:id="col_city" prefWidth="94.0" text="City" />
+                        <TableColumn fx:id="col_name" prefWidth="129.0" text="Nom" />
+                        <TableColumn fx:id="col_city" prefWidth="94.0" text="Ville" />
                         <TableColumn fx:id="col_gouvernorat" prefWidth="100.0" text="Gouvernorat" />
                         <TableColumn fx:id="col_phone" prefWidth="92.0" text="Phone" />
                         <TableColumn fx:id="col_mail" prefWidth="217.0" text="Mail" />
@@ -63,33 +63,49 @@
                      <children>
                         <Button fx:id="deleteAdmin" mnemonicParsing="false" onAction="#deleteuserAction" prefHeight="31.0" prefWidth="167.0" style="-fx-background-color: red;" text="Supprimer Admin" textFill="#f8f8f8">
                            <HBox.margin>
-                              <Insets left="100.0" />
+                              <Insets left="40.0" />
                            </HBox.margin>
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="TRASH" size="20" />
                            </graphic>
                         </Button>
-                        <Button fx:id="AddAdmin" layoutX="110.0" layoutY="17.0" mnemonicParsing="false" onAction="#deleteuserAction" prefHeight="31.0" prefWidth="167.0" style="-fx-background-color: Green;" text="Ajouter Admin" textFill="#f8f8f8">
+                        <Button fx:id="AddAdmin" layoutX="110.0" layoutY="17.0" mnemonicParsing="false" onAction="#AddAdminAction" prefHeight="31.0" prefWidth="167.0" style="-fx-background-color: Green;" text="Ajouter Admin" textFill="#f8f8f8">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="PLUS" size="20" />
                            </graphic>
                            <HBox.margin>
-                              <Insets left="90.0" />
+                              <Insets left="30.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="ModifyAdmin" layoutX="110.0" layoutY="17.0" mnemonicParsing="false" onAction="#deleteuserAction" prefHeight="31.0" prefWidth="167.0" style="-fx-background-color: Orange;" text="Modifier Admin" textFill="#f8f8f8">
+                        <Button fx:id="UpdateAdmin" layoutX="110.0" layoutY="17.0" mnemonicParsing="false" onAction="#UpdateAdminAction" prefHeight="31.0" prefWidth="167.0" style="-fx-background-color: Orange;" text="Modifier Admin" textFill="#f8f8f8">
                            <graphic>
                               <FontAwesomeIconView fill="WHITE" glyphName="WRENCH" size="20" />
                            </graphic>
                            <HBox.margin>
-                              <Insets left="70.0" />
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="cofirmupdate" layoutX="624.0" layoutY="17.0" mnemonicParsing="false" onAction="#cofirmupdateAction" prefHeight="31.0" prefWidth="167.0" style="-fx-background-color: blue;" text="Confirmer modif" textFill="#f8f8f8">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="WRENCH" size="20" />
+                           </graphic>
+                           <HBox.margin>
+                              <Insets left="30.0" />
                            </HBox.margin>
                         </Button>
                      </children>
                   </HBox>
                </children>
             </GridPane>
-            <TextField fx:id="searchInput" layoutX="321.0" layoutY="220.0" prefHeight="31.0" prefWidth="269.0" />
+            <TextField fx:id="searchInput" layoutX="317.0" layoutY="243.0" prefHeight="31.0" prefWidth="269.0" promptText="Rechercher" />
+            <TextField fx:id="inputName" layoutX="14.0" layoutY="156.0" prefHeight="31.0" prefWidth="114.0" promptText="Nom" />
+            <TextField fx:id="inputCity" layoutX="139.0" layoutY="156.0" prefHeight="31.0" prefWidth="80.0" promptText="Villle" />
+            <TextField fx:id="inputGouvernorat" layoutX="227.0" layoutY="156.0" prefHeight="31.0" prefWidth="106.0" promptText="Gouvernorat" />
+            <TextField fx:id="inputPhone" layoutX="347.0" layoutY="156.0" prefHeight="31.0" prefWidth="96.0" promptText="Telephonne" />
+            <TextField fx:id="inputmail" layoutX="452.0" layoutY="156.0" prefHeight="31.0" prefWidth="226.0" promptText="E-mail" />
+            <TextField fx:id="inputRole" layoutX="702.0" layoutY="156.0" prefHeight="31.0" prefWidth="142.0" promptText="Role" />
+            <FontAwesomeIconView fill="#00ff0a" glyphName="SEARCH" layoutX="596.0" layoutY="263.0" size="20" />
+            <TextField fx:id="inputpassword" layoutX="701.0" layoutY="196.0" prefHeight="31.0" prefWidth="142.0" promptText="First Password" />
          </children>
       </Pane>
    </children>
